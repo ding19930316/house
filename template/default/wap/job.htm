@@ -1,0 +1,53 @@
+{template 'header', $TP}
+<div class="nav">
+<a href="index.php">首页</a> >
+<a href="index.php?moduleid={$moduleid}">{$MOD[name]}</a> >
+{if $catid}{wap_pos($CAT)}{/if}
+</div>
+<div class="main">
+{if $itemid}
+	<strong>{$title}</strong><br/>
+	{if $page==1}
+	日期:<small>{$editdate}</small><br/>
+	{if !$username}<span style="color:red;">非会员信息</span><br/>{/if}
+	{if $vip}{VIP}:{$vip}级<br/>{/if}
+	行业:{$CATEGORY[$parentid][catname]}<br/>
+	职位:{$CATEGORY[$catid][catname]}<br/>
+	部门:{$department}<br/>
+	人数:{if $total}{$total}人{else}若干{/if}<br/>
+	地区:{area_pos($areaid, '')}<br/>
+	性质:{$TYPE[$type]}<br/>
+	性别:{$GENDER[$gender]}<br/>
+	婚姻:{$MARRIAGE[$marriage]}<br/>
+	学历:{$EDUCATION[$education]}<br/>
+	经验:{if $experience}{$experience}年以上{else}不限{/if}<br/>
+	年龄:{if $minage && $maxage}{$minage}-{$maxage}岁{elseif $minage}{$minage}岁以上{elseif $maxage}{$maxage}岁以内{else}不限年龄{/if}<br/>
+	待遇:{if $minsalary && $maxsalary}{$minsalary}-{$maxsalary}{$AJ[money_unit]}/月{elseif $minsalary}{$minsalary}{$AJ[money_unit]}/月以上{elseif $maxsalary}{$maxsalary}{$AJ[money_unit]}/月以内{else}面议{/if}<br/>
+	<strong>联系方式</strong><br/>
+	{template 'contact', $TP}
+	<strong>详细介绍</strong><br/>
+	{/if}
+	{$content}<br/>
+{else}
+	<div class="brby"><img src="{AJ_SKIN}image/arrow.gif" align="absmiddle"/> <a href="index.php?moduleid={$moduleid}&amp;action=category">按分类浏览</a>
+	<img src="{AJ_SKIN}image/arrow.gif" align="absmiddle"/> <a href="index.php?moduleid={$moduleid}&amp;action=area">按地区浏览</a></div>
+	{loop $lists $v}
+	&middot;<a href="index.php?moduleid={$moduleid}&amp;itemid={$v[itemid]}">{$v[title]}</a><br/>
+	{/loop}
+{/if}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+<div class="fm">
+<form action="index.php" method="get">
+<input type="hidden" name="moduleid" value="{$moduleid}"/>
+<input type="hidden" name="catid" value="{$catid}"/>
+<input type="hidden" name="areaid" value="{$areaid}"/>
+<select name="moduleid" class="fm_opt">
+{loop $WAP_MODULE $i $m}
+<option value="{$m[moduleid]}"{if $m[moduleid]==$moduleid} selected{/if}>{$m[name]}</option>
+{/loop}
+</select>
+<input type="text" name="kw" value="{$kw}" size="10" class="fm_inp"/>
+<input type="submit" value="搜索" class="fm_sbm"/>
+</form>
+</div>
+{template 'footer', $TP}

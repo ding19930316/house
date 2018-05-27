@@ -1,0 +1,167 @@
+{template 'header', $TP}
+
+<script>var wbAPPKEY = {$sinaid}; var qwbAPPKEY = {$qqid}; var imgUrl="{AJ_SKIN}"; var theact = 'zxlist';</script>
+
+<script src="{AJ_SKIN}js/mobile/shar.js?v=3" type="text/javascript"></script><body>
+	<header>
+	<div class="fl">
+		<a href="index.php" class="a_left"><img src="{if $AJ[waplogo]}{$AJ[waplogo]}{else}{AJ_SKIN}image/waplogo.png{/if}" alt="{$AJ[sitename]}"></a>
+	</div>
+	<div class="fr">
+		<a href="javascript:" id="hs" class="search_ico_gray"></a>　<a href="javascript:" id="dh" class="daohang_ico"></a>
+	</div>
+	<h1>
+		<a href="index.php?moduleid=8"><span class="head_name">{$head_name}</span><!-- 页面标题<7个字 --></a>
+	</h1>
+</header>
+
+<div class="content_header"></div>
+<script>
+	$("#dh").on("click",function(){
+		al({
+			id:"daohang",
+			targetElement: '.content_header',
+			t:"频道导航",
+			p:'<div class="pd_list"><ul><li><a href="index.php">首页</a></li><li><a href="index.php?moduleid=6">新房</a></li>><li><a href="index.php?moduleid=5">二手房</a></li><li><a href="index.php?moduleid=7">租房</a></li><li><a href="index.php?moduleid=8">资讯</a></li></ul></div>'
+		})
+	})
+</script><script>
+$("#hs").on("click",function(){
+	al({
+		id:'sousuo',
+		t:"房源搜索",
+		animationStart:'block',
+		animationEnd:'none',
+		isBlur:'none',
+		p:'<div id="form_search"><form action="index.php" method="get"><input type="hidden" name="moduleid"  value="8" /><div class="category"><p><span class="theact">资讯</span><i></i></p><ul><li><label><input type="radio" name="moduleid" rel="新房" value="6" /> 新房</label></li><li><label><input type="radio" name="moduleid" rel="租房" value="7" /> 租房</label></li><li><label><input type="radio" name="moduleid" rel="二手房" value="5" /> 二手房</label></li><li><label><input type="radio" name="moduleid" rel="资讯" value="news" /> 资讯</label></li></ul></div><input type="search" class="key" x-webkit-speech="" name="kw" placeholder="请输入关键词"><button type="submit" class="search_ico_red"></button></form></div></div>',
+		of:function(){
+			var $pop=$("#h_pop"),
+				$f=$("#form_search form"),
+				$t=$("#form_search .key");
+			$t[0].oninput=function(){
+				$.ajax({
+					url: "",
+					dataType: 'json',
+					data: $f.serialize(),
+					success:function(data) {
+						if (data.length > 0) {
+							var i = 0;
+							l = data.length,
+							str = "";
+							for (; i < l; i++) {
+								str += '<a href="'+data[i].href+'">' + data[i].name + '</a>';
+							}
+							$pop.html(str);
+						} else {
+							$pop.empty();
+						}
+					}
+				});
+			}
+		}
+	})
+});
+</script>
+
+{if $itemid}
+	<div class="news">
+		<section>
+			<h1>{$title}</h1>
+			<p><time>{$editdate}</time>  点击: {$hits}</p>
+		</section>
+				<article>
+			{$content}	</article>
+			
+                    <h3>
+                相关阅读
+            </h3>
+            <ul class="news_list">
+                           <!--{php $tags=tag("moduleid=$moduleid&length=44&catid=$catid&condition=status=3 and itemid!=$itemid&areaid=$cityid&pagesize=6&order=addtime desc&&template=null");}-->
+						   {loop $tags $i $t}<li><a href="index.php?moduleid={$moduleid}&amp;itemid={$t[itemid]}" target="_blank">{$t[title]}</a></li>{/loop}
+								
+                            </ul>
+			</div>
+	{else}
+	<div class="news">
+		<nav id="nav">
+			<div class="swipe">
+			<div class="fl" >
+										<a href="index.php?moduleid=8&amp;catid=28">本地楼市</a>
+					<i class="l"></i>
+										<a href="index.php?moduleid=8&amp;catid=29">国内楼市</a>
+					<i class="l"></i>
+										<a href="index.php?moduleid=8&amp;catid=33">优惠折扣</a>
+					<i class="l"></i>
+										<a href="index.php?moduleid=8&amp;catid=32">楼盘导购</a>
+					<i class="l"></i>
+									</div>
+				
+			</div>
+		</nav>
+				<div class="news_li" id="h_l">
+				{loop $lists $v}
+						<a href="index.php?moduleid={$moduleid}&amp;itemid={$v[itemid]}">
+						<h5><span>{$v[date]}</span>{$v[title]}</h5>
+				{dsubstr($v[introduce], 280, $suffix = '..')}	</a>
+				
+					{/loop}
+					</div>
+				<div id="load_more">
+			{if $pages}<div class="pages">{$pages}</div>{/if}
+		</div>
+			</div>
+			<script>
+var $swi=$("#swipe i");
+swipe = Swipe(document.getElementById('swipe'), {
+	startSlide: 0,
+	auto: 4000,
+	transitionEnd: function(index, element) {
+		$swi.removeClass("on").eq(index).addClass("on")
+	}
+});
+$("#swipe").on("click",".close_ad",function(){
+	$("#swipe").remove()
+})
+
+var swipe = Swipe(document.getElementById('nav')),
+	$nav = $("#nav .swipe"),
+	t=$nav.offset().top,
+	$w=$(window).on("scroll",function(){
+		if($w.scrollTop()>t)
+			$nav.css("position","fixed")
+		else
+			$nav.css("position","relative")
+	}),
+	index=0,
+	$h_l=$("#h_l"),
+	$l=$("#load_more").on("click",function(){
+		$l.html("<i></i>正在加载…")
+		$.ajax({
+			url:"",
+			dataType:"json",
+			data:{'index':++index,'params':"-n54-K"},
+			success:function(data){
+				var html="";
+				if(data.length>0){
+					for(var i=0,l=data.length;i<l;i++){
+						html+='<a href="'+data[i].a_url+'">'
+						if(data[i].thumb){
+							html+='<img src="'+data[i].thumb+'">'
+						}
+						html+='<h5><span>'+data[i].published+'</span>'+data[i].title_cut+'</h5>'+data[i].description+'</a>';
+					}
+					$l.html("<span>加载更多</span>");
+					$h_l.append(html)
+				}else{
+					$l.remove();
+					$("#no_more").show();
+				}
+			}
+		})
+	})
+</script>
+	
+	{/if}
+	
+{template 'footer', $TP}
+

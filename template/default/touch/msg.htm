@@ -1,0 +1,22 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="javascript:Dback('index.php?moduleid={$moduleid}');"><span>返回</span></a></div></td>
+<td><div class="head_name"><span>提示信息</span></div></td>
+<td class="head_bar_td_w55 t_r"><a href="./"><img src="image/home.png" width="40" height="40" alt="首页"/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="content">
+{$msg}
+{if $forward}
+<br/>
+<meta http-equiv="refresh" content="2;URL={$forward}">
+<a href="{$forward}">点击跳转</a>
+{/if}
+</div>
+{template 'footer', $TP}

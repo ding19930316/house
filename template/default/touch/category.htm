@@ -1,0 +1,25 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="{if $pid}javascript:window.history.back();{else}index.php?moduleid={$moduleid}{/if}"><span>返回</span></a></div></td>
+<td><div class="head_name"><a href="index.php?moduleid={$moduleid}"><span>按分类浏览{$MOD[name]}</span></a></div></td>
+<td class="head_bar_td_w55 t_r"><a href="index.php?moduleid={$moduleid}&amp;action=area"><img src="image/sort.png" width="40" height="40" alt="地区分类"/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="main">
+<ul class="listtxt">
+{loop $lists $v}
+	<li>
+	{if $v[child]}
+	<span class="f_r"><a href="index.php?moduleid={$moduleid}&amp;action=category&amp;pid={$v[catid]}" style="color:#666666;font-size:12px;">展开子分类</a></span>{/if}
+	<a href="index.php?moduleid={$moduleid}&amp;catid={$v[catid]}">{$v[catname]}</a> ({$v[item]})
+	</li>
+{/loop}
+</ul>
+</div>
+{template 'footer', $TP}

@@ -1,0 +1,55 @@
+{template 'header', $TP}
+<div class="nav">
+<a href="index.php">首页</a> >
+<a href="index.php?moduleid={$moduleid}">{$MOD[name]}</a> >
+{if $catid}{wap_pos($CAT)}{/if}
+</div>
+<div class="main">
+{if $itemid}
+	<strong>{$title}</strong><br/>
+	日期:<small>{$fromdate}~{$todate}</small><br/>
+	{if $page==1}
+	城市:{$city}<br/>
+	地址:{$address}<br/>
+	展馆:{$hallname}<br/>
+	主办:{$sponsor}<br/>
+	{/if}
+	{if $user_status == 3}
+		{if $page==1}
+		<strong>联系方式</strong><br/>
+		姓名:{$truename}<br/>
+		{if $addr}地址:{$addr}<br/>{/if}
+		{if $mobile}手机:{$mobile}<br/>{/if}
+		{if $telephone}电话:{$telephone}<br/>{/if}
+		{if $fax}传真:{$fax}<br/>{/if}
+		{if $email}邮件:{$email}<br/>{/if}
+		{if $msn}MSN:{$msn}<br/>{/if}
+		{if $qq}QQ:{$qq}<br/>{/if}
+		<strong>详细介绍</strong><br/>
+		{/if}	
+		{$content}<br/>
+	{else}
+	{template 'content', $TP}
+	{/if}
+{else}
+	<div class="brby"><img src="{AJ_SKIN}image/arrow.gif" align="absmiddle"/> <a href="index.php?moduleid={$moduleid}&amp;action=category">按分类浏览</a></div>
+	{loop $lists $v}
+	&middot;<a href="index.php?moduleid={$moduleid}&amp;itemid={$v[itemid]}">{$v[title]}</a><br/>
+	{/loop}
+{/if}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+<div class="fm">
+<form action="index.php" method="get">
+<input type="hidden" name="moduleid" value="{$moduleid}"/>
+<input type="hidden" name="catid" value="{$catid}"/>
+<input type="hidden" name="areaid" value="{$areaid}"/>
+<select name="moduleid" class="fm_opt">
+{loop $WAP_MODULE $i $m}
+<option value="{$m[moduleid]}"{if $m[moduleid]==$moduleid} selected{/if}>{$m[name]}</option>
+{/loop}
+</select>
+<input type="text" name="kw" value="{$kw}" size="10" class="fm_inp"/>
+<input type="submit" value="搜索" class="fm_sbm"/>
+</form>
+</div>
+{template 'footer', $TP}

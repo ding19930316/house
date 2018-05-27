@@ -1,0 +1,26 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="{$back_link}"><span>返回</span></a></div></td>
+<td><div class="head_name"><a href="index.php?moduleid={$moduleid}&amp;action=message"><span>站内信</span></a</div></td>
+<td class="head_bar_td_w55 t_r"><a href="index.php?moduleid={$moduleid}&amp;action=message_send"><img src="image/edit.png" width="40" height="40" alt=""/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="main">
+	<div class="fm">
+	<form action="index.php" method="post">
+	<input type="hidden" name="moduleid" value="{$moduleid}"/>
+	<input type="hidden" name="action" value="{$action}"/>
+	会员:<input type="text" name="touser" value="{$touser}" class="fm_inp"/><br/>
+	标题:<input type="text" name="title" value="{$title}" class="fm_inp"/><br/>
+	内容:<input type="text" name="content" value="{$content}" class="fm_inp"/><br/>
+	<input type="submit" name="submit" value="发送" class="fm_sbm"/><br/>
+	</form>
+	</div>
+</div>
+{template 'footer', $TP}

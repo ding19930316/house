@@ -1,0 +1,46 @@
+{template 'header', $TP}
+<div class="nav">
+<a href="index.php">首页</a> >
+<a href="index.php?moduleid={$moduleid}">{$MOD[name]}</a> >
+{if $catid}{wap_pos($CAT)}{/if}
+</div>
+<div class="main">
+{if $itemid}
+	<strong>{$title}</strong><br/>
+	日期:<small>{$editdate}</small><br/>
+	{if $user_status == 3}
+	<script type="text/javascript">
+	var DTPath = '{AJ_PATH}';
+	var u5;
+	</script>
+	<script type="text/javascript" src="{AJ_STATIC}file/script/player.js"></script>
+	<script type="text/javascript">
+	document.write('<br/><center>'+player('{$video}', 240, 180, 0, 0)+'</center><br/>');
+	document.write(u5 ? '<br/><center>无法播放？<a href="'+u5+'" target="_blank" class="b">点这里试试</a></center><br/>' : '<br/><center class="f_red">抱歉，您的设备无法播放此视频</center><br/>');
+	</script>
+	{else}
+	{template 'content', $TP}
+	{/if}
+	{$content}
+{else}
+	<div class="brby"><img src="{AJ_SKIN}image/arrow.gif" align="absmiddle"/> <a href="index.php?moduleid={$moduleid}&amp;action=category">按分类浏览</a></div>
+	{loop $lists $v}
+	&middot;<a href="index.php?moduleid={$moduleid}&amp;itemid={$v[itemid]}">{$v[title]}</a><br/>
+	{/loop}
+{/if}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+<div class="fm">
+<form action="index.php" method="get">
+<input type="hidden" name="moduleid" value="{$moduleid}"/>
+<input type="hidden" name="catid" value="{$catid}"/>
+<input type="hidden" name="areaid" value="{$areaid}"/>
+<select name="moduleid" class="fm_opt">
+{loop $WAP_MODULE $i $m}
+<option value="{$m[moduleid]}"{if $m[moduleid]==$moduleid} selected{/if}>{$m[name]}</option>
+{/loop}
+</select>
+<input type="text" name="kw" value="{$kw}" size="10" class="fm_inp"/>
+<input type="submit" value="搜索" class="fm_sbm"/>
+</form>
+</div>
+{template 'footer', $TP}

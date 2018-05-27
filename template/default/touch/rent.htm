@@ -1,0 +1,300 @@
+{template 'header', $TP}
+<script>var wbAPPKEY = {$sinaid}; var qwbAPPKEY = {$qqid}; var imgUrl="{AJ_SKIN}"; var theact = 'zflist';</script>
+
+<script src="{AJ_SKIN}js/mobile/shar.js?v=3" type="text/javascript"></script><body>
+	<header>
+	<div class="fl">
+		<a href="index.php" class="a_left"><img src="{if $AJ[waplogo]}{$AJ[waplogo]}{else}{AJ_SKIN}image/waplogo.png{/if}" alt="{$AJ[sitename]}"></a>
+	</div>
+	<div class="fr">
+		<a href="javascript:" id="hs" class="search_ico_gray"></a>　<a href="javascript:" id="dh" class="daohang_ico"></a>
+	</div>
+	<h1>
+		<a href="index.php?moduleid=7"><span class="head_name">{$head_name}</span><!-- 页面标题<7个字 --></a>
+	</h1>
+</header>
+
+<div class="content_header"></div>
+<script>
+	$("#dh").on("click",function(){
+		al({
+			id:"daohang",
+			targetElement: '.content_header',
+			t:"频道导航",
+			p:'<div class="pd_list"><ul><li><a href="index.php">首页</a></li><li><a href="index.php?moduleid=6">新房</a></li>><li><a href="index.php?moduleid=5">二手房</a></li><li><a href="index.php?moduleid=7">租房</a></li><li><a href="index.php?moduleid=8">资讯</a></li></ul></div>'
+		})
+	})
+</script><script>
+$("#hs").on("click",function(){
+	al({
+		id:'sousuo',
+		t:"房源搜索",
+		animationStart:'block',
+		animationEnd:'none',
+		isBlur:'none',
+		p:'<div id="form_search"><form action="index.php" method="get"><input type="hidden" name="moduleid"  value="7" /><div class="category"><p><span class="theact">新房</span><i></i></p><ul><li><label><input type="radio" name="moduleid" rel="新房" value="6" /> 新房</label></li><li><label><input type="radio" name="moduleid" rel="租房" value="7" /> 租房</label></li><li><label><input type="radio" name="moduleid" rel="二手房" value="5" /> 二手房</label></li><li><label><input type="radio" name="moduleid" rel="资讯" value="news" /> 资讯</label></li></ul></div><input type="search" class="key" x-webkit-speech="" name="kw" placeholder="请输入关键词"><button type="submit" class="search_ico_red"></button></form></div></div>',
+		of:function(){
+			var $pop=$("#h_pop"),
+				$f=$("#form_search form"),
+				$t=$("#form_search .key");
+			$t[0].oninput=function(){
+				$.ajax({
+					url: "",
+					dataType: 'json',
+					data: $f.serialize(),
+					success:function(data) {
+						if (data.length > 0) {
+							var i = 0;
+							l = data.length,
+							str = "";
+							for (; i < l; i++) {
+								str += '<a href="'+data[i].href+'">' + data[i].name + '</a>';
+							}
+							$pop.html(str);
+						} else {
+							$pop.empty();
+						}
+					}
+				});
+			}
+		}
+	})
+});
+</script>
+
+{if $itemid}
+	<div class="detail_huandeng">
+				<div id="swipe" >
+			<div class="swipe" >
+			
+				  <!--{php $tags=tag("table=house_pic&condition=item=$itemid&mid=7&pagesize=5&order=itemid desc&template=null");}-->
+ {loop $tags $i $t}    
+						<a href="#" class="fl">
+					<u style="background-image:url({$t[thumb]})"></u>
+				</a>{/loop}
+						  
+				
+							</div>
+			<p>
+							
+				
+							
+			
+				  <!--{php $tags=tag("table=house_pic&condition=item=$itemid&mid=7&pagesize=5&order=itemid desc&template=null");}-->
+ {loop $tags $i $t}  <i {if $i==0}class="on"{/if} ></i>{/loop}
+							</p>
+						
+			           {if $enable} <div class="js_wap_share btn-share"></div>{/if}
+			<div id="storageimg" class="none">{$thumb}</div>
+			<div id="lpdizhi" class="none">{area_pos($areaid, ' ')}</div>
+			<div id="lptel" class="none">{$telephone}</div>
+		</div>
+			</div>
+	<div class="detail">
+				{if $fyts}<span class="tags">{$fyts}</span>{/if}
+				<h3>{$title}</h3>
+		<table>
+			<tr>
+				<td colspan="2">租金：<span class="red">{if $price}{$price}元/月{else}面议{/if}</span></td>
+			</tr>
+			<tr>
+				<td>面积：{$houseearm}㎡</td>
+				<td>户型：{if $room}{$room}室{/if}{if $hall}{$hall}厅{/if}{if $toilet}{$toilet}卫{/if}</td>
+			</tr>
+			<tr>
+				<td>朝向：{$toward}</td>
+				<td>楼层：第{$floor1}层/总{$floor2}层</td>
+			</tr>
+			<tr>
+				<td>类型：{cat_pos($CAT, ' &raquo; ')}</td>
+				<td>装修：{getbox_diaoval('zhuanxiu','checkbox',$zhuanxiu,'rent_7')}</td>
+			</tr>
+			<tr>
+				<td>小区：{$housename}</td>
+				<td>房龄：{$houseyear}年</td>
+			</tr>
+		</table>
+	</div>
+	<div class="detail">
+		<h3>房源描述</h3>
+		<p class="has">
+					<span>{$peitao}</span>
+				</p>
+	</div>
+	<div class="detail">
+		<p>{$content}
+
+</p>
+	</div>
+<div class="detail">
+				<h3>交通地图</h3>
+			<img src="http://api.map.baidu.com/staticimage?width=400&height=200center={$AJ[map_mid]}&zoom=14&markers={if $map}{$map}{else}{$AJ[map_mid]}{/if}&markerStyles=m,A,0xff0000" alt="{$title}" class="d_map">
+				<h3>小区地址</h3>
+		<p>{$address}</p>
+		<h3>公交线路</h3>
+		<p>{$bus}</p>
+	</div>
+	
+	<div id="fixed">
+		<div class="table">
+			<div class="td">
+				<p>联系电话：<br>{$telephone}</p>
+			</div>
+			<div class="td">
+				<a href="tel:{$telephone}" class="red_btn bg_blue">电话咨询</a>
+			</div>
+		
+		</div>
+	</div>
+	
+<script>
+var $swi=$("#swipe i");
+swipe = Swipe(document.getElementById('swipe'), {
+	startSlide: 0,
+	auto: 4000,
+	transitionEnd: function(index, element) {
+		$swi.removeClass("on").eq(index).addClass("on")
+	}
+});
+
+
+//分享功能
+$(".js_wap_share").click(function(){
+	var name = $("header h1").text();
+	var lpdizhi = $("#lpdizhi").text();
+	var lptel = $("#lptel").text();
+    var title = "我发现了一个不错的租房【"+name+"】" ;
+    var summary = name+"位于"+lpdizhi+",咨询电话："+lptel+",更多详情请点击";
+    var PicUrl = $('#storageimg').text();
+    var titlesina= "{$AJ[ciytname]}"+"{$AJ[sitename]}";
+    var type = "xf";
+    myShare(this,{title:title,summary:summary,PicUrl:PicUrl,titlesina:titlesina,type:type})
+});
+</script>
+	{else}
+	
+	<div class="list">
+		<nav id="nav">
+			<div>
+				<span class="a_down">{if empty($areaid)}区域{else}{area_pos($_GET['areaid'], ' ')}{/if}</span>
+				<ol>
+					<li><a href="index.php?moduleid=7&c={$_GET['c']}&catid={$_GET['catid']}&p={$_GET['p']}">全部区域</a></li>
+					{php $mainarea = get_mainarea($cityid)}
+									{loop $mainarea $k $v}
+														<li><a {if $areaid==$v[areaid]}class="on"{/if} href="index.php?moduleid=7&c={$_GET['c']}&catid={$_GET['catid']}&p={$_GET['p']}&areaid={$v[areaid]}">{$v[areaname]}</a></li>
+														 {/loop}
+					</li>
+									</ol>
+			</div><i class="l"></i>
+			<div>
+				<span class="a_down">{if empty($p)}价格{else}{$range_name}{/if}</span>
+				 <ol>
+				 	<li><a href="index.php?moduleid=7&areaid={$_GET['areaid']}&c={$_GET['c']}&catid={$_GET['catid']}">全部</a></li>
+					{php $range_arr = getbox_name('range','rent_7')}
+					    {loop $range_arr $key $v}
+										<li ><a {if $p==$key}class="on"{/if} href="index.php?moduleid=7&areaid={$_GET['areaid']}&c={$_GET['c']}&catid={$_GET['catid']}&p={$key}">{$v}</a></li>
+										 {/loop}
+									 </ol>
+			</div><i class="l"></i>
+			<div>
+				<span class="a_down">{if empty($c)}面积{else}{$area_name}{/if}</span>
+				<ol>
+					<li><a href="index.php?moduleid=7&areaid={$_GET['areaid']}&p={$_GET['p']}&catid={$_GET['catid']}">全部</a></li>
+					 {php $mianji = array('40平米以下', '40-60平米', '60-80平米', '80-100平米', '100-120平米', '120-150平米','150平米以上');}
+{loop $mianji $k $v} 	<li><a href="index.php?moduleid=7&areaid={$_GET['areaid']}&p={$_GET['p']}&catid={$_GET['catid']}&c={$k+1}">{$v}</a></li>
+								 {/loop}		
+									</ol>
+			</div><i class="l"></i>
+			<div>
+				<span class="a_down">{if empty($catid)}类型{else}{get_cats($_GET['catid'], '7')}{/if}</span>
+				<ol>
+					<li><a href="index.php?moduleid=7&areaid={$_GET['areaid']}&p={$_GET['p']}&c={$_GET['c']}">全部</a></li>
+					 {php $maincat = get_maincat(0,7)}
+						 {loop $maincat $k $v}
+										<li><a href="index.php?moduleid=7&areaid={$_GET['areaid']}&p={$_GET['p']}&c={$_GET['c']}&catid={$v[catid]}">{$v[catname]}</a></li>
+									  {/loop}
+									</ol>
+			</div><i class="l"></i>
+		</nav>
+				<div class="house_list" id="h_l">
+				{loop $lists $t}
+						<a href="index.php?moduleid={$moduleid}&amp;itemid={$t[itemid]}">
+				<img src="{if $t[thumb]}{$t[thumb]}{else}image/nopic.png{/if}">
+				<i class="tag0"></i>
+								<h5><span class="fr red">{if $t[price]}{$t[price]}元/月{else}面议{/if}</span>{$t[title]}</h5>
+				<p><span class="gray">[{area_pos($t[areaid], '')}]</span></p>
+				<p>{if $t[room]}{$t[room]}室{/if}{if $t[hall]}{$t[hall]}厅{/if}{if $t[toilet]}{$t[toilet]}卫{/if}&nbsp;{$t[houseearm]}平米&nbsp;{$t[floor1]}/{$t[floor2]}&nbsp;{getbox_diaoval('fix','checkbox',$t[fix],'sale_5')}&nbsp;				<p>
+								{if $t[fyts]}<span class="tags">{$t[fyts]}</span>{/if}
+								</p>
+			</a>
+			{/loop}
+						
+		</div>
+				<div id="load_more">
+			{if $pages}<div class="pages">{$pages}</div>{/if}
+		</div>
+			</div>
+			<script>
+var $swi=$("#swipe i");
+swipe = Swipe(document.getElementById('swipe'), {
+	startSlide: 0,
+	auto: 4000,
+	transitionEnd: function(index, element) {
+		$swi.removeClass("on").eq(index).addClass("on")
+	}
+});
+$("#swipe").on("click",".close_ad",function(){
+	$("#swipe").remove()
+})
+	$("#nav div,#nav li").on("click",function(e){
+		$(this).toggleClass("on").siblings().filter(".on").removeClass("on");
+		e.stopPropagation()
+	})
+	var $nav=$("#nav"),
+		$w=$(window).on("scroll",function(){
+			if($w.scrollTop()>45)
+				$nav.css("position","fixed")
+			else
+				$nav.css("position","relative")
+		})
+	var index=0,
+		$h_l=$("#h_l"),
+		$l=$("#load_more").on("click",function(){
+		$l.html("<i></i>正在加载…")
+		$.ajax({
+			url:"{$MODULE[6][linkurl]}house.php?action=house",
+			dataType:"json",
+			data:{'index':++index,'params':""},
+			success:function(data){
+				var html="";
+				if(data.length>0){
+					for(var i=0,l=data.length;i<l;i++){
+						html+='<a href="'+data[i].url+'"><img src="'+data[i].pic_url+'"><i class="tag'+data[i].tag+'"></i>'+(data[i].usertype == 1?'<u>个人</u>':'')+'<h5><span class="fr '+(data[i].price=="0"?'gray':'red')+'">'+(data[i].price=="0"?'面议':data[i].price+"万")+'</span>'+data[i].title+'</h5><p><span class="gray">['+data[i].areaname
+						if(data[i].circlename){
+							html+="&nbsp;"+data[i].circlename
+						}
+						html+=']</span></p><p>';
+						if(data[i]['room']){html+=data[i]['room']+'室';if(data[i]['hall']){html+=data[i]['hall']+'厅 &nbsp;'}}
+						if(data[i]['area']){html+=data[i]['area']+'平米&nbsp;';}
+						if(data[i]['floor']){html+=data[i]['floor']+'/'+data[i]['totalfloor']+'层&nbsp;';}
+						if(data[i]['decorate']){html+=data[i]['decorate']+'&nbsp;</p><p>';}
+						for(var j=0,k=data[i].tagtext.length;j<k;j++){
+							html+='<span class="tags">'+data[i].tagtext[j]+'</span>';
+						}
+						html+='</p></a>';
+					}
+					$l.html("<span>加载更多</span>");
+					$h_l.append(html)
+				}else{
+					$l.remove();
+					$("#no_more").show();
+				}
+			}
+		})
+	})
+</script>
+	
+	{/if}
+	
+{template 'footer', $TP}
+

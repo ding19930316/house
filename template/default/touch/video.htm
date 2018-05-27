@@ -1,0 +1,47 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="{$back_link}"><span>返回</span></a></div></td>
+<td><div class="head_name"><a href="{$head_link}"><span>{$head_name}</span></a></div></td>
+<td class="head_bar_td_w55 t_r"><a href="index.php?moduleid={$moduleid}&amp;action=category"><img src="image/sort.png" width="40" height="40" alt="行业分类"/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="main">
+{if $itemid}
+	<div class="title"><strong>{$title}</strong></div>
+	<div class="info">日期:<small>{$editdate}</small>&nbsp;&nbsp;播放:<small>{$hits}</small></div>
+	{if $user_status == 3}
+	<script type="text/javascript">
+	var DTPath = '{AJ_PATH}';
+	var u5;
+	</script>
+	<script type="text/javascript" src="{AJ_STATIC}file/script/player.js"></script>
+	<script type="text/javascript">
+	document.write('<br/><center>'+player('{$video}', 240, 180, 0, 0)+'</center><br/>');
+	document.write('<br/><center>无法播放？<a href="'+(u5 ? u5 : '{$video}')+'" target="_blank" class="b">点这里试试</a></center><br/>');
+	</script>
+	{else}
+	{template 'chip-content', $TP}
+	{/if}
+	<div class="content">{$content}</div>
+{else}
+	{loop $lists $v}
+	<div class="listimg">
+	<a href="index.php?moduleid={$moduleid}&amp;itemid={$v[itemid]}"><img src="{if $v[thumb]}{$v[thumb]}{else}image/nopic.png{/if}" width="75" height="55" alt=""/></a>
+	<ul>
+	<li><a href="index.php?moduleid={$moduleid}&amp;itemid={$v[itemid]}"><strong>{$v[title]}</strong></a></li>
+	<li><span>{$v[hits]} 次播放</span></li>
+	<li><em>{$v[date]}</em></li>
+	</ul>
+	</div>
+	{/loop}
+{/if}
+	{if $pages}<div class="pages">{$pages}</div>{/if}
+	{template 'chip-search', $TP}
+</div>
+{template 'footer', $TP}

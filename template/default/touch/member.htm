@@ -1,0 +1,24 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="./"><span>返回</span></a></div></td>
+<td><div class="head_name"><span>会员中心</span></div></td>
+<td class="head_bar_td_w55 t_r"><a href="./"><img src="image/home.png" width="40" height="40" alt="首页"/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="userinfo">
+	<ul>
+	<li class="t_c">欢迎，{$_company}({$_truename})</li>
+	<li class="t_c"><a href="index.php?moduleid=4&amp;username={$_username}"><img src="{useravatar($_username, 'large')}" width="128" height="128"/></a></li>
+	<li><a href="index.php?moduleid={$moduleid}&amp;action=message"><span class="f_r">{if $_message}<em>{$_message}</em>{else}{$_message}{/if}</span><strong>消息</strong></a></li>
+	<li><a href="index.php?moduleid=2&amp;action=charge"><span class="f_r">{$_money}</span><strong>{$AJ[money_name]}</strong></a></li>
+	<li><span class="f_r">{$_credit}</span><strong>{$AJ[credit_name]}</strong></li>
+	<li class="t_c"><a href="index.php?moduleid=2&amp;action=logout" class="b">注销登录[{$_username}]</a></li>
+	</ul>
+</div>
+{template 'footer', $TP}

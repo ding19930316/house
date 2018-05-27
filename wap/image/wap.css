@@ -1,0 +1,17 @@
+body {font-size:13px;margin:0;}
+form {margin:0px;}
+td {font-size:13px}
+a:link,a:visited,a:active {color:#004299;text-decoration:none;}
+a:hover {color:#FF5500;}
+.main {margin:auto;line-height:150%;padding:3px 8px 8px 8px;}
+.head {background:#ECF3FB;border-top:#CEE1F6 1px solid;padding:5px 0 5px 8px;}
+.nav {background:#ECF3FB;border-bottom:#CEE1F6 1px solid;padding:5px 0 5px 8px;}
+.pay {border:#BD3131 1px solid;background:#FFE4D3;padding:5px;}
+.b10 {font-size:1px;height:10px;line-height:10px;}
+.f_red{color:red;}
+.brby {padding:5px 0 5px 0;border-bottom:#CEE1F6 1px solid;margin:0 0 5px 0;}
+.pages {padding:5px 0 5px 6px;}
+.fm {padding:5px 0 5px 3px;}
+.fm_opt {}
+.fm_inp {border:#CEE1F6 1px solid;}
+.fm_sbm {background:#ECF3FB;border:#CEE1F6 1px solid;height:20px;line-height:18px;}

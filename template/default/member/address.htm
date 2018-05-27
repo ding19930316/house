@@ -1,0 +1,175 @@
+{template 'header', 'member'}
+<script type="text/javascript">c(2);</script>
+<div class="menu">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="tab" id="add"><a href="address.php?action=add"><span>添加地址</span></a></td>
+<td class="tab_nav">&nbsp;</td>
+<td class="tab" id="s3"><a href="address.php"><span>收货地址</span></a></td>
+</tr>
+</table>
+</div>
+{if $action=='add'}
+<form method="post" action="address.php" id="dform" onsubmit="return check();">
+<input type="hidden" name="action" value="{$action}"/>
+<table cellpadding="6" cellspacing="1" class="tb">
+<tr>
+<td class="tl"><span class="f_red">*</span> 详细地址</td>
+<td class="tr">{ajax_area_select('post[areaid]', '请选择')}<input name="post[address]" type="text" id="title" size="60" /> <span id="dtitle" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"><span class="f_red">*</span> 邮政编码</td>
+<td class="tr"><input name="post[postcode]" type="text" id="postcode" size="10" /> <span id="dpostcode" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"><span class="f_red">*</span> 真实姓名</td>
+<td class="tr"><input name="post[truename]" type="text" id="truename" size="10" /> <span id="dtruename" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"><span class="f_red">*</span> 手机号码</td>
+<td class="tr"><input name="post[mobile]" type="text" id="mobile" size="20" /> <span id="dmobile" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"> 电话号码</td>
+<td class="tr"><input name="post[telephone]" type="text" id="telephone" size="20" /> <span id="dtelephone" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"> 显示顺序</td>
+<td class="tr f_gray"><input name="post[listorder]" type="text" id="listorder" size="4" /> 数字越小越靠前<span id="dlistorder" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"> 备注信息</td>
+<td class="tr"><input name="post[note]" type="text" id="note" size="60" /> <span id="dnote" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl">&nbsp;</td>
+<td class="tr" height="50"><input type="submit" name="submit" value=" 确 定 " class="btn"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" name="reset" value=" 重 置 " class="btn"/></td>
+</tr>
+</table>
+</form>
+{load('clear.js')}
+<script type="text/javascript">s('address');m('add');</script>
+{elseif $action=='edit'}
+<form method="post" action="address.php" id="dform" onsubmit="return check();">
+<input type="hidden" name="action" value="{$action}"/>
+<input type="hidden" name="itemid" value="{$itemid}"/>
+<input type="hidden" name="forward" value="{$forward}"/>
+<table cellpadding="6" cellspacing="1" class="tb">
+
+<tr>
+<td class="tl"><span class="f_red">*</span> 详细地址</td>
+<td class="tr"><input name="post[address]" type="text" id="title" size="60" value="{$address}"/> <span id="dtitle" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"><span class="f_red">*</span> 邮政编码</td>
+<td class="tr"><input name="post[postcode]" type="text" id="postcode" size="10" value="{$postcode}" /> <span id="dpostcode" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"><span class="f_red">*</span> 真实姓名</td>
+<td class="tr"><input name="post[truename]" type="text" id="truename" size="10" value="{$truename}"/> <span id="dtruename" class="f_red"></span></td>
+</tr>
+
+
+<tr>
+<td class="tl"><span class="f_red">*</span> 手机号码</td>
+<td class="tr"><input name="post[mobile]" type="text" id="mobile" size="20" value="{$mobile}"/> <span id="dmobile" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"> 电话号码</td>
+<td class="tr"><input name="post[telephone]" type="text" id="telephone" size="20" value="{$telephone}"/> <span id="dtelephone" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"> 显示顺序</td>
+<td class="tr f_gray"><input name="post[listorder]" type="text" id="listorder" size="4" value="{$listorder}"/> 数字越小越靠前<span id="dlistorder" class="f_red"></span></td>
+</tr>
+
+<tr>
+<td class="tl"> 备注信息</td>
+<td class="tr"><input name="post[note]" type="text" id="note" size="60" value="{$note}"/> <span id="dnote" class="f_red"></span></td>
+</tr>
+<tr>
+<td class="tl">&nbsp;</td>
+<td class="tr" height="50"><input type="submit" name="submit" value=" 修 改 " class="btn"/>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value=" 返 回 " class="btn" onclick="history.back(-1);"/></td>
+</tr>
+</table>
+</form>
+{load('clear.js')}
+<script type="text/javascript">s('address');m('s3');</script>
+{else}
+<div class="ls">
+<table cellpadding="0" cellspacing="0" class="tb">
+<tr>
+<th>地址(邮编)</th>
+<th>姓名</th>
+<th>手机</th>
+<th>电话</th>
+<th>添加时间</th>
+<th>排序</th>
+<th width="40">修改</th>
+<th width="40">删除</th>
+</tr>
+{loop $lists $k $v}
+<tr onmouseover="this.className='on';" onmouseout="this.className='';" align="center">
+<td height="30" align="left">&nbsp;&nbsp{$v[address]}({$v[postcode]}){if $v[note]} <a href="javascript:" onclick="alert('备注:{$v[note]}');"><img src="{AJ_STATIC}{$MODULE[2][moduledir]}/image/why.gif" title="备注:{$v[note]}"/></a>{/if}</td>
+<td>{$v[truename]}</td>
+<td>{$v[mobile]}</td>
+<td>{if $v[telephone]}{$v[telephone]}{else}&nbsp;{/if}</td>
+<td class="px11 f_gray" title="更新时间 {$v[editdate]}">{$v[adddate]}</td>
+<td class="px11 f_gray">{$v[listorder]}</td>
+<td><a href="address.php?action=edit&itemid={$v[itemid]}"><img width="16" height="16" src="{AJ_STATIC}{$MODULE[2][moduledir]}/image/edit.png" title="修改" alt=""/></a></td>
+<td><a href="address.php?action=delete&itemid={$v[itemid]}" onclick="if(!confirm('确定要删除吗？此操作将不可撤销')) return false;"><img width="16" height="16" src="{AJ_STATIC}{$MODULE[2][moduledir]}/image/delete.png" title="删除" alt=""/></a></td>
+</tr>
+{/loop}
+</table>
+</div>
+{if $MG[address_limit]}
+<div class="limit">总共可发 <span class="f_b f_red">{$MG[address_limit]}</span> 条&nbsp;&nbsp;&nbsp;当前已发 <span class="f_b">{$limit_used}</span> 条&nbsp;&nbsp;&nbsp;还可以发 <span class="f_b f_blue">{$limit_free}</span> 条</div>
+{/if}
+<div class="pages">{$pages}</div>
+<script type="text/javascript">s('addr');m('s3');</script>
+{/if}
+{if $action=='add' || $action=='edit'}
+<script type="text/javascript">
+function check() {
+	var l;
+	var f;
+	f = 'title';
+	l = Dd(f).value.length;
+	if(l < 5) {
+		Dmsg('请填写详细地址', f);
+		return false;
+	}
+	f = 'postcode';
+	l = Dd(f).value.length;
+	if(l < 6) {
+		Dmsg('请填写邮政编码', f);
+		return false;
+	}
+	f = 'truename';
+	l = Dd(f).value.length;
+	if(l < 2) {
+		Dmsg('请填写真实姓名', f);
+		return false;
+	}
+	f = 'mobile';
+	l = Dd(f).value.length;
+	if(l < 11) {
+		Dmsg('请填写手机号码', f);
+		return false;
+	}
+	return true;
+}
+</script>
+{/if}
+{template 'footer', 'member'}

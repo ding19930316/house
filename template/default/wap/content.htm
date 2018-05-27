@@ -1,0 +1,25 @@
+{if $user_status == 3}
+	{$content}
+{elseif $user_status == 2}
+	{if $description}{$description}<br/>{/if}
+	<div class="pay">
+	查看详细内容或联系方式需支付<strong>{$fee}</strong>{$fee_unit}<br/>
+	{if $currency == 'money'}
+	{$fee_name}余额:{$_money}{$fee_unit} <a href="index.php?moduleid=2&amp;action=charge">充值</a> <br/>
+	{else}
+	{$fee_name}余额:{$_credit}{$fee_unit} <br/>
+	{/if}
+	<form action="index.php" method="post">
+	<input type="hidden" name="moduleid" value="{$moduleid}"/>
+	<input type="hidden" name="itemid" value="{$itemid}"/>
+	<input type="hidden" name="action" value="pay"/>
+	{if $currency == 'money'}支付密码:<input type="password" name="password" size="5"/>{/if}
+	<input type="submit" name="submit" value="确定" class="fm_sbm"/>
+	</form>
+	</div>
+{elseif $user_status == 1}
+	无权查看，请升级<br/>
+	{if $AJ[telephone]}咨询电话：{$AJ[telephone]}<br/>{/if}
+{elseif $user_status == 0}
+	<a href="index.php?moduleid=2&amp;action=login">请登录查看</a><br/>
+{/if}

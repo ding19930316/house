@@ -1,0 +1,1 @@
+var DTPath = "http://www.1377.com/";var SKPath = "http://www.1377.com/skin/default/";var MEPath = "http://www.1377.com/member/";var EXPath = "http://www.1377.com/extend/";var CKDomain = "";var CKPath = "/";var CKPrex = "cf0_";

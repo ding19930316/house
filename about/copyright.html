@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta charset="utf-8"/>
+<link rel="archives" title="AIJIACMS房产网站" href="http://www.1377.com/archiver/"/>
+<link rel="shortcut icon" type="image/x-icon" href="http://www.1377.com/favicon.ico"/>
+<link href="http://www.1377.com/skin/default/reset.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="http://www.1377.com/skin/default/style.css"/><link href="http://www.1377.com/skin/default/esf.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="http://www.1377.com/lang/zh-cn/lang.js"></script>
+<script type="text/javascript" src="http://www.1377.com/file/script/config.js"></script>
+<script type="text/javascript" src="http://www.1377.com/file/script/jquery.js"></script>
+<script type="text/javascript" src="http://www.1377.com/file/script/common.js"></script>
+<script type="text/javascript" src="http://www.1377.com/file/script/page.js"></script>
+<script src="http://www.1377.com/skin/default/js/sea.js" type="text/javascript"></script>
+<title>版权隐私_AIJIACMS房产网站</title>
+<script type="text/javascript">
+ var apptype = "house";
+</script>
+</head><body>
+<div id="top_bar">
+<div class="cf wrap">
+<div class="fl" id="aijiacms_member"></div>
+<div class="fr">
+<ul>
+            <li class="home"><a class="a" href="http://www.1377.com/" title="首页">首页</a></li>
+<li class="favorite" id="favorite"><a class="a" href="http://www.1377.com/extend/shortcut.php" title="保存桌面">保存桌面</a></li>
+<li class="phone"><a class="a" href="http://www.1377.com//wap/mobile.php" target="_blank">手机版</a></li>
+                                <li class="top_nav" ><a class="a" href="http://www.1377.com/map">地图找房</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h1 class="hide_title">版权隐私</h1><div class="nav_box">
+<div id="nav">
+<h1><a href="http://www.1377.com/"><img src="http://www.1377.com/skin/default/images/logo.gif" alt="AIJIACMS房产网站"/></a></h1>
+<a href="http://www.1377.com/map" target="_blank" class="i_smap">地图找房</a>
+<form id="i_search" method="post" target="_blank" autocomplete="off" onSubmit="return false;">
+<div class="search_item" data-type="house"><span>新房</span><s><i></i><u></u></s></div>
+<ul class="search_item_list none">
+
+
+<li data-type="house">新房</li>
+<li data-type="sale">二手房</li>
+<li data-type="rent">出租</li>
+<li data-type="news">资讯</li>
+<li data-type="video">视频</li>
+<li data-type="buy">求购</li>
+<li data-type="home">家装</li>
+
+</ul>
+<input type="text" name="keyword" class="keyword "  x-webkit-speech value="请输入搜索内容">
+<button type="submit" title="房源搜索">搜索</button>
+</form>
+<a href="http://www.1377.com/member/publish.php" target="_blank" class="fabu">免费发布房源</a>
+</div>
+</div>
+<script>
+seajs.use("hsearch",function(hs){
+    
+hs("#i_search",{
+house:{
+url:"http://www.1377.com/house/list-k",
+initUrl:"http://www.1377.com/house/list",
+hz:".html",
+msg:"请输入楼盘名称(中文/拼音/简拼)、地址",
+autoUrl:"http://www.1377.com/house/house.php?action=house"
+},
+sale:{
+url:"http://www.1377.com/sale/list-k",
+initUrl:"http://www.1377.com/sale/list.html",
+hz:".html",
+msg:"请输入小区名称/地址/标题",
+autoUrl:"http://www.1377.com/house/house.php?action=xiaoqu"
+},
+rent:{
+url:"http://www.1377.com/rent/list-k",
+initUrl:"http://www.1377.com/rent/list.html",
+hz:".html",
+msg:"请输入小区名称/地址/标题",
+autoUrl:"http://www.1377.com/house/house.php?action=xiaoqu"
+},
+buy:{
+url:"http://www.1377.com/buy/list-k",
+initUrl:"http://www.1377.com/buy/list.html",
+hz:".html",
+msg:"请输入搜索内容",
+autoUrl:""
+},
+group:{
+url:"http://www.1377.com/group/list-k",
+initUrl:"http://www.1377.com/group/list.html",
+hz:".html",
+msg:"请输入搜索内容",
+autoUrl:""
+},
+community:{
+url:"http://www.1377.com/community/list-k",
+initUrl:"http://www.1377.com/group/list.html",
+hz:".html",
+msg:"请输入搜索内容",
+autoUrl:"http://www.1377.com/house/house.php?action=xiaoqu"
+},
+video:{
+url:"http://www.1377.com/video/search-k",
+initUrl:"http://www.1377.com/video/list.html",
+hz:".html",
+msg:"请输入搜索内容",
+autoUrl:""
+},
+home:{
+url:"http://www.1377.com/home/search-k",
+hz:".html",
+initUrl:"http://www.1377.com/home/list.html",
+msg:"请输入搜索内容",
+autoUrl:""
+},
+company:{
+url:"http://www.1377.com/company/search-k",
+hz:"",
+initUrl:"http://www.1377.com/company/list.html",
+msg:"请输入搜索内容",
+autoUrl:""
+},
+news:{
+url:"http://www.1377.com/news/search-k",
+initUrl:"http://www.1377.com/news/list.html",
+hz:".html",
+msg:"请输入搜索内容",
+autoUrl:""
+}
+
+});
+});
+</script>
+<div class="nav_menu c_blue">
+<ul><li><a href="http://www.1377.com/"  class="on"><span>首页</span><em></em></a></li><li><a href="http://www.1377.com/house/" ><span>新房</span></a><em></em></li><li><a href="http://www.1377.com/sale/" ><span>二手房</span></a><em></em></li><li><a href="http://www.1377.com/rent/" ><span>出租</span></a><em></em></li><li><a href="http://www.1377.com/news/" ><span style="color:#FF0000;">资讯</span></a><em></em></li><li><a href="http://www.1377.com/buy/" target="_blank" ><span>求购</span></a><em></em></li><li><a href="http://www.1377.com/company/" ><span>公司</span></a><em></em></li><li><a href="http://www.1377.com/group/" ><span>团购</span></a><em></em></li><li><a href="http://www.1377.com/community/" ><span>小区</span></a><em></em></li><li><a href="http://www.1377.com/home/" ><span>家装</span></a><em></em></li><li><a href="http://www.1377.com/video/" ><span>视频</span></a><em></em></li></ul>
+</div>
+<div class="m">
+<table cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td valign="top" class="left_menu">
+<ul>
+<li class="left_menu_li"><a href="http://www.1377.com/">网站首页</a></li>
+<li class="left_menu_li" id="webpage_1"><a href="http://www.1377.com/about/index.html">关于我们</a></li>
+<li class="left_menu_li" id="webpage_2"><a href="http://www.1377.com/about/contact.html">联系方式</a></li>
+<li class="left_menu_li" id="webpage_3"><a href="http://www.1377.com/about/agreement.html">使用协议</a></li>
+<li class="left_menu_li" id="webpage_4"><a href="http://www.1377.com/about/copyright.html">版权隐私</a></li>
+</ul>
+</td>
+<td valign="top">
+<div class="left_box">
+<div class="pos">当前位置: <a href="http://www.1377.com/">首页</a> &raquo; <a href="http://www.1377.com/about/copyright.html">版权隐私</a></div>
+<div style="border-bottom:#C0C0C0 1px dotted;margin:5px 15px 5px 15px;line-height:36px;" class="t_c px14"><strong>版权隐私</strong></div>
+<div class="content" id="content">版权隐私</div>
+<br/>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript">try{Dd('webpage_4').className='left_menu_on';}catch(e){}</script>
+<div id="footer">
+<p> <a target="_blank" href="http://www.1377.com/">网站首页</a>
+| <a href="http://www.1377.com/about/index.html" class="bottom_text2">关于我们</a> 
+| <a href="http://www.1377.com/about/contact.html" class="bottom_text2">联系方式</a> 
+| <a href="http://www.1377.com/about/agreement.html" class="bottom_text2">使用协议</a> 
+| <a href="http://www.1377.com/about/copyright.html" class="bottom_text2">版权隐私</a> 
+<span>|</span> <a href="http://www.1377.com/sitemap/">网站地图</a>
+ <span>|</span> <a href="http://www.1377.com/guestbook/">网站留言</a> <span>|</span> <a href="http://www.1377.com/ad/">广告服务</a></p>
+
+<p>ICP备案号：<a href="http://www.miibeian.gov.cn" target="_blank">备案申请中</a> 客服热线 （工作时间：周一至周五8:00至18:00）</p>
+<p>Copyright (c) 2010-2014 爱家网-爱家房产系统 All Rights Reserved</p>
+</div>
+<script type="text/javascript">
+show_task('moduleid=3&html=webpage&itemid=4');
+</script>
+</body>
+</html>

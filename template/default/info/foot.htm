@@ -1,0 +1,23 @@
+<div class="AntFooter">
+<ul>
+  <li class="Nav"><a href="{$MODULE[1][linkurl]}">网站首页</a>
+		<!--{tag("table=webpage&condition=item=1&areaid=$cityid&order=listorder desc,itemid desc&template=list-webpage")}-->
+		| <a href="{$MODULE[1][linkurl]}sitemap/">网站地图</a>
+		{if $EXT[guestbook_enable]} | <a href="{$EXT[guestbook_url]}">网站留言</a>{/if}
+		{if $EXT[ad_enable]} | <a href="{$EXT[ad_url]}">广告服务</a>{/if}  </li>
+  <li> {$AJ[copyright]}</li>
+ {if $AJ[icpno]} <li> <a href="http://www.miibeian.gov.cn" target="_blank">{$AJ[icpno]}</a></li>{/if}
+</ul>
+</div>
+<script type="text/javascript">
+{if $aijiacms_task}
+show_task('{$aijiacms_task}');
+{else}
+{php include AJ_ROOT.'/api/task.inc.php';}
+{/if}
+{if $lazy}$(function(){$("img").lazyload();});{/if}
+$('#back2top').click(function() {
+	$("html, body").animate({scrollTop:0}, 200);
+});
+</script>
+</body></html>

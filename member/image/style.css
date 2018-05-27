@@ -1,0 +1,99 @@
+/*
+	[Aijiacms house System] Copyright (c) 2008-2013 Aijiacms.COM
+	This is NOT a freeware, use is subject to license.txt
+*/
+/* global */
+
+
+
+body{margin:0px;height:100%;}
+html{height:100%;}
+
+
+.menu {padding:5px 0 5px 5px;background:url('menu_bg.gif') repeat-x;height:35px;overflow:hidden;}
+
+.tab_nav {width:3px;}
+.tab {height:22px;line-height:18px;letter-spacing:1px;}
+.tab a:link,.tab a:visited,.tab a:active {text-decoration:none;color:#001C30;display:block;height:22px;line-height:18px;padding:5px 12px 2px 12px;}
+.tab a:hover {background:#F6F9FC;color:#FF3300;}
+.tab_on {height:22px;line-height:18px;background:#FFFFFF;border:#CDDAEA 1px solid;border-bottom:none;font-weight:bold;}
+.tab_on a:link,.tab_on a:visited,.tab_on a:active,.tab_on a:hover {text-decoration:none;display:block;height:22px;line-height:18px;padding:5px 15px 2px 15px;color:#333333;}
+#add span {background:url('add_bg.gif') no-repeat 0 center;padding:0 0 0 18px;}
+
+.tbs {background:#FFFFFF;width:100%;border:1px #ddd solid;}
+.tb {background:#FFFFFF;width:100%;border-left:0;border-right:0}
+.ls {background:#eee;height:48px;font-weight:normal;border:1px #ddd solid;border-left:0}
+.ls td {padding:4px 0;background:#fff;border:1px #ddd solid;word-break:break-all;border-left:0}
+.ls li {line-height:25px;height:25px;overflow:hidden;}
+.bd {background:#FFFFFF;}
+.bd td {border-bottom:#CDDAEA 1px solid;border-left:#CDDAEA 1px solid;}
+.tt {padding:0 8px 8px 8px;background:#FFFFFF;}
+.t2 {padding:6px 8px 4px 25px;background:#EDF2F7 url('t2.gif') repeat-x;;font-weight:bold;color:#555555;}
+.tl {background:#EFF5FB;width:80px;text-align:right;padding-right:30px;letter-spacing:1px;}
+.tr {background:#FCFCFC;}
+.on td {background:#F2F6FB;}
+.tb th {background:#eee;height:40px;font-weight:normal;border:1px #ddd solid;border-left:0}
+
+
+.thumb {padding:2px;margin:5px 0 5px 0;border:#CDDAEA 1px solid;}
+.nv table {width:300px;}
+.nv td {text-align:center;padding:3px;}
+.nv th {background:#EFF5FB;border:none;}
+.dot {border-bottom:#CCCCCC 1px dotted;}
+.b10 {height:10px;font-size:1px;}
+.b5 {height:10px;font-size:1px;background:#F1F2F3;}
+.sbt {padding:20px 0 20px 180px;}
+.sbm {height:21px;line-height:19px;cursor:pointer;background:#69A44A;color:#FFFFFF;border-left:#DDDDDD 1px solid;border-right:#2E561B 1px solid;border-top:#DDDDDD 1px solid;border-bottom:#2E561B 1px solid;}
+.res {height:21px;line-height:19px;cursor:pointer;background:#666666;color:#FFFFFF;border-left:#DDDDDD 1px solid;border-right:#4A4A4A 1px solid;border-top:#DDDDDD 1px solid;border-bottom:#4A4A4A 1px solid;}
+.btn {background:url('btn.gif') no-repeat;border:none;width:69px;height:24px;vertical-align:middle;text-align:center;cursor:pointer;line-height:19px;line-height:22px\9;_line-height:26px;*line-height:26px;padding-bottom:2px !important;}
+.btns {padding:8px;border-bottom:#CDDAEA 1px solid;}
+.f_red {color:red;}
+.f_blue {color:blue;}
+.f_green {color:green;}
+.f_gray {color:#888888;}
+.f_black {color:#000000;}
+.f_dblue {color:#0240A3;}
+.f_price {font-weight:bold;font-family:Arial;color:#FF6600;}
+.c_p {cursor:pointer;}
+.f_b {font-weight:bold;}
+.f_r {float:right;}
+.dsn {display:none;}
+.px10 {font-size:10px;}
+.px11 {font-size:11px;}
+.px12 {font-size:12px;}
+.px13 {font-size:13px;}
+.px14 {font-size:14px;}
+.lh18 {line-height:180%;}
+.jt {color:#0240A3;cursor:pointer;}
+.bar {letter-spacing:1px;background:#6980DA;padding:5px 10px 2px 10px;line-height:20px;color:#FFFFFF;border-bottom:#5069CB 1px solid;}
+.hinp {border:none;width:98%;background:url('spacer.gif');height:18px;}
+.hinp_on {border:#84A1BD 1px solid;width:98%;height:16px;}
+.mr {float:right;border:#6C92AD 1px solid;background:#EAF1F7;color:#666666;padding:3px 15px 3px 15px;}
+.warn {padding:10px 0 10px 60px;margin:0 0 10px 0;background:#FFF5D8 url('warn.gif') no-repeat 10px 5px;line-height:200%;border:#FF7300 1px solid;font-size:13px;}
+.limit {padding:5px 10px 5px 10px;margin-top:10px;background:#FFFFCC;border:#FF9900 1px solid;}
+.ok {background:#F1FBE8 url('ok.gif') no-repeat 20px center;padding:20px 20px 20px 60px;margin:0 0 10px 0;font-size:14px;}
+/* pages */
+.pages {padding:10px 0 10px 0;text-align:center;font-size:12px;color:#666666;}
+.pages a:link,.pages a:visited,.pages a:active  {color:#004499;background:#FFFFFF;border:#9AAFE5 1px solid;padding:1px;text-decoration:none;}
+.pages a:hover  {background:#FFFFFF;border:#2E6AB1 1px solid;color:#FF6600;padding:1px;text-decoration:none;}
+.pages strong {background:#2E6AB1;padding:1px;border:#1D589E 1px solid;color:#FFFFFF;}
+.pages_inp {border:#2E6AB1 1px solid;padding:1px;width:30px;text-align:center;color:#666666;}
+.pages_btn {width:26px;background:#F1F7FC;border:#2E6AB1 1px solid;color:#004499;font-weight:bold;font-size:11px;}
+.pages label {background:#FFFFFF;border:#2E6AB1 1px solid;color:#004499;padding:1px 5px 1px 5px;}
+.pages label em {color:red;font-weight:bold;font-style:normal;}
+.pages label span {font-weight:bold;}
+.pages cite {font-style:normal;}
+/* powerd */
+#powered {width:140px;line-height:180%;font-size:9px;margin:10px 0 10px 5px;}
+#powered div {border-bottom:#BCC9F0 1px solid;padding:0 0 3px 0;}
+#powered a {color:#BCC9F0;text-decoration:none;}
+/*Dialog*/
+#Dtop{border-right:#CCCCCC 3px solid;border-bottom:#CCCCCC 3px solid;}
+#Dtop .dbody{border:#305C81 1px solid;background:#EBF0F6;}
+#Dtop .dhead{background:url('dialog.gif') repeat-x;color:#FFFFFF;padding:0 0 0 10px;letter-spacing:1px;line-height:26px;height:26px;font-weight:bold;cursor:move;-moz-user-select:none;-khtml-user-select:none;user-select:none;}
+#Dtop .dhead span{float:right;cursor:pointer;display:block;width:26px;height:26px;background:url('close.gif') no-repeat center center;}
+#Dtop .dbox{padding:8px;overflow:hidden;line-height:200%;clear:both;}
+#Dtop .dsize{height:11px;font-size:1px;}
+#Dtop .dsize div{height:11px;width:11px;background:url('resize.gif') no-repeat;cursor:se-resize;font-size:1px;float:right;}
+/* message box */
+#msgbox{z-index:5;position:absolute;background:#FF4400;top:96px;left:660px;color:#FFFFFF;padding:3px 6px 3px 6px;line-height:15px;letter-spacing:1px;cursor:pointer;}

@@ -1,0 +1,23 @@
+{if $typeid==1}
+{$code}
+{elseif $typeid==2}
+<a href="{$url}" title="{$text_title}" target="_blank">{$text_name}</a>
+{elseif $typeid==3}
+{if $url}<a href="{$url}" target="_blank">{/if}<img src="{$image_src}" width="{$width}" height="{$height}" alt="{$image_alt}"/>{if $url}</a>{/if}
+{elseif $typeid==4}
+{if $url}<a target="_blank" href="{$url}" style="display:block;width:{$width}px;height:{$height}px;position:absolute;left:0;top:0;background:transparent  url('{$flash_src}');"></a>{/if}<embed width="{$width}" height="{$height}" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" quality="high" src="{$flash_src}" wmode="transparent" />
+{elseif $typeid == 5}
+{load('slide.js')}
+<div id="slide_a{$pid}" class="slide" style="width:{$width}px;height:{$height}px;">
+{loop $tags $i $t}
+<a href="{if $t[linkurl]}{$t[linkurl]}{else}###{/if}" target="{if $t[linkurl]}_blank{else}_self{/if}"><img src="{$t[thumb]}" width="{$width}" height="{$height}" alt="{$t[alt]}"/></a>
+{/loop}
+</div>
+<script type="text/javascript">new dslide('slide_a{$pid}');</script>
+{elseif $typeid==6}
+	{if $tags}
+		<div id="adword">
+		<div class="adword">{template 'list-'.$ad_module, 'tag'}</div>
+		</div>
+	{/if}
+{/if}
