@@ -24,9 +24,23 @@
 <link href="<?php echo AJ_SKIN;?>reset.css" rel="stylesheet" type="text/css" />-->
 <script type="text/javascript" src="/js/html5.js"></script>
 <script type="text/javascript" src="/js/page.js"></script>
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"> -->
 <script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/config.js"></script>
 <script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/jquery.js"></script>
+<!-- <script src="//code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/common.js"></script>
+<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+<link href="css/style.css" rel="stylesheet" />
+<style>
+  .ui-tabs .ui-tabs-nav li {
+    width:24%;
+  }
+  #tabs li{
+    text-align：center;
+  }
+</style>
 <script type="text/javascript">
 <?php if($head_mobile && $EXT['mobile_goto']) { ?>
 GoMobile('<?php echo $head_mobile;?>');
@@ -42,7 +56,7 @@ GoMobile('<?php echo $head_mobile;?>');
               <a href="<?php echo $MODULE['1']['linkurl'];?>member/login.php" class="btn-login bounceIn"><span class="reg">登录</span></a>
                     </script><div class="typeShowUser"><a href="<?php echo $MODULE['1']['linkurl'];?>member/register.php"><span class="log">注册</span></a>
               <a href="<?php echo $MODULE['1']['linkurl'];?>member/login.php" class="btn-login bounceIn"><span class="reg">登录</span></a></div></div></div></div>
-   <div class="lianjia-header" mod-id="lj-home-header">
+   <!-- <div class="lianjia-header" mod-id="lj-home-header">
   <div class="nav-wrap">
   <div class="hhd left">
   <span class="city" id="aijiacms_city"></span>
@@ -53,19 +67,17 @@ GoMobile('<?php echo $head_mobile;?>');
   <ul class="nav-lst nav-lst-q">
   <li><a class="a" href="<?php echo $MODULE['3']['linkurl'];?>shortcut.php" title="保存桌面">保存桌面</a></li>
   <li><a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>about">了解我们</a></li>
- 
   <li class="nav_f"><a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>sitemap">网站导航</a>
   <div class="sitemap-quick"><p>二手房</p><dd><a href="<?php echo $MODULE['1']['linkurl'];?>sale/">区域找房</a></dd><div class="nav_area">
         <?php $mainarea = get_mainarea($cityid)?>
     <?php if(is_array($mainarea)) { foreach($mainarea as $k => $v) { ?><a  href="<?php echo $MODULE['5']['linkurl'];?>list-r<?php echo $v['areaid'];?>.html"><?php echo $v['areaname'];?></a><?php } } ?>
                              <a href="<?php echo $MODULE['1']['linkurl'];?>sale/list.php" class="more">更多</a>
-                             
   </div><p>租房</p><div class="nav_area">       <?php $mainarea = get_mainarea($cityid)?>
     <?php if(is_array($mainarea)) { foreach($mainarea as $k => $v) { ?><a  href="<?php echo $MODULE['7']['linkurl'];?>list-r<?php echo $v['areaid'];?>.html"><?php echo $v['areaname'];?></a><?php } } ?><a href="<?php echo $MODULE['1']['linkurl'];?>rent/list.php" class="more">更多</a></div>
-<!-- <div class="nav_area last"><a href="<?php echo $MODULE['1']['linkurl'];?>map"><?php echo $city_name;?>地图找房</a></div>--></div></li><li class="kefu">客服热线  <?php echo $AJ['telephone'];?></li></ul><div class="login-panel typeUserInfo"><div class="typeShowUser"><span class="welcome">您好，欢迎来到<?php echo $AJ['sitename'];?>！请<a href="<?php echo $MODULE['1']['linkurl'];?>member/register.php"><span class="log">注册</span></a> 或 <a href="<?php echo $MODULE['1']['linkurl'];?>member/login.php" class="btn-login bounceIn actLoginBtn"><span class="reg">登录</span></a></span></div></div>
-</div></div>
+<div class="nav_area last"><a href="<?php echo $MODULE['1']['linkurl'];?>map"><?php echo $city_name;?>地图找房</a></div></div></li><li class="kefu">客服热线  <?php echo $AJ['telephone'];?></li></ul><div class="login-panel typeUserInfo"><div class="typeShowUser"><span class="welcome">您好，欢迎来到<?php echo $AJ['sitename'];?>！请<a href="<?php echo $MODULE['1']['linkurl'];?>member/register.php"><span class="log">注册</span></a> 或 <a href="<?php echo $MODULE['1']['linkurl'];?>member/login.php" class="btn-login bounceIn actLoginBtn"><span class="reg">登录</span></a></span></div></div>
+</div></div> -->
 <div class="heroImage" id="heroImage" style="background-image:url(<?php echo $MODULE['1']['linkurl'];?>11/img/home-bg1.jpg)" data-stellar-background-ratio="0.07"></div>
-<header class="lianjia-header nav-nobg" mod-id="lj-common-header"><div class="nav-wrap"><a href="<?php echo $MODULE['1']['linkurl'];?>" title="<?php echo $AJ['sitename'];?>">
+<!-- <header class="lianjia-header nav-nobg" mod-id="lj-common-header"><div class="nav-wrap"><a href="<?php echo $MODULE['1']['linkurl'];?>" title="<?php echo $AJ['sitename'];?>">
 <div class="home-banner"><img src="<?php echo $MODULE['1']['linkurl'];?>11/16-28-45-48-1.png" alt="<?php echo $AJ['sitename'];?>"></div></a>
 <ul class="nav-lst">
 <li><a class="on" href="<?php echo $MODULE['1']['linkurl'];?>">首页</a></li>
@@ -74,11 +86,38 @@ GoMobile('<?php echo $head_mobile;?>');
 <li><a rel="nofollow" class="" href="<?php echo $MODULE['1']['linkurl'];?>rent/" target="_blank">租房</a></li>
 <li><a class="" href="<?php echo $MODULE['1']['linkurl'];?>company/list.php">经纪人</a></li>
 <li><a class="" href="<?php echo $MODULE['1']['linkurl'];?>community/">小区</a></li>
-<li><a class="" href="<?php echo $MODULE['1']['linkurl'];?>news/" target="_blank">资讯</a></li></ul></div></header>
-<!-- 主搜模块、查成交价模块 --><div class="main-wrap" mod-id="lj-home-search"><h2 class="banner home-ico ico-banner"></h2>
-<div class="search-box-wrap"><div class="search-box-bg"></div><div class="search-box-con"><div class="search-box clear" id="homeSearchMain"><form class="clear" action="<?php echo $MODULE['1']['linkurl'];?>sale/search.php"><input class="txt" name="kw" placeholder="请输入城区、商圈或小区名开始找房..." autocomplete="off" id=""><input class="btn home-ico ico-search" type="submit" value="搜索"></form><div id="suggest-cont" class="suggest-wrap"></div></div><div class="hot-rec clear"><div class="left rec lazyStaticData">
-                     
-                      </div><div class="right map-search"> </div></div><div class="ie-bg"></div><div class="palm_lianjia"><div class="palm_text"></div><div class="palm_phone"><a href="<?php echo $EXT['mobile_url'];?>mobile.php" target="_blank"></a></div></div><div class="zhenfangyuan"><i></i><a href="<?php echo $MODULE['1']['linkurl'];?>"><?php echo $AJ['sitename'];?> 了解更多</a></div></div></div>
+<li><a class="" href="<?php echo $MODULE['1']['linkurl'];?>news/" target="_blank">资讯</a></li></ul></div></header> -->
+<!-- 主搜模块、查成交价模块 -->
+<div class="main-wrap" mod-id="lj-home-search"><h2 class="banner home-ico ico-banner"></h2>
+<div class="search-box-wrap">
+  <div class="search-box-bg"></div>
+<div class="search-box-con">
+  <div class="search-box clear" id="homeSearchMain"><form class="clear" action="<?php echo $MODULE['1']['linkurl'];?>sale/search.php"><input class="txt" name="kw" placeholder="中文名称/地名/楼盘名/开发商" autocomplete="off" id=""><input class="btn home-ico ico-search" type="submit" value="搜索"></form>
+    <div id="suggest-cont" class="suggest-wrap"></div>
+    <div class="city_list">
+      <span>宜兴市</span>
+      <span>崇安区</span>
+      <span>南长区</span>
+      <span>北塘区</span>
+      <span>滨湖区</span>
+      <span>锡山区</span>
+      <span>惠山区</span>
+      <span>新区</span>
+      <span>江阴</span>
+      <span>宜兴</span>
+    </div>
+  </div>
+<div class="hot-rec clear"><div class="left rec lazyStaticData">
+</div>
+<!-- <div class="right map-search"> </div> -->
+</div><div class="ie-bg"></div>
+<div class="palm_lianjia">
+  <div class="palm_text"></div>
+  <div class="palm_phone"><a href="<?php echo $EXT['mobile_url'];?>mobile.php" target="_blank"></a></div>
+</div>
+<div class="zhenfangyuan"><i></i><a href="<?php echo $MODULE['1']['linkurl'];?>"><?php echo $AJ['sitename'];?> 了解更多</a></div>
+</div>
+</div>
   <h3 class="sub-title">
 专做客户做不了、划不来、不愿做的事
 </h3>
@@ -87,164 +126,289 @@ GoMobile('<?php echo $head_mobile;?>');
   <div class="wrapper">
   <ul class="clear">
   <li class="banner-1">
-  <h3>找二手房</h3>
-  <a class="coner" target="_blank" href="<?php echo $MODULE['5']['linkurl'];?>">
+  <h3>中介注册</h3>
+  <a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=1">
   <div class="foot-ico foot-ico-1"></div><div class="ico-fix ico-fix-1"></div></a>
-  <p class="p-1">100%真房源，每日上新</p><p class="p-2"><a target="_blank" href="<?php echo $MODULE['5']['linkurl'];?>">二手房</a></p></li>
-  <li class="banner-2"><h3>租学区房</h3><a class="coner" target="_blank" href="<?php echo $MODULE['7']['linkurl'];?>"><div class="foot-ico foot-ico-2"></div><div class="ico-fix ico-fix-2"></div></a><p class="p-1">带孩子跨入希望的起跑线，直通重点</p><p class="p-2"><a target="_blank" href="<?php echo $MODULE['7']['linkurl'];?>">去找房</a></p></li>
-  
-  <li class="banner-3"><h3>找新房</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>house/"><div class="foot-ico foot-ico-3"></div><div class="ico-fix ico-fix-3"></div></a><p class="p-1">提供最新房房源信息</p><p class="p-2"><a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>house/">找新房</a></p></li>
-  
-  
+</li>、
+  <li class="banner-2"><h3>经纪人注册</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=2"><div class="foot-ico foot-ico-2"></div><div class="ico-fix ico-fix-2"></div></a></li>
+  <li class="banner-3"><h3>个人注册</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=3"><div class="foot-ico foot-ico-3"></div><div class="ico-fix ico-fix-3"></div></a></li>
   </ul></div></section>
-<section class="guess" mod-id="lj-home-guesslike"><div class="wrapper"><h2>二手房   <span  style="float:right; font-size:14px;"><a target='_blank' href='/sale'>更多</a></span></h2><ul class="guess-con clear">
-        <?php $tags=tag("moduleid=5&condition=status=3 and thumb<>''&areaid=$cityid&length=22&pagesize=10&order=addtime desc&target=_blank&template=null");?> 
- <?php if(is_array($tags)) { foreach($tags as $i => $t) { ?>        
- <li >  <a target="_blank" href="<?php echo $t['linkurl'];?>">
-        <img class="g-img lj-lazy" src="<?php echo imgurl($t['thumb']);?>">
-        <p class="description"><?php if($t['room']) { ?><?php echo $t['room'];?>室<?php } else { ?>待定<?php } ?>
-<?php if($t['hall']) { ?><?php echo $t['hall'];?>厅<?php } ?>
-<span style="color:#FF0000"> <?php echo $t['housename'];?></span></p>
-        </a>
-    <p class="ddl">
-    <span class="price left"><?php if($t['price']) { ?><?php echo $t['price'];?>万<?php } else { ?>面议<?php } ?>
-</span><span class="p-del right">第<?php echo $t['floor1'];?>层/总<?php echo $t['floor2'];?>层</span></p>
-    </li >    
-     <?php } } ?>
- </ul></div></section>
-<section class="s-truth"><div class="wrapper">
-<img src="/images/ad_d.jpg" width="1000" height="79" alt=""></div></section>
-<section class="guess" mod-id="lj-home-guesslike">
-<div class="wrapper">
-<h2>租房 <span  style="float:right; font-size:14px;"><a target='_blank' href='/rent'>更多</a></span></h2>
-<ul class="guess-con clear">
-          <?php $tags=tag("moduleid=7&condition=status=3 and thumb<>''&areaid=$cityid&length=22&pagesize=10&order=addtime desc&target=_blank&template=null");?>
- <?php if(is_array($tags)) { foreach($tags as $i => $t) { ?>        
-            <li>  <a target="_blank" href="<?php echo $t['linkurl'];?>">
-        <img class="g-img lj-lazy" src="<?php echo imgurl($t['thumb']);?>" data-original="<?php echo imgurl($t['thumb']);?>">
-        <p class="description"><?php if($t['room']) { ?><?php echo $t['room'];?>室<?php } else { ?>待定<?php } ?>
-<?php if($t['hall']) { ?><?php echo $t['hall'];?>厅<?php } ?>
- <?php echo $t['housename'];?></p>
-        </a>
-    <p class="ddl">
-    <span class="price left"><?php if($t['price']) { ?><span class="jg"><?php echo $t['price'];?></span>元/月<?php } else { ?><span class="jg">面议</span><?php } ?>
-</span><span class="p-del right">第<?php echo $t['floor1'];?>层/总<?php echo $t['floor2'];?>层</span></p>
-    </li> 
-     <?php } } ?>
-     </ul></div></section>
-     
-<!-- 掌上优房大banner -->
-<section class="hand-lianjia" mod-id="lj-home-handlianjia">
-<div class="bg-hand">
-<div class="wrapper">
-<a target="_blank" href="<?php echo $EXT['mobile_url'];?>mobile.php">
-<div class="get-btn">
-</div>
-</a>
-</div>
-</div>
-</section>
-<!-- 新房模块  ok  23 znt --><section class="new-house" data-stellar-background-ratio="0.05" mod-id="lj-home-newhouse"><div class="wrapper"><div class="new-head clear"><span class="left title">新房</span><p class="right"><span class="right-con"><a target='_blank' href='/house'>更多</a></span></p></div>
-<ul class="content-1 clear">
-<?php $tags=tag("moduleid=6&condition=status=3 and isnew=1 and thumb!=''&areaid=$cityid&length=20&order=hits desc&pagesize=1&target=_blank&template=null");?>
-<?php if(is_array($tags)) { foreach($tags as $k => $t) { ?>
- <li class="left " > 
-<a class="pic" target="_blank" href="<?php echo $t['linkurl'];?>" class="img-crop">
-<img class="img" onload="RESIZEIMG(this, '' , '' ,true)" src="<?php echo imgurl($t['thumb']);?>" data-original="<?php echo imgurl($t['thumb']);?>" width="100%"></a><p class="p-1"><a target="_blank" href="<?php echo $t['linkurl'];?>"><span class="t-1"><?php echo $t['title'];?></span></a><i></i><span class="t-2"><?php echo $t['tedian'];?></span><span class="t-p right"><?php if($t['price']) { ?><span class="c-p"><?php echo $t['price'];?></span><span class="t-l">元/平米</span><?php } else { ?>一房一价<?php } ?>
-</span></p><p class="p-2"><span class="t-3"><?php echo area_poss($t['areaid'], ' ');?> / <span class="t-4"><?php echo $t['kfs'];?></span></span></p></li> 
-<?php } } ?>
-<?php $tags=tag("moduleid=6&condition=status=3 and isnew=1 and thumb!=''&areaid=$cityid&length=20&order=addtime desc&pagesize=1&target=_blank&template=null");?>
-<?php if(is_array($tags)) { foreach($tags as $k => $t) { ?>
- <li class="left last" > 
-<a class="pic" target="_blank" href="<?php echo $t['linkurl'];?>" class="img-crop">
-<img class="img" onload="RESIZEIMG(this, '' , '' ,true)" src="<?php echo imgurl($t['thumb']);?>" data-original="<?php echo imgurl($t['thumb']);?>" width="100%"></a><p class="p-1"><a target="_blank" href="<?php echo $t['linkurl'];?>"><span class="t-1"><?php echo $t['title'];?></span></a><i></i><span class="t-2"><?php echo $t['tedian'];?></span><span class="t-p right"><?php if($t['price']) { ?><span class="c-p"><?php echo $t['price'];?></span><span class="t-l">元/平米</span><?php } else { ?>一房一价<?php } ?>
-</span></p><p class="p-2"><span class="t-3"><?php echo area_poss($t['areaid'], ' ');?> / <span class="t-4"><?php echo $t['kfs'];?></span></span></p></li> 
-<?php } } ?> </ul>
-<ul class="content-2 clear">
- <?php $tags=tag("moduleid=6&condition=status=3 and thumb!=''&areaid=$cityid&length=20&order=addtime desc&pagesize=4&target=_blank&template=null");?>
-<?php if(is_array($tags)) { foreach($tags as $k => $t) { ?>
-    <li class="left ">
-<div class="con">    
-<a target="_blank" href="<?php echo $t['linkurl'];?>" class="img-crop"><img class="img lj-lazy"  src="<?php echo imgurl($t['thumb']);?>" style="left: -71px; height: 100%; "></a><p><a target="_blank" href="<?php echo $t['linkurl'];?>">
-<span class="info"><?php echo $t['title'];?></span></a>
-<span class="info"><?php if($t['price']) { ?><?php echo $t['price'];?>元/平米<?php } else { ?>一房一价<?php } ?>
-元/平米</span>
-<span class="info"><?php echo $t['tedian'];?></span></p>
-<div class="des"><i></i>
-<span title="<?php echo $t['tedian'];?>"><?php echo $t['tedian'];?></span></div></div>
-<p class="location">
-<i></i>
-<span title="$t[sell_address]}"></span></p>
-</li>
- <?php } } ?>
- </ul></div></section>
- 
- 
-<section class="s-truth" mod-id="lj-home-searchtruth"><div class="bg-truth"><div class="wrapper"><div class="form clear"><div class="sear-result clear"></div>
-<!--<form target="_blank" action="<?php echo $MODULE['1']['linkurl'];?>" method="post"><input type="text" class="sear-con left" name="k" value="" placeholder="请输入出售房源编号查询真伪..." autocomplete="off" id="truth"><input type="submit" class="home-tr left" value=""></form>--></div></div></div></section><!-- 房源编号查询模块  -->
-<section class="rent"><div class="wrapper"><div class="news-con" mod-id="lj-home-consult"><h1>房产资讯</h1><ul class="clear"><li class="bb focus" id="homeFocus"><p class="pp">大家都在关注的话题</p><p class="label lazyStaticData">            
-                <a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>news/" title="二手房交易税"><span class="fangchan-1">二手房交易税</span></a>
-              
-                <a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>news/" title="房产税"><span class="fangchan-2">房产税</span></a>
-              
-                <a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>news/" title="住房公积金"><span class="fangchan-3">住房公积金</span></a>
-              
-                <a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>news/" title="二手房交易流程"><span class="fangchan-4">二手房交易流程</span></a>
-              
-                <a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>news/" title="二手房贷款"><span class="fangchan-5">二手房贷款</span></a>
-              
-                <a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>news/" title="过户"><span class="fangchan-6">过户</span></a>
-              
-              </p><p class="introextra lazyStaticData">   
-                   
-                    <?php $tags=tag("moduleid=8&condition=status=3&areaid=$cityid&length=42&pagesize=8&order=addtime desc&target=_blank&template=null");?>
-  <?php if(is_array($tags)) { foreach($tags as $i => $t) { ?>
- <span><i><?php if($t['houseid']) { ?> <a target="_blank" title="<?php echo $t['housename'];?>" href="<?php echo $MODULE['6']['linkurl'];?><?php echo $t['houseid'];?>" >[<?php echo $t['housename'];?>]</a><?php } ?>
-</i><a href="<?php echo $t['linkurl'];?>" target="_blank" title="<?php echo $t['alt'];?>"><?php echo $t['title'];?></a></span>
-                <br>
-               <?php } } ?>
- </p></li><li class="bb house-news"><p class="pp clear"><span class="t-zixun left">最新房产资讯</span><span class="t-more right"><a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>news/">更多资讯</a></span></p><div class="lab-list"></div><ul class="content">
-  <?php $tags=tag("moduleid=8&condition=status=3&areaid=$cityid&length=42&pagesize=8&order=addtime desc&target=_blank&template=null");?>
-  <?php if(is_array($tags)) { foreach($tags as $i => $t) { ?>
-     <li class="ddl "><span class="det"><a href="<?php echo $t['linkurl'];?>" target="_blank" title="<?php echo $t['alt'];?>"><?php echo $t['title'];?></a></span><span class="time right"><?php echo date(‘Y-m-d’, $t['addtime']);?></span></li><?php } } ?>
-   
-   </ul></li><li class="ad bb last"><p class="pp">安心服务承诺</p><a target="_blank" href="/"><img class="lj-lazy" src="/images/ad_bottom.png" data-original="/images/ad_bottom.png" alt=""></a></li></ul></div>
-</div></section><!-- SEO信息模块 --><section class="trust-dd"><div class="wrapper bbg"></div></section>
-<div class="lianjia-link-box" mod-id="lj-common-linkbox">
-<div class="wrapper">
-<dl class="dl-lst clear"><dt>热门区域二手房</dt><dd>    <?php $mainarea = get_mainarea($cityid)?>
-    <?php if(is_array($mainarea)) { foreach($mainarea as $k => $v) { ?><a  href="<?php echo $MODULE['5']['linkurl'];?>list-r<?php echo $v['areaid'];?>.html"><?php echo $v['areaname'];?>二手房</a><?php } } ?></dd></dl>
-<dl class="dl-lst clear"><dt>热门区域新房</dt><dd>      <?php $mainarea = get_mainarea($cityid)?>
-    <?php if(is_array($mainarea)) { foreach($mainarea as $k => $v) { ?><a  href="<?php echo $MODULE['6']['linkurl'];?>list-r<?php echo $v['areaid'];?>.html"><?php echo $v['areaname'];?>楼盘</a><?php } } ?>
-                            </dd></dl>
-<dl class="dl-lst clear"><dt>热门区域租房</dt><dd>     <?php $mainarea = get_mainarea($cityid)?>
-    <?php if(is_array($mainarea)) { foreach($mainarea as $k => $v) { ?><a  href="<?php echo $MODULE['7']['linkurl'];?>list-r<?php echo $v['areaid'];?>.html"><?php echo $v['areaname'];?>租房</a><?php } } ?></dd></dl>
-<dl class="dl-lst clear"><dt>合作及友情链接 <?php echo $AJ['QQ'];?></dt><dd>    <?php $tags=tag("table=link&condition=status=3 and thumb='' and username=''&areaid=$cityid&pagesize=".$AJ['page_text']."&order=listorder desc,itemid desc&template=null");?>
-  <?php if(is_array($tags)) { foreach($tags as $t) { ?> 
-         <a href="<?php echo $t['linkurl'];?>" target="_blank" title="<?php echo $t['alt'];?>"><?php echo $t['title'];?></a>
- <?php } } ?>
- </dd></dl></div></div>
-<div class="lianjia-footer" mod-id="lj-common-footer"><div class="wrapper"><div class="foot-content left">
-<div class="link">
- <a target="_blank" href="/">网站首页</a>
-                        <span class="stp">|</span><a href="<?php echo $MODULE['1']['linkurl'];?>about/index.html" target="_blank">关于我们</a>
-                                         <!--     <span class="stp">|</span><a href="<?php echo $MODULE['1']['linkurl'];?>about/mianze.html" target="_blank">免责声明</a>
-                                              <span class="stp">|</span><a href="<?php echo $MODULE['1']['linkurl'];?>about/recruitment.html" target="_blank">加入我们</a>-->
-                                              <span class="stp">|</span><a href="<?php echo $MODULE['1']['linkurl'];?>about/agreement.html" target="_blank">使用协议</a>
-                                              <span class="stp">|</span><a href="<?php echo $MODULE['1']['linkurl'];?>about/copyright.html" target="_blank">版权隐私</a>
-                                              <span class="stp">|</span><a href="<?php echo $MODULE['1']['linkurl'];?>about/contact.html" target="_blank">联系方式</a>
-                      <!--<span class="stp">|</span> <a href="<?php echo $MODULE['1']['linkurl'];?>sitemap/">网站地图</a>-->
-<label></label></div>
-<!--<div class="link link-z">
-<a href="<?php echo $MODULE['1']['linkurl'];?>house/" target="_blank">楼盘</a>  <span class="stp">|</span> <?php $l = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');?>
-<?php if(is_array($l)) { foreach($l as $k => $v) { ?>
-<a <?php if($letter==$v) { ?>class="on"<?php } ?>
- href="<?php echo $MOD['linkurl'];?>list<?php echo deal_str($lst,'e');?>-e<?php echo $v;?>.html"><?php echo $v;?></a><span class="stp">|</span><?php } } ?>
-</div>-->
-<div style="color:#999; padding-bottom:10px;">客服热线：0554-6616188（工作时间：周一至周五8：00至18：00）</div>
-<div class="copy"> <?php echo $AJ['icpno'];?></div><div class="compny"><?php echo $AJ['copyright'];?></div></div></div></div>
-<div class="go_top" id="gotop" style="display: none; "></div>
-<!-- 代码 开始 
+        <?php $tags=tag("moduleid=5&condition=status=3 and thumb<>''&areaid=$cityid&length=22&pagesize=10&order=addtime desc&target=_blank&template=null");?>
+<section class="rent"><div class="wrapper">
+  <div class="tabox">
+        <div class="hd">
+          <ul>
+            <li class=" ">疯狂抢购</li>
+            <li class=" ">猜您喜欢</li>
+            <li class=" ">热卖商品</li>
+            <li class=" ">热评商品</li>
+            <li class="on">新品上架</li></ul>
+        </div>
+        <div class="bd">
+          <ul class="lh" style="display: none;">
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/1.1.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">艾家纺全棉加厚磨毛四件套</a></div>
+              <div class="p-price">京东价：
+                <strong>￥399.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/1.2.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">优曼真丝提花奢华四件套</a></div>
+              <div class="p-price">京东价：
+                <strong>￥1299.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/1.3.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">3999！大金1.5匹变频空调更安静！</a></div>
+              <div class="p-price">京东价：
+                <strong>￥3999.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/1.4.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">爸爸爱喜禾（犬子在，不远游！感动无数读者的电子书</a></div>
+              <div class="p-price">京东价：
+                <strong>￥1.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/1.5.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">【超值】飞利浦21.5英寸LED背光宽屏液晶显示</a></div>
+              <div class="p-price">京东价：
+                <strong>￥809.00</strong></div>
+            </li>
+          </ul>
+          <ul class="lh" style="display: none;">
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.1.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">安钛克（Antec）VP 550P 额定550W 120mm静音风扇 主动PFC 黑化外型设计电源</a></div>
+              <div class="p-price">京东价：
+                <strong>￥399.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.2.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">G.SKILL（芝奇）RipjawsX DDR3 1600 8G(4G×2条)台式机内存(F3-12800CL9D-8GBXL )</a></div>
+              <div class="p-price">京东价：
+                <strong>￥235.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.3.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
+              <div class="p-price">京东价：
+                <strong>￥438.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.4.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">华硕(ASUS)P8Z77-V LK主板(Intel Z77/LGA 1155)</a></div>
+              <div class="p-price">京东价：
+                <strong>￥899.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.5.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
+              <div class="p-price">京东价：
+                <strong>￥112.00</strong></div>
+            </li>
+          </ul>
+          <ul class="lh" style="display: none;">
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/3.1.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">冬季健身TOP1！瑞亚特仰卧板加送俯卧撑架</a></div>
+              <div class="p-price">京东价：
+                <strong>￥187.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/3.2.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">HTC Z715e!双核！魔音耳机！</a></div>
+              <div class="p-price">京东价：
+                <strong>￥2399.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/3.3.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">下单返现150元！格力9片电油汀</a></div>
+              <div class="p-price">京东价：
+                <strong>￥449.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/3.4.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">绿之源净味宝2居室除味超值套装 4000克</a></div>
+              <div class="p-price">京东价：
+                <strong>￥449.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/3.5.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">宏碁i5 4G GT630M 1G独显 月销量破</a></div>
+              <div class="p-price">京东价：
+                <strong>￥3599.00</strong></div>
+            </li>
+          </ul>
+          <ul class="lh" style="display: none;">
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.3.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
+              <div class="p-price">京东价：
+                <strong>￥438.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.3.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
+              <div class="p-price">京东价：
+                <strong>￥438.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.3.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
+              <div class="p-price">京东价：
+                <strong>￥438.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.3.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
+              <div class="p-price">京东价：
+                <strong>￥438.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.3.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
+              <div class="p-price">京东价：
+                <strong>￥438.00</strong></div>
+            </li>
+          </ul>
+          <ul class="lh" style="display: block;">
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.5.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
+              <div class="p-price">京东价：
+                <strong>￥112.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.5.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
+              <div class="p-price">京东价：
+                <strong>￥112.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.5.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
+              <div class="p-price">京东价：
+                <strong>￥112.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.5.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
+              <div class="p-price">京东价：
+                <strong>￥112.00</strong></div>
+            </li>
+            <li>
+              <div class="p-img ld">
+                <a href="#">
+                  <img src="images/2.5.jpg"></a>
+              </div>
+              <div class="p-name">
+                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
+              <div class="p-price">京东价：
+                <strong>￥112.00</strong></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+</div></section>
+<!-- 代码 开始
 <div class="scrollsidebar" id="hhService">
 <div class="side_content">
 <div class="side_list">
@@ -274,9 +438,6 @@ GoMobile('<?php echo $head_mobile;?>');
 <img src="<?php echo AJ_SKIN;?>/images/esf/online.png"></a></p>
 <p><a title="点击这里给我发消息" href="http://wpa.qq.com/msgrd?v=3&uin=435893798&site=qq&menu=yes" target="_blank">吴媛媛
 <img src="<?php echo AJ_SKIN;?>/images/esf/online.png"></a></p>
-
-
-
 </div>
 <strong>咨询热线：123456</strong><div class="msgserver">
 <p>在线时间:9:00-18:00</p>
@@ -292,5 +453,13 @@ GoMobile('<?php echo $head_mobile;?>');
 <script src="<?php echo AJ_SKIN;?>js/jquery.hhService.js"></script>
 <script>$(function(){$("#hhService").fix({float:'right',minStatue:false,skin:'green',durationTime:1000})});</script>
 <!-- 代码 结束 -->
- 
+<script>
+ $(".city_list").find("span").click(function(){
+   $("input[name='kw']").val($(this).text());
+ });
+</script>
+<script type="text/javascript" src="js/jquery.SuperSlide.js"></script>
+<script type="text/javascript">
+$(".tabox").slide({delayTime: 0});
+</script>
 </body></html>

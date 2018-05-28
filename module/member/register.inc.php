@@ -1,7 +1,8 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 if($_userid) dheader($MOD['linkurl']);
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
+$regtype = $_GET['regtype'];
 if(isset($print)) exit(include template('agreement', $module));
 if(!$MOD['enable_register']) message($L['register_msg_close'], AJ_PATH);
 if($MOD['defend_proxy']) {
@@ -99,7 +100,7 @@ if($submit) {
 	$RG = array();
 	foreach($GROUP as $k=>$v) {
 		if($k > 4 && $v['vip'] == 0) $RG[] = $k;
-	}	
+	}
 	$reload_captcha = $MOD['captcha_register'] ? reload_captcha() : '';
 	$reload_question = $MOD['question_register'] ? reload_question() : '';
 	in_array($post['regid'], $RG) or dalert($L['register_pass_groupid'], '', $reload_captcha.$reload_question);

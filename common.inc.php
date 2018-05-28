@@ -15,7 +15,7 @@ if(isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])) exit('Request Denie
 @set_magic_quotes_runtime(0);
 $MQG = get_magic_quotes_gpc();
 foreach(array('_POST', '_GET') as $__R) {
-	if($$__R) { 
+	if($$__R) {
 		foreach($$__R as $__k => $__v) {
 			if(substr($__k, 0, 1) == '_') if($__R == '_POST') { unset($_POST[$__k]); } else { unset($_GET[$__k]); }
 			if(isset($$__k) && $$__k == $__v) unset($$__k);
@@ -91,12 +91,13 @@ if(!$CACHE) {
 	require_once AJ_ROOT.'/include/post.func.php';
 	require_once AJ_ROOT.'/include/cache.func.php';
     cache_all();
-	$CACHE = cache_read('module.php');
+	$CACHE = cache_read('module.php');//读取管理端的模块设置和网站设置cding
 }
-$AJ = $CACHE['dt'];
-$MODULE = $CACHE['module'];
+// print_r($CACHE);exit;
+$AJ = $CACHE['dt'];//网站设置
+$MODULE = $CACHE['module'];//模块信息
 $EXT = cache_read('module-3.php');
-$lazy = $AJ['lazy'] ? 1 : 0;
+$lazy = $AJ['lazy'] ? 1 : 0;//图片延时加载
 if(!IN_ADMIN && ($AJ['close'] || $AJ['defend_cc'] || $AJ['defend_reload'] || $AJ['defend_proxy'])) include AJ_ROOT.'/include/defend.inc.php';
 unset($CACHE, $CFG['db_host'], $CFG['db_user'], $CFG['db_pass'], $db_class, $db_file);
 $moduleid = isset($moduleid) ? intval($moduleid) : 1;
@@ -119,7 +120,7 @@ $city_domain =$city_domain;
 if($AJ['city']){
 $map_mid = $map_mid;
 }else{
-$map_mid=$AJ['map_mid'];}//�ٶȵ�ͼ�����޸ģ������а汾��
+$map_mid=$AJ['map_mid'];}//�ٶȵ�ͼ�����޸ģ������а汾��
  $city_sitename = '';
 ($AJ['gzip_enable'] && !$_POST && !defined('AJ_WAP')) ? ob_start('ob_gzhandler') : ob_start();
 $forward = isset($forward) ? urldecode($forward) : $AJ_REF;
@@ -137,7 +138,7 @@ $areaid = isset($areaid) ? intval($areaid) : 0;
 $itemid = isset($itemid) ? (is_array($itemid) ? array_map('intval', $itemid) : intval($itemid)) : 0;
 $pagesize = $AJ['pagesize'] ? $AJ['pagesize'] : 30;
 $offset = ($page-1)*$pagesize;
-$kw = isset($_GET['kw']) ? strip_kw($_GET['kw']) : '';	
+$kw = isset($_GET['kw']) ? strip_kw($_GET['kw']) : '';
 $keyword = $kw ? str_replace(array(' ', '*'), array('%', '%'), $kw) : '';
 $today_endtime = strtotime(date('Y-m-d', $AJ_TIME).' 23:59:59');
 $seo_file = $seo_title = $head_title = $head_keywords = $head_description = $head_canonical = $head_mobile = '';
@@ -147,7 +148,7 @@ $_userid = $_admin = $_aid = $_message = $_chat = $_sound = $_online = $_money =
 $_username = $_company = $_passport = $_truename = $_mobile = '';
 $_groupid = 3;
 $aijiacms_auth = get_cookie('auth');
-if($aijiacms_auth) {	
+if($aijiacms_auth) {
 	$_dauth = explode("\t", decrypt($aijiacms_auth));
 	$_userid = isset($_dauth[0]) ? intval($_dauth[0]) : 0;
 	$_username = isset($_dauth[1]) ? trim($_dauth[1]) : '';
@@ -170,6 +171,7 @@ if($aijiacms_auth) {
 		unset($aijiacms_auth, $USER, $_dauth, $_password);
 	}
 }
+// die('11');
 if($_userid == 0) { $_groupid = 3; $_username = ''; }
 if(!IN_ADMIN) {
 	if($_groupid == 1) include AJ_ROOT.'/module/member/admin.inc.php';
@@ -183,5 +185,9 @@ if(!IN_ADMIN) {
 	}
 	if($AJ_BOT && $moduleid >= 4) $MOD['order'] = $moduleid == 4 ? 'userid DESC' : 'addtime DESC';
 }
+// die('11');
+
 $MG = cache_read('group-'.$_groupid.'.php');
+// die('11');
+
 ?>

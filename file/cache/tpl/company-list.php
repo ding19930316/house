@@ -51,7 +51,7 @@
 </div>
 </div>
                                   
-                           <?php echo tag("moduleid=$moduleid&condition=groupid>5&areaid=$cityid&pagesize=18&order=userid desc&template=list-company");?>
+                              <?php if($tags) { ?><?php include template('list-'.$module, 'tag');?><?php } ?>
                                            
                 
                 </div>

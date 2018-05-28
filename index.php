@@ -41,6 +41,7 @@ if($username) {
 	require AJ_ROOT.'/module/'.$module.'/common.inc.php';
 	include AJ_ROOT.'/module/'.$module.'/init.inc.php';
 } else {
+	// print_r($AJ);exit;
 	if($AJ['safe_domain']) {
 		$safe_domain = explode('|', $AJ['safe_domain']);
 		$pass_domain = false;
@@ -51,7 +52,7 @@ if($username) {
 	}
 	if($AJ['index_html']) {
 		$html_file = $CFG['com_dir'] ? AJ_ROOT.'/'.$AJ['index'].'.'.$AJ['file_ext'] : AJ_CACHE.'/index.inc.html';
-		if(!is_file($html_file)) tohtml('index');		
+		if(!is_file($html_file)) tohtml('index');
 		if(is_file($html_file)) exit(include($html_file));
 	}
 		if($AJ['city']){
@@ -67,9 +68,12 @@ $xiqoqu = get_xiqoqu(0);
 	$seo_title = $AJ['seo_title'];
 	$head_keywords = $AJ['seo_keywords'];
 	$head_description = $AJ['seo_description'];
+	// die('11');
+
 	if($city_template) {
 		include template($city_template, 'city');
-	} else {		
+		
+	} else {
 		include template('index');
 	}
 }
