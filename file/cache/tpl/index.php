@@ -24,21 +24,15 @@
 <link href="<?php echo AJ_SKIN;?>reset.css" rel="stylesheet" type="text/css" />-->
 <script type="text/javascript" src="/js/html5.js"></script>
 <script type="text/javascript" src="/js/page.js"></script>
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"> -->
 <script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/config.js"></script>
 <script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/jquery.js"></script>
-<!-- <script src="//code.jquery.com/jquery-1.9.1.js"></script> -->
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/common.js"></script>
-<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
-<link href="css/style.css" rel="stylesheet" />
-<style>
-  .ui-tabs .ui-tabs-nav li {
-    width:24%;
-  }
-  #tabs li{
-    text-align：center;
+<!--大话插件加载-->
+<script type="text/javascript" src="static/dahua/jquery.SuperSlide.2.1.1.js"></script>
+<!--大话插件加载end-->
+<style media="screen">
+  .shadow{
+    text-shadow: 0 1px 8px rgba(0,0,0,0.8);
   }
 </style>
 <script type="text/javascript">
@@ -95,16 +89,15 @@ GoMobile('<?php echo $head_mobile;?>');
   <div class="search-box clear" id="homeSearchMain"><form class="clear" action="<?php echo $MODULE['1']['linkurl'];?>sale/search.php"><input class="txt" name="kw" placeholder="中文名称/地名/楼盘名/开发商" autocomplete="off" id=""><input class="btn home-ico ico-search" type="submit" value="搜索"></form>
     <div id="suggest-cont" class="suggest-wrap"></div>
     <div class="city_list">
-      <span>宜兴市</span>
-      <span>崇安区</span>
-      <span>南长区</span>
-      <span>北塘区</span>
-      <span>滨湖区</span>
-      <span>锡山区</span>
-      <span>惠山区</span>
-      <span>新区</span>
-      <span>江阴</span>
-      <span>宜兴</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r6.html">崇安区</a></span><span>|</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r9.html">南长区</a></span><span>|</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r10.html">北塘区</a></span><span>|</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r11.html">滨湖区</a></span><span>|</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r12.html">锡山区</a></span><span>|</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r13.html">惠山区</a></span><span>|</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r14.html">新区</a></span><span>|</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r15.html">江阴</a></span><span>|</span>
+      <span><a href="<?php echo $MODULE['1']['linkurl'];?>sale/list-r16.html">宜兴</a></span>
     </div>
   </div>
 <div class="hot-rec clear"><div class="left rec lazyStaticData">
@@ -126,287 +119,108 @@ GoMobile('<?php echo $head_mobile;?>');
   <div class="wrapper">
   <ul class="clear">
   <li class="banner-1">
-  <h3>中介注册</h3>
+  <h3 class="shadow">中介注册</h3>
   <a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=1">
   <div class="foot-ico foot-ico-1"></div><div class="ico-fix ico-fix-1"></div></a>
 </li>、
-  <li class="banner-2"><h3>经纪人注册</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=2"><div class="foot-ico foot-ico-2"></div><div class="ico-fix ico-fix-2"></div></a></li>
-  <li class="banner-3"><h3>个人注册</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=3"><div class="foot-ico foot-ico-3"></div><div class="ico-fix ico-fix-3"></div></a></li>
+  <li class="banner-2"><h3 class="shadow">经纪人注册</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=2"><div class="foot-ico foot-ico-2"></div><div class="ico-fix ico-fix-2"></div></a></li>
+  <li class="banner-3"><h3 class="shadow">个人注册</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=3"><div class="foot-ico foot-ico-3"></div><div class="ico-fix ico-fix-3"></div></a></li>
   </ul></div></section>
         <?php $tags=tag("moduleid=5&condition=status=3 and thumb<>''&areaid=$cityid&length=22&pagesize=10&order=addtime desc&target=_blank&template=null");?>
+<section class="rent" style="border-bottom: 1px solid #d9d9d9;"><div class="wrapper">
+  <style type="text/css">
+/* css 重置 */
+*{margin:0; padding:0; list-style:none; }
+body{ background:#fff; font:normal 12px/22px 宋体;  }
+img{ border:0;  }
+a{ text-decoration:none; color:#333;  }
+a:hover{ color:#1974A1;  }
+/* 本例子css */
+.slideTxtBox{ border:1px solid #ddd; text-align:left; border-radius:5px; }
+.slideTxtBox .hd{ height:30px; line-height:30px;     background: #000; opacity: .55; padding:0 10px 0 20px;   border-bottom:1px solid #000;  position:relative; }
+.slideTxtBox .hd ul{ float:left;  position:absolute; left:20px; top:-1px; height:32px;   }
+.slideTxtBox .hd ul li{ float:left;     text-align: center;
+  padding-left:12px;
+  padding-right:12px;
+    font-size: 16px;
+    color: white;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.8);}
+.slideTxtBox .hd ul li.on{ height:30px;  background:#fff; border:1px solid #ddd; border-bottom:2px solid #fff; color:#000}
+.slideTxtBox .bd ul{ padding:15px;  zoom:1;  }
+.slideTxtBox .bd li{ height:24px; line-height:24px;   }
+.slideTxtBox .bd li .date{ float:right; color:#999;  }
+.x4{
+  width:220px;
+  padding:10px;
+  display: inline-block;
+}
+.x2{
+  padding:10px;
+  display: inline-block;
+  width: 22.5%;
+  text-align: center;
+}
+.x2 img{
+  margin:0px auto;
+  width: 100%;
+  height: 280px;
+}
+</style>
+<h3 class="sub-title" style="color: #333;">
+  房源推荐
+</h3>
+<div class="slideTxtBox">
+  <div class="hd">
+    <ul>
+      <!-- {foreach name=foreach_name key=k item=v from=$tags1}
+        <li><?php echo $v['truename'];?></li>
+      {/foreach} -->
+      <?php if(is_array($members_r)) { foreach($members_r as $k => $t) { ?>
+      <li><?php echo $t['truename'];?></li>
+      <?php } } ?>
+    </ul>
+  </div>
+  <div class="bd">
+    <?php if(is_array($tag)) { foreach($tag as $k => $t) { ?>
+      <li><?php echo $k;?></li>
+    <?php } } ?>
+    <!-- {foreach from=$tags key=num item="book"}
+      <li class="x4">
+        <?php echo $book['title'];?>
+      </li>
+    {/foreach} -->
+      <!-- <?php if(is_array($tags)) { foreach($tags as $k => $t) { ?>
+      <ul> -->
+        <!-- <li class="x4">
+          <?php echo $t1['truename'];?>
+        </li> -->
+        <!-- <li class="x4"><?php echo $k;?></li>
+        <?php echo $k;?> -->
+        <!-- <?php if(is_array($t1)) { foreach($t1 as $kk => $tt) { ?>
+          <li class="x4">
+            <?php echo $tt['title'];?>
+          </li>
+        <?php } } ?> -->
+      <!-- </ul>
+      <?php } } ?> -->
+  </div>
+</div>
+<script type="text/javascript">jQuery(".slideTxtBox").slide();</script>
+</div></section>
 <section class="rent"><div class="wrapper">
-  <div class="tabox">
-        <div class="hd">
-          <ul>
-            <li class=" ">疯狂抢购</li>
-            <li class=" ">猜您喜欢</li>
-            <li class=" ">热卖商品</li>
-            <li class=" ">热评商品</li>
-            <li class="on">新品上架</li></ul>
-        </div>
-        <div class="bd">
-          <ul class="lh" style="display: none;">
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/1.1.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">艾家纺全棉加厚磨毛四件套</a></div>
-              <div class="p-price">京东价：
-                <strong>￥399.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/1.2.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">优曼真丝提花奢华四件套</a></div>
-              <div class="p-price">京东价：
-                <strong>￥1299.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/1.3.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">3999！大金1.5匹变频空调更安静！</a></div>
-              <div class="p-price">京东价：
-                <strong>￥3999.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/1.4.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">爸爸爱喜禾（犬子在，不远游！感动无数读者的电子书</a></div>
-              <div class="p-price">京东价：
-                <strong>￥1.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/1.5.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">【超值】飞利浦21.5英寸LED背光宽屏液晶显示</a></div>
-              <div class="p-price">京东价：
-                <strong>￥809.00</strong></div>
-            </li>
-          </ul>
-          <ul class="lh" style="display: none;">
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.1.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">安钛克（Antec）VP 550P 额定550W 120mm静音风扇 主动PFC 黑化外型设计电源</a></div>
-              <div class="p-price">京东价：
-                <strong>￥399.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.2.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">G.SKILL（芝奇）RipjawsX DDR3 1600 8G(4G×2条)台式机内存(F3-12800CL9D-8GBXL )</a></div>
-              <div class="p-price">京东价：
-                <strong>￥235.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.3.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
-              <div class="p-price">京东价：
-                <strong>￥438.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.4.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">华硕(ASUS)P8Z77-V LK主板(Intel Z77/LGA 1155)</a></div>
-              <div class="p-price">京东价：
-                <strong>￥899.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.5.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
-              <div class="p-price">京东价：
-                <strong>￥112.00</strong></div>
-            </li>
-          </ul>
-          <ul class="lh" style="display: none;">
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/3.1.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">冬季健身TOP1！瑞亚特仰卧板加送俯卧撑架</a></div>
-              <div class="p-price">京东价：
-                <strong>￥187.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/3.2.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">HTC Z715e!双核！魔音耳机！</a></div>
-              <div class="p-price">京东价：
-                <strong>￥2399.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/3.3.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">下单返现150元！格力9片电油汀</a></div>
-              <div class="p-price">京东价：
-                <strong>￥449.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/3.4.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">绿之源净味宝2居室除味超值套装 4000克</a></div>
-              <div class="p-price">京东价：
-                <strong>￥449.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/3.5.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">宏碁i5 4G GT630M 1G独显 月销量破</a></div>
-              <div class="p-price">京东价：
-                <strong>￥3599.00</strong></div>
-            </li>
-          </ul>
-          <ul class="lh" style="display: none;">
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.3.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
-              <div class="p-price">京东价：
-                <strong>￥438.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.3.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
-              <div class="p-price">京东价：
-                <strong>￥438.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.3.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
-              <div class="p-price">京东价：
-                <strong>￥438.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.3.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
-              <div class="p-price">京东价：
-                <strong>￥438.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.3.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">希捷（Seagate）1TB ST1000DM003 7200转64M SATA 6Gb/秒 台式机硬盘 建达蓝德 盒装正品</a></div>
-              <div class="p-price">京东价：
-                <strong>￥438.00</strong></div>
-            </li>
-          </ul>
-          <ul class="lh" style="display: block;">
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.5.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
-              <div class="p-price">京东价：
-                <strong>￥112.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.5.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
-              <div class="p-price">京东价：
-                <strong>￥112.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.5.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
-              <div class="p-price">京东价：
-                <strong>￥112.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.5.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
-              <div class="p-price">京东价：
-                <strong>￥112.00</strong></div>
-            </li>
-            <li>
-              <div class="p-img ld">
-                <a href="#">
-                  <img src="images/2.5.jpg"></a>
-              </div>
-              <div class="p-name">
-                <a href="#">大水牛（BUBALUS）电脑机箱 经典-A1008 灰黑色（不含电源）</a></div>
-              <div class="p-price">京东价：
-                <strong>￥112.00</strong></div>
-            </li>
-          </ul>
-        </div>
+  <h3 class="sub-title" style="color: #333;">
+    其他推荐
+  </h3>
+  <div class="" style="margin:0 -10px">
+    <?php if(is_array($members_r)) { foreach($members_r as $k => $t) { ?>
+      <div class="x2">
+        <a href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
+          <img src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $t['username'];?>&size=large" alt="" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
+        </a>
+        <?php echo $t['truename'];?>
       </div>
+    <?php } } ?>
+  </div>
 </div></section>
 <!-- 代码 开始
 <div class="scrollsidebar" id="hhService">
@@ -454,11 +268,10 @@ GoMobile('<?php echo $head_mobile;?>');
 <script>$(function(){$("#hhService").fix({float:'right',minStatue:false,skin:'green',durationTime:1000})});</script>
 <!-- 代码 结束 -->
 <script>
- $(".city_list").find("span").click(function(){
-   $("input[name='kw']").val($(this).text());
- });
+ // $(".city_list").find("span").click(function(){
+ //   $("input[name='kw']").val($(this).text());
+ // });
 </script>
-<script type="text/javascript" src="js/jquery.SuperSlide.js"></script>
 <script type="text/javascript">
 $(".tabox").slide({delayTime: 0});
 </script>

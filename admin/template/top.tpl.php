@@ -29,8 +29,8 @@ function switchBar(obj)
 			obj.value="打开左边菜单";
 		}
 	}
-	else //Firefox 
-	{  
+	else //Firefox
+	{
 		if (displayBar)
 		{
 			self.top.document.getElementById('frame').cols="0,*";
@@ -63,31 +63,31 @@ ele.className = "hover"//激活当前点击tab
     <div class="top_logo"></div>
     <div class="top_nav">
          <div class="top_nav_sm">
-		 
+
 		 <span style="float:right; padding-right:12px"><?php foreach($allcrowd as $crowd){if($crowd['id']==SITEID){echo '[<b><u><span  title="当前站点">'.trim($crowd['site_name']).'</span></u></b>] ';}else{?>[<a href="<?php echo ADMIN_FILE;?>?file=sitecrowd&action=setting&id=<?php echo $crowd['id'];?>" target='main'><?php echo $crowd['site_name'];?></a>] <?php }}?>
 
 </span>
-		 
-		您好！<?php echo $_username;?> [<?php echo $_admin == 1 ? ($CFG['founderid'] == $_userid ? '网站创始人' : '超级管理员') : ($_aid ? '<span class="f_blue">'.$AREA[$_aid]['areaname'].'站</span>管理员' : '普通管理员'); ?>]  &nbsp;&nbsp;&nbsp;&nbsp; <span onclick="changeMenu(this);"><a href="javascript:void(0);" onclick="goindex()"><i>后台首页</i></a></span>| <a href="./" target="_blank">网站首页</a> | <a href="http://www.aijiacms.com" target="_blank">官方网站</a>
+
+		您好！<?php echo $_username;?> [<?php echo $_admin == 1 ? ($CFG['founderid'] == $_userid ? '网站创始人' : '超级管理员') : ($_aid ? '<span class="f_blue">'.$AREA[$_aid]['areaname'].'站</span>管理员' : '普通管理员'); ?>]  &nbsp;&nbsp;&nbsp;&nbsp; <span onclick="changeMenu(this);"><a href="javascript:void(0);" onclick="goindex()"><i>后台首页</i></a></span>| <a href="./" target="_blank">网站首页</a>
 		</div>
 		<?php if($_admin == 2) {
 ?> <div class="top_nav_xm">
              <div class="navtit" id="navtit">
-			
-           
+
+
 			<span class="hover" ><a href="?action=main" target="main"><i>系统首页</i></a></span>
 			<span ><a href="?action=cache" target="main"><i>更新缓存</i></a></span>
 			<span ><a href="?action=password" target="main"><i>修改密码</i></a></span>
 			<span ><a href="?action=main" target="main"><i>网站首页</i></a></span>
-	
-		
-				
+
+
+
              </div>
          </div>
     </div><?php } else { ?>
          <div class="top_nav_xm">
              <div class="navtit" id="navtit">
-			
+
               <span  class="hover" onclick="ad(this)"><a href="?file=left&action=setting"  target='left'><i>系统设置</i></a></span>
 			  <?php
 	foreach($MODULE as $v) {
@@ -96,21 +96,21 @@ ele.className = "hover"//激活当前点击tab
 			if(is_file($menuinc)) {
 				extract($v);
 				include $menuinc;
-			
+
 				echo '<span onclick="ad(this)"><a href="?file=left&menu='.$moduleid.'" target="left"><i>'.$name.'管理</i></a></span>';
-				
+
 			}
 		}
 	}
-	
+
 	?>
 		 <span  onclick="ad(this)"><a href="?file=left&action=fenxiao"  target='left'><i>分销设置</i></a></span>
              </div>
          </div>
     </div>
 	<?php } ?>
-    <div class="top_bar"><input onClick="switchBar(this)" type="button" value="关闭左边菜单" name="SubmitBtn" class="bntof"/> 
-    <div class="top_she"> 
+    <div class="top_bar"><input onClick="switchBar(this)" type="button" value="关闭左边菜单" name="SubmitBtn" class="bntof"/>
+    <div class="top_she">
 	<?php if($_admin == 2) {
 ?> <a href="javascript:void(0);" onClick="self.top.location.href='?file=logout'">安全注销</a> <?php } else { ?>
 		<a href="javascript:void(0);" onClick="self.top.location.href='?file=logout'">安全注销</a>

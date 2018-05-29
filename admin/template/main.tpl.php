@@ -15,18 +15,11 @@ include tpl('header');
 </head>
 <body oncontextmenu="return false" ondragstart="return false" onSelectStart="return false">
 <div id="tips_update" style="display:none;">
-
-<table cellpadding="2" cellspacing="1" class="tb">
-<tr>
-<td><div style="padding:20px 30px 20px 20px;" title="当前版本V<?php echo AJ_VERSION; ?> 更新时间<?php echo AJ_RELEASE;?>"><img src="admin/image/tips_update.gif" width="32" height="32" align="absmiddle"/>&nbsp;&nbsp; <span class="f_red">您的当前软件版本有新的更新，请注意升级</span>&nbsp;&nbsp;最新版本：V<span id="last_v"><?php echo AJ_VERSION; ?></span> 更新时间：<span id="last_r"><?php echo AJ_RELEASE; ?></span>&nbsp;&nbsp;
-<input type="button" value="检查更新" class="btn" onclick="window.open('http://www.dede168.com')"> </div></td>
-</tr>
-</table>
 </div>
 <div id="wrap">
 	<div class="tab">
 		<ul>
-			<li><a href="javascript:void(0);" class="on" onclick="$('#main-lang-1').toggle();">系统信息</a></li>			
+			<li><a href="javascript:void(0);" class="on" onclick="$('#main-lang-1').toggle();">系统信息</a></li>
 		</ul>
 	</div>
 	<div class="main" id="main-lang-1">
@@ -88,52 +81,9 @@ include tpl('header');
 		<tr>
 			<td colspan="2">服务器信息： <?php echo PHP_OS.'&nbsp;'.$_SERVER["SERVER_SOFTWARE"];?> [<?php echo gethostbyname($_SERVER['SERVER_NAME']);?>:<?php echo $_SERVER["SERVER_PORT"];?>] <a href="?action=phpinfo" target="_blank">[详细信息]</a></td>
 		</tr>
-    </table> 
+    </table>
 	<?php } ?>
 	</div>
-	
-	<div class="tab">
-		<ul>
-			<li><a href="javascript:void(0);" class="on" onclick="$('#main-lang-2').toggle();">系统升级</a></li>			
-		</ul>
-	</div>
-	<div class="main" id="main-lang-2">
-	<table width="100%" border="0" cellspacing="1" cellpadding="0" class="mainlist">
-	
-          <tr>
-            <td colspan="2">注意事项，请<a href="?file=count" target='main'>【点击此处】</a>关注发布的未审核信息。</td>
-          </tr>
-		  
-    </table>
-	</div>
-	
-	<div class="tab">
-		<ul>
-			<li><a href="javascript:void(0);" class="on" onclick="$('#main-lang-3').toggle();">版权信息</a></li>			
-		</ul>
-	</div>
-	<div class="main" id="main-lang-3">
-	<table width="100%" border="0" cellspacing="1" cellpadding="0" class="mainlist">
-		<tr>
-			<td width="14%">版本信息： </td>
-			<td width="86%"><span id="copyright" style="color:#FF0000"></span> aijiacms Version <?php echo AJ_VERSION;?> Release <?php echo AJ_RELEASE;?> <?php echo strtoupper(AJ_CHARSET);?> <?php echo strtoupper(AJ_LANG);?>
-			
-         </td>
-		</tr>
-		
-		<tr>
-			<td>总 策 划：</td>
-			<td>安平</td>
-		</tr>
-		<tr>
-			<td>开发与支持团队：</td>
-			<td>阳光CMS 李月华 柳乘风 刘晨 王亚丽</td>
-		</tr>
-		<tr>
-			<td>官方网站： </td>
-			<td><a href="http://www.aijiacms.com" target="_blank">http://www.aijiacms.com</a></td>
-		</tr>
-	</table>
 	</div>
 </div>
 

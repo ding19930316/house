@@ -5,6 +5,7 @@
 */
 defined('IN_AIJIACMS') or exit('Access Denied');
 function tag($parameter, $expires = 0) {
+	// print_r($expires);exit;
 	global $AJ, $CFG, $MODULE, $AJ_TIME, $db;
 	if($expires > 0) {
 		$tag_expires = $expires;
@@ -15,6 +16,7 @@ function tag($parameter, $expires = 0) {
 	} else {
 		$tag_expires = $CFG['tag_expires'];
 	}
+	// print_r($CFG['tag_expires']);exit;
 	$tag_cache = false;
 	$db_cache = ($expires == -2 || defined('TOHTML')) ? 'CACHE' : '';
 	if($tag_expires && $db_cache != 'CACHE' && strpos($parameter, '&page=') === false) {
@@ -26,8 +28,11 @@ function tag($parameter, $expires = 0) {
 		}
 	}
 	$parameter = str_replace(array('&amp;', '%'), array('', '##'), $parameter);
+	// print_r($parameter);exit;
 	$parameter = strip_sql($parameter);
+	// print_r($parameter);exit;
 	parse_str($parameter, $par);
+	// print_r($par);exit;
 	if(!is_array($par)) return '';
 	$par = dstripslashes($par);
 	extract($par, EXTR_SKIP);
@@ -114,7 +119,9 @@ function tag($parameter, $expires = 0) {
 	$query = "SELECT ".$fields." FROM ".$table." WHERE ".$condition.$order." LIMIT ".$offset.",".$pagesize;
 	if($debug) echo $parameter.'<br/>'.$query.'<br/>';
 	$tags = $catids = $CATS = array();
+	// print_r($db_cache);exit;
 	$result = $db->query($query, $db_cache, $tag_expires);
+	// print_r($query);exit;
 	while($r = $db->fetch_array($result)) {
 		if($moduleid == 4 && isset($r['company'])) {
 			$r['alt'] = $r['companyname'] = $r['company'];
@@ -154,6 +161,7 @@ function tag($parameter, $expires = 0) {
 		file_put($TCF, '<!--'.($AJ_TIME + $tag_expires).'-->'.$contents);
 		echo $contents;
 	} else {
+		// print_r($tags);exit;
 		include template($template, $dir);
 	}
 }

@@ -3,6 +3,7 @@
 	[Aijiacms System] Copyright (c) 2008-2013 Aijiacms.COM
 	This is NOT a freeware, use is subject to license.txt
 */
+// print_r($member);exit;
 require 'common.inc.php';
 $username = $domain = '';
 if(isset($homepage) && check_name($homepage)) {
@@ -69,10 +70,35 @@ $xiqoqu = get_xiqoqu(0);
 	$head_keywords = $AJ['seo_keywords'];
 	$head_description = $AJ['seo_description'];
 	// die('11');
+	//首页新房查询cding
+	// foreach ($tags as $tagskey => $tagsvalue) {
+	// 	// code...
+	// }
+	//中介等人员信息
+	$query = "select * from aijiacms_member";
+	$result = $db->query($query, 'CACHE', 0);
+	while($r = $db->fetch_array($result)) {
+		$members_r[] = $r;
+	}
 
+	foreach ($tags1 as $tagskey => $tagsvalue) {
+		$query = "SELECT * FROM aijiacms_newhouse_6 WHERE username='{$tagsvalue['username']}' ORDER BY level desc,editdate desc,vip desc,edittime desc LIMIT 0,12";
+		$result = $db->query($query, 'CACHE', 0);
+		while($r = $db->fetch_array($result)) {
+			$members_houses[$tagsvalue['truename']][] = $r;
+		}
+	}
+
+	$query = "select * from aijiacms_newhouse_6 WHERE 1 ORDER BY level desc,editdate desc,vip desc,edittime desc LIMIT 0,12";
+	$result = $db->query($query, 'CACHE', 0);
+	while($r = $db->fetch_array($result)) {
+		$houses[] = $r;
+	}
+
+	// print_r($members_r);exit;
 	if($city_template) {
 		include template($city_template, 'city');
-		
+
 	} else {
 		include template('index');
 	}

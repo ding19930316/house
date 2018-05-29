@@ -10,4 +10,3 @@
 <?php } ?>
 </div>
 </div>
-<?php include template('footer');?>

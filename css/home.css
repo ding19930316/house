@@ -2,11 +2,13 @@
 
 .city_list{
   color:white;
-  margin:10px auto;
   margin-left:5px;
 }
 .city_list span{
   cursor: pointer;
+}
+.city_list span a{
+  color:white;
 }
 .city_list span:hover{
   color:grey;

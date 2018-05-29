@@ -13,8 +13,8 @@ $maincat = get_maincat(0, $moduleid);
 $condition = 'status=3 and isnew=1';
 $areaids=$_GET['areaid'];
 if($AJ['city']){
-	
-	
+
+
 	$ARE = $AREA[$cityid];
 	$condition .= $ARE['child'] ? " AND areaid IN (".$ARE['arrchildid'].")" : " AND areaid=$areaid";
 $mainarea = get_mainarea($cityid);
@@ -31,5 +31,6 @@ if($typeid != 99) $seo_title = $TYPE[$typeid].$seo_delimiter.$seo_title;
 if($page == 1) $head_canonical = $MOD['linkurl'];
 $aijiacms_task = "moduleid=$moduleid&html=index";
 if($EXT['wap_enable']) $head_mobile = $EXT['wap_url'].'index.php?moduleid='.$moduleid.($page > 1 ? '&page='.$page : '');
+
 include template('index', $module);
 ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 function daddslashes($string) {
 if(!is_array($string)) return addslashes($string);
@@ -147,6 +147,7 @@ return $string;
 function template($template = 'index',$dir = '') {
 global $CFG;
 $to = $dir ?AJ_CACHE.'/tpl/'.$dir.'-'.$template.'.php': AJ_CACHE.'/tpl/'.$template.'.php';
+// print_r($to);exit;
 $isfileto = is_file($to);
 if($CFG['template_refresh'] ||!$isfileto) {
 if($dir) $dir = $dir.'/';
@@ -159,6 +160,7 @@ require_once AJ_ROOT.'/include/template.func.php';
 template_compile($from,$to);
 }
 }
+// print_r($to);exit;
 return $to;
 }
 function ob_template($template,$dir = '') {
@@ -1080,7 +1082,7 @@ return $categorynum;
 function rentcookies($id)
 {
 $TempNum=5;
-if (isset($_COOKIE['RRecentlyGoods'])) 
+if (isset($_COOKIE['RRecentlyGoods']))
 {
 $RecentlyGoods=$_COOKIE['RRecentlyGoods'];
 $RecentlyGoodsArray=explode(",",$RecentlyGoods);
@@ -1088,12 +1090,12 @@ $RecentlyGoodsNum=count($RecentlyGoodsArray);
 }
 if($id!="")
 {
-if (strstr($RecentlyGoods,(string)$id))  
+if (strstr($RecentlyGoods,(string)$id))
 {
 }
 else
 {
-if($RecentlyGoodsNum<$TempNum) 
+if($RecentlyGoodsNum<$TempNum)
 {
 if($RecentlyGoods=="")
 {
@@ -1105,7 +1107,7 @@ $RecentlyGoodsNew=$RecentlyGoods.",".$id;
 setcookie("RRecentlyGoods",$RecentlyGoodsNew,time()+432000,"/");
 }
 }
-else 
+else
 {
 $pos=strpos($RecentlyGoods,",")+1;
 $FirstString=substr($RecentlyGoods,0,$pos);
@@ -1128,7 +1130,7 @@ return $are;
 function salecookies($id)
 {
 $TempNum=5;
-if (isset($_COOKIE['SRecentlyGoods'])) 
+if (isset($_COOKIE['SRecentlyGoods']))
 {
 $RecentlyGoods=$_COOKIE['SRecentlyGoods'];
 $RecentlyGoodsArray=explode(",",$RecentlyGoods);
@@ -1136,12 +1138,12 @@ $RecentlyGoodsNum=count($RecentlyGoodsArray);
 }
 if($id!="")
 {
-if (strstr($RecentlyGoods,(string)$id))  
+if (strstr($RecentlyGoods,(string)$id))
 {
 }
 else
 {
-if($RecentlyGoodsNum<$TempNum) 
+if($RecentlyGoodsNum<$TempNum)
 {
 if($RecentlyGoods=="")
 {
@@ -1153,7 +1155,7 @@ $RecentlyGoodsNew=$RecentlyGoods.",".$id;
 setcookie("SRecentlyGoods",$RecentlyGoodsNew,time()+432000,"/");
 }
 }
-else 
+else
 {
 $pos=strpos($RecentlyGoods,",")+1;
 $FirstString=substr($RecentlyGoods,0,$pos);

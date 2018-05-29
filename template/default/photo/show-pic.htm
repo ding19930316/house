@@ -24,7 +24,7 @@
 </head><body class="gallery">
 	<div class="header">
 		<h1>
-			<a href="{$MODULE[1][linkurl]}"  target="_blank" class="fl"><img alt="{$AJ[sitename]}" src="{if $MODULE[$moduleid][logo]}{AJ_SKIN}image/logo_{$moduleid}.gif{elseif $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.gif{/if}" width="130" height="32"></a></a>
+			<a href="{$MODULE[1][linkurl]}"  target="_blank" class="fl"><img alt="{$AJ[sitename]}" src="{if $MODULE[$moduleid][logo]}{AJ_SKIN}image/logo_{$moduleid}.gif{elseif $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.png{/if}" width="130" height="32"></a></a>
 			<span class="fr"><a href="{$MODULE[1][linkurl]}" target="_blank">网站首页</a>|<a href="{$MODULE[6][linkurl]}{$houseid}/" target="_blank">楼盘主页</a></span>
 		</h1>
 	</div>
@@ -310,4 +310,3 @@ seajs.use(["share"],function(alertM){
 	})
 });
 </script>
-{template 'footer'}

@@ -10,10 +10,10 @@ $edition = edition(1);
 <meta name="generator" content="AIJIACMS HOUSE - www.aijiacms.com"/>
 <meta http-equiv="x-ua-compatible" content="IE=8"/>
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
-<title>管理中心 - AIJIACMS房产系统</title>
+<title>管理中心</title>
 </head>
 <frameset rows="96,*,4" frameborder="no" border="0" framespacing="0">
-	<frame src="?action=top" noresize="noresize" id="topFrame" frameborder="0" 
+	<frame src="?action=top" noresize="noresize" id="topFrame" frameborder="0"
 name="topFrame" marginwidth="0" marginheight="0" scrolling="no">
 	<frameset rows="*" cols="185,*" id="frame" framespacing="0" frameborder="no" border="0">
 		<frame name="left" noresize scrolling="yes" src="?action=left">

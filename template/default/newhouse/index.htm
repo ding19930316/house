@@ -3,10 +3,10 @@
 	<link href="{AJ_SKIN}xinfang.css" rel="stylesheet" type="text/css" />
 
 <div class="main">
-         
+
 
     <div class="bread">您当前的位置：<a href="{$MODULE[1][linkurl]}" title="{$AJ[sitename]}">{$AJ[sitename]}</a>&gt;<a href="{$MOD[linkurl]}">{$MOD[name]}</a>&gt;<span>楼盘搜索</span></div>
-   
+
 
 	<div class="con">
 		<div class="hslist" id="hslist">
@@ -19,18 +19,18 @@
                     <p id="hs_area" class="hs_hidep ">
                         <a href="javascript:" class="hs_hide" style="display: inline-none;"><u class="hs_mo">更多</u><u class="hs_le">收起</u></a>
 						<em><a {if empty($areaid)}class="on"{/if} href="{$MOD[linkurl]}list{deal_str($lst,'r')}.html">全部</a></em>
-						{loop $mainarea $k $v}<em><a {if $areaid==$v[areaid]}class="on"{/if} href="{$MOD[linkurl]}list-r{$v[areaid]}{deal_str($lst,'r')}.html">{$v[areaname]}</a></em>{/loop}	
+						{loop $mainarea $k $v}<em><a {if $areaid==$v[areaid]}class="on"{/if} href="{$MOD[linkurl]}list-r{$v[areaid]}{deal_str($lst,'r')}.html">{$v[areaname]}</a></em>{/loop}
 						{if $areaid}
 						<span class="i">
 								<em><a {if empty($bid)}class="on"{/if} href="{$MOD[linkurl]}list{deal_str($lst,'b')}.html">全部</a></em>
 								{php $mainareas = get_mainarea($areaid)}
 						{loop $mainareas $k $v}
 								<em><a {if $bid==$v[areaid]}class="on"{/if} href="{$MOD[linkurl]}list-b{$v[areaid]}{deal_str($lst,'b')}.html">{$v[areaname]}</a></em>{/loop}	</span>{/if}
-						
-                       
+
+
                                                 </p>
                 </div>
-            			
+
 			<div class="cf">
 				<span>价格：</span>
 				<p>
@@ -45,7 +45,7 @@
 				<p>
 					<em><a  {if empty($catid)}class="on"{/if} href="{$MOD[linkurl]}list{deal_str($lst,'t')}.html" >全部</a></em>
 					 {php $maincat = get_maincat(0,6)}
-{loop $maincat $k $v} <em><a  {if $catid==$v[catid]}class="on"{/if} href="{$MOD[linkurl]}list{deal_str($lst,'t')}-t{$v[catid]}.html">{$v[catname]}</a></em>{/loop}	
+{loop $maincat $k $v} <em><a  {if $catid==$v[catid]}class="on"{/if} href="{$MOD[linkurl]}list{deal_str($lst,'t')}-t{$v[catid]}.html">{$v[catname]}</a></em>{/loop}
 										</p>
 			</div>
 			<div class="cf">
@@ -69,14 +69,14 @@
 			<div class="cf hsl_b">
 				<span>名称：</span>
 					<form action="" id="serach_form" method="post">
-						
+
 						<input data-url="{$MOD[linkurl]}house.php?action=house" type="text" id="hname" name="kw" value="" placeholder="请输入楼盘名称（支持拼音或简拼）" autocomplete="off">
 						<a class="obtn" href="javascript:"><i class="search"></i><button type="submit"></button></a>
 				</form>
 			</div>
 			<div class="hs_more cf" id="hs_more">
 				<span>更多找房条件：</span>
-				
+
 				<div class="hs_mlist">建筑类型					<ul>
 						<li><a href="{$MOD[linkurl]}list{deal_str($lst,'j')}.html">全部</a></li>
 															{php $buildtype_arr = getbox_name('buildtype','newhouse_6')}
@@ -98,47 +98,24 @@
 					 <li><a {if $opentime==($k+1)}class="on"{/if} href="{$MOD[linkurl]}list{deal_str($lst,'o')}-o{$k+1}.html">{$v}</a></li>{/loop}
 												</ul>
 				</div>
-				
+
 			</div>
             		</div>
 
 		<div class="fl xf_sh_list">
-			<div class="xf_sh_list_t">
-				<ul class="xszt cf">
-					<li><a {if empty($typeid)}class="on"{/if} href="{$MOD[linkurl]}list{deal_str($lst,'h')}.html">全部</a></li>
-							  {loop $TYPE $k $v} 
-							<li><a  {if $typeid==($k+1)}class="on"{/if}  href="{$MOD[linkurl]}list{deal_str($lst,'h')}-h{$k+1}.html">{$v}</a></li>{/loop}
-                  
-				</ul>
-				<div class="px">
-					<p>默认排序<span class="pointer"><i class="sj_icon"></i><u class="sj_icon"></u></span></p>
-					<ul>	<li><a href="list{deal_str($lst,'n')}.html">默认排序</a></li>
-							    <li><a  href="list{deal_str($lst,'n')}-n1.html">售价从高到低</a></li>
-                                <li><a  href="list{deal_str($lst,'n')}-n2.html">售价从低到高</a></li>
-                                <li><a  href="list{deal_str($lst,'n')}-n3.html">开盘时间由近到远</a></li>
-                                <li><a  href="list{deal_str($lst,'n')}-n4.html">开盘时间由远到近</a></li>
-                            					</ul>
-				</div>
-				<div class="ssjj">共为您找到 <span>{$items}</span> 个楼盘</div>
-				<div class="page">
-					<a href=" {if $page==1} javascript:void(0);{else}{$MOD[linkurl]}list{deal_str($lst,'g')}-g{$page-1}.html{/if}" class="fl"></a>
-					<a href="{$MOD[linkurl]}list{deal_str($lst,'g')}-g{if $page==$total}{$total}{else}{$page+1}{/if}.html" class="fr"></a>
-					<span><em>{$page}</em></span>
-				</div>
-			</div>
-			
-			          				
+
+
         {if $page == 1}{ad($moduleid,0,'',6)}{/if}	<!--{tag("moduleid=$moduleid&condition=status=3 and isnew=1$dtype&areaid=$cityid&pagesize=".$MOD[pagesize]."&page=$page&showpage=1&datetype=5&order=".$MOD[order]."&fields=".$MOD[fields]."&lazy=$lazy&template=list-newhouse")}-->
 		</div>
         <div class="fr lp_right">
-    	
+
         <div class="category">
             <h2>推荐楼盘</h2>
             <ul>
                                 	<!--{php $tags=tag("moduleid=6&condition=status=3 and isnew=1&areaid=$cityid&length=42&pagesize=10&order=level desc&template=null");}-->
  {loop $tags $i $t} 					<li><span class="jg">{if $t[price]}{$t[price]}元/平米{else}待定{/if}</span>[{area_pos($t[areaid], '')}] <a href="{$t[linkurl]}" target="_blank" title="{$t[title]}">{$t[title]}</a></li>{/loop}
- 
- 
+
+
                             </ul>
         </div>
 		<div class="category adb">
@@ -151,8 +128,8 @@
  {loop $tags $i $t} 					<li><span class="jg">{if $t[price]}{$t[price]}元/平米{else}待定{/if}</span>[{area_pos($t[areaid], '')}] <a href="{$t[linkurl]}" target="_blank" title="{$t[title]}">{$t[title]}</a></li>{/loop}
                             </ul>
         </div>
-    	
-    	
+
+
         <div class="category">
             <h2>热点楼盘</h2>
             <ul>
@@ -160,15 +137,15 @@
  {loop $tags $i $t} 					<li><span class="jg">{if $t[price]}{$t[price]}元/平米{else}待定{/if}</span>[{area_pos($t[areaid], '')}] <a href="{$t[linkurl]}" target="_blank" title="{$t[title]}">{$t[title]}</a></li>{/loop}
                             </ul>
         </div>
-       
-          
+
+
     </div>
 <div style="clear:both;"></div>            <div class="guanzhu">
                 <h2>网友正在关注的楼盘</h2>
                 <ul class="cf">
-                                       
+
 									   <!--{php $tags=tag("moduleid=6&condition=status=3 and isnew=1 and thumb<>''&areaid=$cityid&length=42&pagesize=6&order=hits desc&template=null");}-->
- {loop $tags $i $t} 				
+ {loop $tags $i $t}
 					                        <li {if $i==5} class="no_fl"{/if}>
                             <div class="thumb">
                                 <div class="img"><a href="{$t[linkurl]}" target="_blank"><img src="{imgurl($t[thumb])}" alt="{$t[alt]}" width="150" height="110"></a></div>
@@ -179,13 +156,13 @@
                                 </div>
                             </div>
                         </li>{/loop}
-						
+
                                     </ul>
             </div>
             </div>
- 
-    	<div class="shengming"> {$AJ[sitename]}所提供的2015 {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}楼盘及{if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}房价信息仅供参考！{$AJ[sitename]} {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}，专业的{if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}房产网，提供最全面的 {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}新楼盘,  {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}楼盘信息以及 {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}房价查询，您可以查到{if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}新楼盘的打折优惠以及团购活动，为您找到最适合的{if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}新房房产信息。</div>
-		
+
+    	<div class="shengming"> {$AJ[sitename]}所提供的2018 {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}楼盘及{if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}房价信息仅供参考！{$AJ[sitename]} {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}，专业的{if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}房产网，提供最全面的 {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}新楼盘,  {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}楼盘信息以及 {if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}房价查询，您可以查到{if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}新楼盘的打折优惠以及团购活动，为您找到最适合的{if $AJ[city]}{$city_name}{else}{$AJ[city_sitename]}{/if}新房房产信息。</div>
+
 
 <script>
 
@@ -234,7 +211,7 @@
 			return false;
 		}).on("click","a.obtn",function(){
 			$form.trigger("submit")
-	});	
+	});
 
 		/*********更多找房条件*************/
 		$("#hs_more div").on({
@@ -257,4 +234,3 @@
 		})
 	});
 </script>
-{template 'footer'}

@@ -72,7 +72,7 @@ mSubObj.style.display = "none";
 <div id="maphead">
   <div id="maptop">
     <div class="webguide fr"><a href="{$MODULE[1][linkurl]}" target="_blank">网站首页</a> - <a href="{$MODULE[6][linkurl]}" target="_blank">新房中心</a> - <a href="{$MODULE[5][linkurl]}" target="_blank">二手房</a> - <a href="{$MODULE[8][linkurl]}" target="_blank">房产资讯</a></div>
-    <div class="maplogo fl"><a href="{$MODULE[1][linkurl]}"><img src="{if $MODULE[$moduleid][logo]}{AJ_SKIN}image/logo_{$moduleid}.gif{elseif $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.gif{/if}" alt="{$AJ[sitename]}" width="151" height="27"/></a><img src="{AJ_SKIN}images/map/mapin.gif"></div><!-- 切换城市开始 -->
+    <div class="maplogo fl"><a href="{$MODULE[1][linkurl]}"><img src="{if $MODULE[$moduleid][logo]}{AJ_SKIN}image/logo_{$moduleid}.gif{elseif $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.png{/if}" alt="{$AJ[sitename]}" width="151" height="27"/></a><img src="{AJ_SKIN}images/map/mapin.gif"></div><!-- 切换城市开始 -->
 	  <script type="text/javascript">
 function gocity(s) {
 	Go('{$MODULE[1][linkurl]}city.php?action=go&'+s);

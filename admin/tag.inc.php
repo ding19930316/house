@@ -73,11 +73,11 @@ switch($action) {
 	case 'preview':
 		$db->halt = 0;
 		$aijiacms_task = '';
-		if($tag_css) $tag_css = stripslashes($tag_css); 
-		if($tag_html_s) $tag_html_s = stripslashes($tag_html_s); 
-		if($tag_html_e) $tag_html_e = stripslashes($tag_html_e); 
-		if($tag_code) $tag_code = stripslashes($tag_code); 
-		if($tag_js) $tag_js = stripslashes($tag_js); 
+		if($tag_css) $tag_css = stripslashes($tag_css);
+		if($tag_html_s) $tag_html_s = stripslashes($tag_html_s);
+		if($tag_html_e) $tag_html_e = stripslashes($tag_html_e);
+		if($tag_code) $tag_code = stripslashes($tag_code);
+		if($tag_js) $tag_js = stripslashes($tag_js);
 		$code_eval = $code_call = $code_html = '';
 		if($tag_css) $code_eval .= '<style type="text/css">'."\n".''.$tag_css.''."\n".'</style>'."\n";
 		if($tag_html_s) $code_eval .= $tag_html_s."\n";
@@ -129,7 +129,7 @@ switch($action) {
 				$table = substr($table, strlen($AJ_PRE));
 				if(in_array($table, $out)) continue;
 				$s = $db->get_one("SHOW TABLE STATUS FROM `".$CFG['db_name']."` LIKE '".$r[0]."'");
-				$table_select .= '<option value="'.$table.'">'.($s['Comment'] ? $s['Comment'] : $table).'</option>';         
+				$table_select .= '<option value="'.$table.'">'.($s['Comment'] ? $s['Comment'] : $table).'</option>';
 			}
 		}
 		$mid or $mid = '';

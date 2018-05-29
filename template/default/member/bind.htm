@@ -31,7 +31,7 @@ a:hover {color:#FF6600;}
 	<br/>
 	<table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
-	<td><a href="{$MODULE[1][linkurl]}"><img src="{if $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.gif{/if}" alt="{$AJ[sitename]}"/></a></td>
+	<td><a href="{$MODULE[1][linkurl]}"><img src="{if $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.png{/if}" alt="{$AJ[sitename]}"/></a></td>
 	<td width="70" align="center"><img src="{if $avatar}{$avatar}{else}{AJ_PATH}api/oauth/avatar.png{/if}" width="50"/></td>
 	<td>来自 <img src="{AJ_PATH}api/oauth/{$site}/ico.png" align="absmiddle"/> {$OAUTH[$site][name]} 的 {if $url}<a href="{$url}" target="_blank">{/if}<strong style="color:#1C6797;">{if $nickname}{$nickname}{else}用户{/if}</strong>{if $url}</a>{/if}，您好!<div style="padding-top:5px;">现在可以连接 <span style="color:#FF6600;">{$AJ[sitename]}</span> 了</div></td>
 	</tr>

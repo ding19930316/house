@@ -39,13 +39,16 @@
 				<tr>
 			<td class="tl">会员类型 <span class="f_red">*</span></td>
 			<td>
-			<!-- <span{if !$GROUP[5][reg]} class="dsn"{/if}>
-			<input type="radio" name="post[regid]" value="5" id="g_5"onclick="reg(0);" checked/><label for="g_5"> {$GROUP[5][groupname]}</label>
-			</span>
-			<input type="radio" name="post[regid]" value="6" id="g_6"onclick="reg(1);" /><label for="g_6"> {$GROUP[6][groupname]}</label>&nbsp;&nbsp;&nbsp;&nbsp; -->
+			{if !$regtype}
+				<span{if !$GROUP[5][reg]} class="dsn"{/if}>
+				<input type="radio" name="post[regid]" value="5" id="g_5"onclick="reg(0);" checked/><label for="g_5"> {$GROUP[5][groupname]}</label>
+				</span>
+				<input type="radio" name="post[regid]" value="6" id="g_6"onclick="reg(1);" /><label for="g_6"> {$GROUP[6][groupname]}</label>
+				<input type="radio" name="post[regid]" value="7" id="g_7"onclick="reg(1);" /><label for="g_7"> {$GROUP[7][groupname]}</label>
+			{/if}
 			{if $regtype == '1'}中介<input type="hidden" class = "regtype" reg = "1" name="post[regid]" value="7" />{/if}
 			{if $regtype == '2'}经纪人<input type="hidden" class = "regtype" reg = "1" name="post[regid]" value="6" />{/if}
-			{if $regtype == '3'}个人<input type="hidden" class = "regtype" reg = "0" name="post[regid]" value="5" />{/if}
+			{if $regtype == '3'}个人会员<input type="hidden" class = "regtype" reg = "0" name="post[regid]" value="5" />{/if}
 			</td>
 			</tr>
 			<table cellpadding="5" cellspacing="5" width="100%">
@@ -545,6 +548,3 @@ seajs.use(["jjrfbconc", "emailpop"], function(fb) {
 		});
 });
 </script>
-
-
-{template 'footer'}

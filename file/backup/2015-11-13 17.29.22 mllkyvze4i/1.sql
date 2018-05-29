@@ -4476,7 +4476,7 @@ INSERT INTO `aijiacms_setting` VALUES('1','index','index');
 INSERT INTO `aijiacms_setting` VALUES('1','file_ext','html');
 INSERT INTO `aijiacms_setting` VALUES('1','seo_description','歪歪分享论坛房产网站是基于PHP+MySQL的房产行业门户解决方案');
 INSERT INTO `aijiacms_setting` VALUES('1','seo_keywords','房产网站系统,房产行业门户系统,房产解决方案,歪歪分享论坛房产网站');
-INSERT INTO `aijiacms_setting` VALUES('1','seo_title','房产网站系统|房产行业门户解决方案');
+INSERT INTO `aijiacms_setting` VALUES('1','seo_title','无锡房产');
 INSERT INTO `aijiacms_setting` VALUES('1','seo_delimiter','_');
 INSERT INTO `aijiacms_setting` VALUES('1','trade_nu','notify.php');
 INSERT INTO `aijiacms_setting` VALUES('1','trade_tp','0');

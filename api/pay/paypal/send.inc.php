@@ -18,7 +18,7 @@ defined('IN_AIJIACMS') or exit('Access Denied');
 <input type="hidden" name="charset" value="<?php echo AJ_CHARSET;?>" />
 <input type="hidden" name="currency_code" value="<?php echo $PAY[$bank]['currency'];?>">
 <input type="hidden" name="amount" value="<?php echo $charge;?>">
-<input type="hidden" name="image_url" value="<?php echo AJ_SKIN;?>image/logo.gif" />
+<input type="hidden" name="image_url" value="<?php echo AJ_SKIN;?>image/logo.png" />
 <input type="hidden" name="email" value="<?php echo $_email;?>" />
 <input type="hidden" name="custom" value="<?php echo $_email;?>" />
 </form>

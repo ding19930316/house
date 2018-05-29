@@ -30,8 +30,8 @@ show_menu($menus);
 </tr>
 <tr>
 <td class="tl">网站LOGO</td>
-<td><input name="setting[logo]" type="text" value="<?php echo $logo;?>" id="logo" size="58"/> <span onclick="Dthumb(1,180,60, Dd('logo').value, 0, 'logo');" class="jt">[上传]</span>&nbsp;&nbsp;<span onclick="if(Dd('logo').value){Dd('showlogo').src=Dd('logo').value;}" class="jt">[预览]</span>&nbsp;&nbsp;<span onclick="Dd('logo').value='';Dd('showlogo').src='<?php echo AJ_SKIN;?>image/logo.gif';" class="jt">[删除]</span><br/>
-<a href="<?php echo AJ_PATH;?>" target="_blank"><img src="<?php echo $logo ? $logo : AJ_SKIN.'image/logo.gif';?>" style="margin:2px;" id="showlogo"/></a></td>
+<td><input name="setting[logo]" type="text" value="<?php echo $logo;?>" id="logo" size="58"/> <span onclick="Dthumb(1,180,60, Dd('logo').value, 0, 'logo');" class="jt">[上传]</span>&nbsp;&nbsp;<span onclick="if(Dd('logo').value){Dd('showlogo').src=Dd('logo').value;}" class="jt">[预览]</span>&nbsp;&nbsp;<span onclick="Dd('logo').value='';Dd('showlogo').src='<?php echo AJ_SKIN;?>image/logo.png';" class="jt">[删除]</span><br/>
+<a href="<?php echo AJ_PATH;?>" target="_blank"><img src="<?php echo $logo ? $logo : AJ_SKIN.'image/logo.png';?>" style="margin:2px;" id="showlogo"/></a></td>
 </tr>
 <tr>
 <td class="tl">手机版网站LOGO</td>

@@ -332,4 +332,3 @@ window.location.reload();
 <script type="text/javascript">
 $("#esflist").attr("class","on");
 </script>
-<?php include template('footer');?>

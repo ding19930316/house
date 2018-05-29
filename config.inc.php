@@ -9,7 +9,7 @@ defined('IN_AIJIACMS') or exit('Access Denied');
 $CFG['database'] = 'mysql';
 $CFG['pconnect'] = '0';
 $CFG['db_host'] = 'localhost';
-$CFG['db_name'] = 'test';
+$CFG['db_name'] = '1377';
 $CFG['db_user'] = 'root';
 $CFG['db_pass'] = 'root';
 $CFG['db_charset'] = 'utf8';
