@@ -313,6 +313,7 @@ switch($action) {
 	break;
 	default:
 		$members = $do->get_list($condition, $dorder[$order]);
+    // print_r($members);exit;
 		include tpl('member', $module);
 	break;
 }

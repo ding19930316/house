@@ -54,6 +54,8 @@ if($module == 'aijiacms' || $action == 'collect' || $action == 'dataimport' || $
 	(include AJ_ROOT.'/admin/'.$file.'.inc.php') or msg();
 } else {
 	include AJ_ROOT.'/module/'.$module.'/common.inc.php';
+	// die();
+	// print_r(MD_ROOT);exit;
 	(include MD_ROOT.'/admin/'.$file.'.inc.php') or msg();
 }
 ?>

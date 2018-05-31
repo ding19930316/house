@@ -147,7 +147,7 @@ return $string;
 function template($template = 'index',$dir = '') {
 global $CFG;
 $to = $dir ?AJ_CACHE.'/tpl/'.$dir.'-'.$template.'.php': AJ_CACHE.'/tpl/'.$template.'.php';
-// print_r($to);exit;
+// print_r($to);
 $isfileto = is_file($to);
 if($CFG['template_refresh'] ||!$isfileto) {
 if($dir) $dir = $dir.'/';

@@ -1,3 +1,0 @@
-<?php
-$moduleid = 8;
-?>

@@ -63,107 +63,24 @@ GoMobile('<?php echo $head_mobile;?>');
 <?php if($AJ['city']) { ?><div id="city_change">
   <span><?php echo $city_name;?></span>
                     <a href="<?php echo AJ_PATH;?>api/city.php" id="city_c">更改城市<i></i></a>
-                
                 </div> <?php } ?>
 <a href="<?php echo $MODULE['1']['linkurl'];?>map" target="_blank" class="i_smap">地图找房</a>
-<form id="i_search" method="post" target="_blank" autocomplete="off" onSubmit="return false;">
-<div class="search_item" data-type="<?php echo $MODULE[$searchid]['moduledir'];?>"><span><?php echo $MODULE[$searchid]['name'];?></span><s><i></i><u></u></s></div>
-<ul class="search_item_list none">
-
+<form id="i_search" method="post" target="_blank" autocomplete="off" action="">
+<div  style = "display:none" class="search_item" data-type="<?php echo $MODULE[$searchid]['moduledir'];?>"><span><?php echo $MODULE[$searchid]['name'];?></span><s><i></i><u></u></s></div>
+<ul  style = "display:none"  class="search_item_list none">
 <?php $searchids = array(6,5,7,8,14,16,13);?>
 <?php if(!in_array($searchid, $searchids)) { ?>
 <?php $searchids[] = $searchid;?>
 <?php } ?>
 <?php if(is_array($searchids)) { foreach($searchids as $s) { ?>
-
 <li data-type="<?php echo $MODULE[$s]['moduledir'];?>"><?php echo $MODULE[$s]['name'];?></li><?php } } ?>
-
-
 </ul>
-<input type="text" name="keyword" class="keyword "  x-webkit-speech value="<?php if($moduleid==6 || $moduleid<3) { ?>请输入楼盘名称(中文/拼音/简拼)、地址<?php } else if($moduleid==5 || $moduleid==7 ) { ?>请输入小区名称/地址/标题<?php } else { ?>请输入搜索内容<?php } ?>
-">
-<button type="submit" title="房源搜索">搜索</button>
+<input  style= "left:0px" type="text" name="keyword" class="keyword " placeholder="请输入搜索内容"  x-webkit-speech value="<?php echo $keyword;?>">
+<button type="submit" title="搜索" value="<?php echo $keyword;?>">搜索</button>
 </form>
-<a href="<?php echo $MODULE['2']['linkurl'];?>publish.php" target="_blank" class="fabu">免费发布房源</a>
 </div>
 </div>
 <script>
-seajs.use("hsearch",function(hs){
-    
-hs("#i_search",{
-house:{
-url:"<?php echo $MODULE['6']['linkurl'];?>list-k",
-initUrl:"<?php echo $MODULE['6']['linkurl'];?>list",
-hz:".html",
-msg:"请输入楼盘名称(中文/拼音/简拼)、地址",
-autoUrl:"<?php echo $MODULE['6']['linkurl'];?>house.php?action=house"
-},
-sale:{
-url:"<?php echo $MODULE['5']['linkurl'];?>list-k",
-initUrl:"<?php echo $MODULE['5']['linkurl'];?>list.html",
-hz:".html",
-msg:"请输入小区名称/地址/标题",
-autoUrl:"<?php echo $MODULE['6']['linkurl'];?>house.php?action=xiaoqu"
-},
-rent:{
-url:"<?php echo $MODULE['7']['linkurl'];?>list-k",
-initUrl:"<?php echo $MODULE['7']['linkurl'];?>list.html",
-hz:".html",
-msg:"请输入小区名称/地址/标题",
-autoUrl:"<?php echo $MODULE['6']['linkurl'];?>house.php?action=xiaoqu"
-},
-buy:{
-url:"<?php echo $MODULE['16']['linkurl'];?>list-k",
-initUrl:"<?php echo $MODULE['16']['linkurl'];?>list.html",
-hz:".html",
-msg:"请输入搜索内容",
-autoUrl:""
-},
-group:{
-url:"<?php echo $MODULE['15']['linkurl'];?>list-k",
-initUrl:"<?php echo $MODULE['15']['linkurl'];?>list.html",
-hz:".html",
-msg:"请输入搜索内容",
-autoUrl:""
-},
-community:{
-url:"<?php echo $MODULE['18']['linkurl'];?>list-k",
-initUrl:"<?php echo $MODULE['15']['linkurl'];?>list.html",
-hz:".html",
-msg:"请输入搜索内容",
-autoUrl:"<?php echo $MODULE['6']['linkurl'];?>house.php?action=xiaoqu"
-},
-video:{
-url:"<?php echo $MODULE['14']['linkurl'];?>search-k",
-initUrl:"<?php echo $MODULE['14']['linkurl'];?>list.html",
-hz:".html",
-msg:"请输入搜索内容",
-autoUrl:""
-},
-home:{
-url:"<?php echo $MODULE['13']['linkurl'];?>search-k",
-hz:".html",
-initUrl:"<?php echo $MODULE['13']['linkurl'];?>list.html",
-msg:"请输入搜索内容",
-autoUrl:""
-},
-company:{
-url:"<?php echo $MODULE['4']['linkurl'];?>search-k",
-hz:"",
-initUrl:"<?php echo $MODULE['4']['linkurl'];?>list.html",
-msg:"请输入搜索内容",
-autoUrl:""
-},
-news:{
-url:"<?php echo $MODULE['8']['linkurl'];?>search-k",
-initUrl:"<?php echo $MODULE['8']['linkurl'];?>list.html",
-hz:".html",
-msg:"请输入搜索内容",
-autoUrl:""
-}
-
-});
-});
 </script>
 <?php if($moduleid!=1) { ?>
 <div class="nav_menu c_blue">

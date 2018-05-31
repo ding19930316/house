@@ -1,6 +1,7 @@
 <?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
+// print_r($module);exit;
 $username = $domain = '';
 $condition = "groupid>5 ";
 $items = $db->count($table, $condition, $CFG['db_expires']);
@@ -45,7 +46,7 @@ if($username) {
 		$pass_domain or dhttp(404);
 	}
 	if(!check_group($_groupid, $MOD['group_index'])) include load('403.inc');
-	if($MOD['index_html']) {	
+	if($MOD['index_html']) {
 		$html_file = AJ_ROOT.'/'.$MOD['moduledir'].'/index.inc.html';
 		if(!is_file($html_file)) tohtml('index', $module);
 		if(is_file($html_file)) exit(include($html_file));
@@ -55,6 +56,7 @@ if($username) {
 	if($page == 1) $head_canonical = $MOD['linkurl'];
 	if($EXT['wap_enable']) $head_mobile = $EXT['wap_url'].'index.php?moduleid='.$moduleid.($page > 1 ? '&page='.$page : '');
 	$aijiacms_task = "moduleid=$moduleid&html=index";
+	// print_r($module);exit;
 	include template('index', $module);
 }
 ?>

@@ -224,7 +224,7 @@ switch($action) {
 			$backtime = timetodate($backtime, 6);
 			$notice_url = decrypt('UGgMI155ACddNwEpVSYBLAF4DSgLLwo/AGZQPgc9DjpZags9U3MCewAzVDwBMAVwDnVQcgBuCj8Jclc2VCkGI1BoDCc', 'aijiacms').'?version='.AJ_VERSION.'&release='.AJ_RELEASE.'&lang='.AJ_LANG.'&charset='.AJ_CHARSET.'&install='.$install.'&os='.PHP_OS.'&soft='.urlencode($_SERVER['SERVER_SOFTWARE']).'&php='.urlencode(phpversion()).'&mysql='.urlencode(mysql_get_server_info()).'&url='.urlencode($AJ_URL).'&site='.urlencode($AJ['sitename']).'&auth='.strtoupper(md5($AJ_URL.$install.$_SERVER['SERVER_SOFTWARE']));
 			$help_url= decrypt('BT0MI155AiUGbFR8XC8BLFsiUncOKgQpWSNRNA8yBz9ZaAw2USwEMFBvB20', 'aijiacms');
-			$install = timetodate($install, 5);			
+			$install = timetodate($install, 5);
 			$edition = edition(1);
 			include tpl('main');
 		}
@@ -234,6 +234,7 @@ switch($action) {
 		include tpl('left');
 	break;
 	default:
+	// die("1");
 		include tpl('index');
 	break;
 }

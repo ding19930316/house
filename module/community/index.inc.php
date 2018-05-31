@@ -12,13 +12,13 @@ $dtype = $typeid != 99 ? " AND typeid=$typeid" : '';
 $maincat = get_maincat(0, $moduleid);
 $condition = 'status=3 ';
 
-	
-if($catid) $condition .= $CAT['child'] ? " AND catid IN (".$CAT['arrchildid'].")" : " AND catid=$catid";	      
+
+if($catid) $condition .= $CAT['child'] ? " AND catid IN (".$CAT['arrchildid'].")" : " AND catid=$catid";
 //$condition .= ($CAT['child']) ? " AND catid IN (".$CAT['arrchildid'].")" : " AND catid=$catid";
 
 if($AJ['city']){
-	
-	
+
+
 	$ARE = $AREA[$cityid];
 	$condition .= $ARE['child'] ? " AND areaid IN (".$ARE['arrchildid'].")" : " AND areaid=$areaid";
 $mainarea = get_mainarea($cityid);
@@ -32,7 +32,6 @@ $items = $db->count($table, $condition, $CFG['db_expires']);
 $pages = housepages($items, $page, $lst,$pagesize);
 $tags = array();
 verify();
-
 if($items) {
 	$result = $db->query("SELECT ".$MOD['fields']." FROM {$table} WHERE {$condition} ORDER BY ".$MOD['order']." LIMIT {$offset},{$pagesize}", ($CFG['db_expires'] && $page == 1) ? 'CACHE' : '', $CFG['db_expires']);
 	while($r = $db->fetch_array($result)) {
@@ -43,7 +42,7 @@ if($items) {
 		$r['telephone'] = $r['telephone'];
 		$r['title'] = set_style($r['title'], $r['style']);
 		$r['linkurl'] = $MOD['linkurl'].$r['linkurl'];
-		  
+
 		$tags[] = $r;
 	}
 	$db->free_result($result);

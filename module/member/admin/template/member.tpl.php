@@ -36,14 +36,14 @@ show_menu($menus);
 </tr>
 <tr>
 <td>&nbsp;
-<?php echo $vprofile_select;?> 
-<?php echo $vemail_select;?> 
-<?php echo $vmobile_select;?> 
-<?php echo $vtruename_select;?> 
-<?php echo $vbank_select;?> 
-<?php echo $vcompany_select;?> 
-<?php echo $vtrade_select;?> 
-<?php echo $avatar_select;?> 
+<?php echo $vprofile_select;?>
+<?php echo $vemail_select;?>
+<?php echo $vmobile_select;?>
+<?php echo $vtruename_select;?>
+<?php echo $vbank_select;?>
+<?php echo $vcompany_select;?>
+<?php echo $vtrade_select;?>
+<?php echo $avatar_select;?>
 会员名：<input type="text" name="username" value="<?php echo $username;?>" size="8"/>&nbsp;
 会员ID：<input type="text" name="uid" value="<?php echo $uid;?>" size="4"/>
 </td>
@@ -78,7 +78,7 @@ show_menu($menus);
 <td class="px11"><a href="javascript:Dwidget('?moduleid=<?php echo $moduleid;?>&file=credit&username=<?php echo $v['username'];?>', '[<?php echo $v['username'];?>] <?php echo $AJ['credit_name'];?>记录');"><?php echo $v['credit'];?></a></td>
 <td class="px11"><a href="javascript:Dwidget('?moduleid=<?php echo $moduleid;?>&file=sms&username=<?php echo $v['username'];?>&action=record', '[<?php echo $v['username'];?>] 短信记录');"><?php echo $v['sms'];?></a></td>
 <td><?php echo gender($v['gender']);?></td>
-<td><a href="?moduleid=<?php echo $moduleid;?>&groupid=<?php echo $v['groupid'];?>"><?php echo $GROUP[$v['groupid']]['groupname'];?></a></td>
+<td><a href="?moduleid=<?php echo $moduleid;?>&groupid=<?php echo $v['groupid'];?>"><?php echo $GROUP[$v['groupid']]['groupname'];?></a></td><!--会员组-->
 <td class="px11"><?php echo $v['regdate'];?></td>
 <td class="px11"><?php echo $v['logindate'];?></td>
 <td class="px11"><a href="javascript:Dwidget('?moduleid=<?php echo $moduleid;?>&file=loginlog&username=<?php echo $v['username'];?>&action=record', '[<?php echo $v['username'];?>] 登录记录');"><?php echo $v['logintimes'];?></a></td>
@@ -102,7 +102,7 @@ show_menu($menus);
 <input type="submit" value=" 发送邮件 " class="btn" onclick="this.form.action='?moduleid=<?php echo $moduleid;?>&file=sendmail';"/>&nbsp;
 <input type="submit" value=" 发送消息 " class="btn" onclick="this.form.action='?moduleid=<?php echo $moduleid;?>&file=message&action=send';"/>&nbsp;
 <input type="submit" value=" 贸易提醒 " class="btn" onclick="this.form.action='?moduleid=<?php echo $moduleid;?>&file=alert&action=add';"/>&nbsp;
-<input type="submit" value=" 移动至 " class="btn" onclick="if(Dd('mgroupid').value==0){alert('请选择会员组');Dd('mgroupid').focus();return false;}this.form.action='?moduleid=<?php echo $moduleid;?>&action=move';"/> <?php echo group_select('groupid', '会员组', 0, 'id="mgroupid"');?> 
+<input type="submit" value=" 移动至 " class="btn" onclick="if(Dd('mgroupid').value==0){alert('请选择会员组');Dd('mgroupid').focus();return false;}this.form.action='?moduleid=<?php echo $moduleid;?>&action=move';"/> <?php echo group_select('groupid', '会员组', 0, 'id="mgroupid"');?>
 </div>
 </form>
 <div class="pages"><?php echo $pages;?></div>
@@ -118,7 +118,7 @@ show_menu($menus);
 </td>
 </tr>
 </table>
-</form>	
+</form>
 <div class="tt">手机查询</div>
 <table cellpadding="2" cellspacing="1" class="tb">
 <tr>

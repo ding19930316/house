@@ -1,13 +1,14 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
+// print_r($module);exit;
 if(!check_group($_groupid, $MOD['group_search'])) {
 	$head_title = lang('message->without_permission');
 	include template('noright', 'message');
 	exit;
 }
 
-
+// print_r($table);exit;
 require AJ_ROOT.'/include/post.func.php';
 include load('search.lang');
 $CP = $MOD['cat_property'] && $catid && $CAT['property'];
@@ -79,26 +80,26 @@ if($AJ_QST) {
 		}
 	}
 
-   
+
 	$fds = $MOD['fields'];
-	
+
 	$condition = '';
 	if($catid) $condition .= $CAT['child'] ? " AND catid IN (".$CAT['arrchildid'].")" : " AND catid=$catid";
 	if($areaid) $condition .= $ARE['child'] ? " AND areaid IN (".$ARE['arrchildid'].")" : " AND areaid=$areaid";
 	if($thumb) $condition .= " AND thumb<>''";
 	if($vip) $condition .= " AND vip>0";
-	
+
 	//价目格范围
 	if($p== 1){
 			$condition.=' AND price<30';
 		}
 	if($p == 2){
 			$condition.=" AND price>=30  AND price<50";
-			
+
 		}
 	if($p == 3){
 			$condition.=' AND 50<=price AND price<80';
-			
+
 		}
 	if($p== 4){
 			$condition.=' AND 80<=price AND price<100';
@@ -120,7 +121,7 @@ if($AJ_QST) {
 			$condition.=" AND houseearm>40  AND houseearm<60";}
 	if($a == 3){
 			$condition.=' AND 60<=houseearm AND houseearm<80';
-			
+
 		}
 	if($a== 4){
 			$condition.=' AND 80<=houseearm AND houseearm<100';
@@ -142,7 +143,7 @@ if($AJ_QST) {
 			$condition.=" AND room=2";}
 	if($r == 3){
 			$condition.=' AND room=3';
-			
+
 		}
 	if($r== 4){
 			$condition.=' AND room=4';
@@ -150,7 +151,7 @@ if($AJ_QST) {
 	if($r == 5){
 			$condition.=' AND 5<=room ';
 		}
-   
+
 	//list_order 排序转换
 switch ($_GET['order']){
 	case "dd":
@@ -181,13 +182,13 @@ switch ($_GET['order']){
 		$order = " order by itemid desc";
 		break;
 }
-	
+
 $letter = $_GET['letter'];
 if($letter){
 	$condition .= " and letter like '".$letter."%'";
-	
+
 }
-	      
+
 	//if($price) $condition .= " AND price>0 AND unit<>''";
 	if($minprice)  $condition .= " AND price>=$minprice";
 	if($maxprice)  $condition .= " AND price<=$maxprice";
@@ -201,29 +202,30 @@ if($letter){
 		$condition = "i.status=3 AND i.itemid=d.itemid".$condition;
 		if($keyword && $MOD['fulltext'] == 2) $condition .= " AND MATCH(`content`) AGAINST('$kw'".(preg_match("/[+-<>()~*]/", $kw) ? ' IN BOOLEAN MODE' : '').")";
 		$table = $table.' i,'.$table_data.' d';
+		// print_r($table);exit;
 		$fds = 'i.'.str_replace(',', ',i.', $fds);
 	} else {
 		if($keyword) $condition .= " AND $dfields[$fields] LIKE '%$keyword%'";
 		if($pptsql) $condition .= $pptsql;//PPT
 		$condition = "status=3".$condition;
 	}
-	
+
 	$pagesize = $MOD['pagesize'];
 	$offset = ($page-1)*$pagesize;
-	
-	
+
+// print($table);exit;
 	$items = $db->count($table, $condition, $CFG['db_expires']);
 	$pages = pages($items, $page, $pagesize);
 verify();
-	
+// print_r($items);exit;
 	if($items) {
 		$order = $dorder[$order] ? " ORDER BY $dorder[$order]" : '';
-		
-	
+
+
 		$result = $db->query("SELECT ".$MOD['fields']." FROM {$table} WHERE {$condition}{$order} LIMIT {$offset},{$pagesize}", ($AJ['cache_search'] && $page == 1) ? 'CACHE' : '', $CFG['db_expires']);
-		
-	
-		
+
+
+
 		if($kw) {
 			$replacef = explode(' ', $kw);
 			$replacet = array_map('highlight', $replacef);

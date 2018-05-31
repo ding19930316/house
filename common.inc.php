@@ -16,12 +16,14 @@ if(isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])) exit('Request Denie
 $MQG = get_magic_quotes_gpc();
 foreach(array('_POST', '_GET') as $__R) {
 	if($$__R) {
+// print_r($$__R);exit;
 		foreach($$__R as $__k => $__v) {
 			if(substr($__k, 0, 1) == '_') if($__R == '_POST') { unset($_POST[$__k]); } else { unset($_GET[$__k]); }
 			if(isset($$__k) && $$__k == $__v) unset($$__k);
 		}
 	}
 }
+// print_r($_GET);exit;
 define('IN_AIJIACMS', true);
 define('IN_ADMIN', defined('AJ_ADMIN') ? true : false);
 define('AJ_ROOT', str_replace("\\", '/', dirname(__FILE__)));
@@ -51,7 +53,7 @@ require AJ_ROOT.'/include/tag.func.php';
 require AJ_ROOT.'/api/im.func.php';
 require AJ_ROOT.'/api/extend.func.php';
 if(!$MQG) {
-	if($_POST) $_POST = daddslashes($_POST);
+	if($_POST) $_POST = daddslashes($_POST);// 在预定义字符前加上反斜杠daddslashes
 	if($_GET) $_GET = daddslashes($_GET);
 	if($_COOKIE) $_COOKIE = daddslashes($_COOKIE);
 }
@@ -70,15 +72,19 @@ require AJ_ROOT.'/include/session_'.$CFG['session'].'.class.php';
 require AJ_ROOT.'/include/file.func.php';
 if(!empty($_SERVER['REQUEST_URI'])) strip_uri($_SERVER['REQUEST_URI']);
 if($_POST) { $_POST = strip_sql($_POST); strip_key($_POST); }
-if($_GET) { $_GET = strip_sql($_GET); strip_key($_GET); }
+if($_GET) { $_GET = strip_sql($_GET);
+	strip_key($_GET); }
+		// print_r($_GET);exit;
 if($_COOKIE) { $_COOKIE = strip_sql($_COOKIE); strip_key($_COOKIE); }
 if(!IN_ADMIN) {
+	// print_r(111);exit;
 	$BANIP = cache_read('banip.php');
 	if($BANIP) banip($BANIP);
 	$aijiacms_task = '';
 }
 if($_POST) extract($_POST, EXTR_SKIP);
 if($_GET) extract($_GET, EXTR_SKIP);
+// print_r($moduleid);exit;
 $db_class = 'db_'.$CFG['database'];
 $db = new $db_class;
 $db->halt = (AJ_DEBUG || IN_ADMIN) ? 1 : 0;
@@ -98,6 +104,7 @@ if(!$CACHE) {
 // print_r($CACHE);exit;
 $AJ = $CACHE['dt'];//网站设置
 $MODULE = $CACHE['module'];//模块信息
+// print_r($MODULE);exit;
 $EXT = cache_read('module-3.php');
 $lazy = $AJ['lazy'] ? 1 : 0;//图片延时加载
 if(!IN_ADMIN && ($AJ['close'] || $AJ['defend_cc'] || $AJ['defend_reload'] || $AJ['defend_proxy'])) include AJ_ROOT.'/include/defend.inc.php';
@@ -107,6 +114,7 @@ if($moduleid > 1) {
 	isset($MODULE[$moduleid]) or dheader(AJ_PATH);
 	$module = $MODULE[$moduleid]['module'];
 	$MOD = $moduleid == 3 ? $EXT : cache_read('module-'.$moduleid.'.php');
+	// print_r($MOD);exit;
 	include AJ_ROOT.'/lang/'.AJ_LANG.'/'.$module.'.inc.php';
 } else {
 	$moduleid = 1;
@@ -150,6 +158,7 @@ $_userid = $_admin = $_aid = $_message = $_chat = $_sound = $_online = $_money =
 $_username = $_company = $_passport = $_truename = $_mobile = '';
 $_groupid = 3;
 $aijiacms_auth = get_cookie('auth');
+// print_r($aijiacms_auth);exit;
 if($aijiacms_auth) {
 	$_dauth = explode("\t", decrypt($aijiacms_auth));
 	$_userid = isset($_dauth[0]) ? intval($_dauth[0]) : 0;
@@ -188,8 +197,8 @@ if(!IN_ADMIN) {
 	if($AJ_BOT && $moduleid >= 4) $MOD['order'] = $moduleid == 4 ? 'userid DESC' : 'addtime DESC';
 }
 // die('11');
-
+// die($_groupid);
 $MG = cache_read('group-'.$_groupid.'.php');
-// die('11');
+// print_r($MG);exit;
 
 ?>
