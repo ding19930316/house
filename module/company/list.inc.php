@@ -7,12 +7,29 @@ $condition = array();
 $mods = array(
 	'company',
 	'member',
-	'newhouse_6',
+	'newhouse_6',//小区
 	'rent_7'
 );
 
+// $result = $db->query("SELECT * FROM `aijiacms_company` ,`aijiacms_member`  WHERE 1 ");
+// // print_r($result);exit;
+// while($r = $db->fetch_array($result)) {
+// 	//if($lazy && isset($r['thumb']) && $r['thumb']) $r['thumb'] = AJ_SKIN.'image/lazy.gif" original="'.$r['thumb'];
+// 	$tags[] = $r;
+// }
+// print_r($tags);exit;
+
 foreach ($mods as $mod_item) {
-	$condition[$CFG['tb_pre'].'_'.$mod_item] = "1";
+	$table = $CFG['tb_pre'].$mod_item;
+	switch ($mod_item) {
+		case 'newhouse_6':
+			$condition[$table] = "status=3 ";
+			break;
+		default:
+			$condition[$table] = "1";
+			break;
+	}
+	// $condition[$CFG['tb_pre'].'_'.$mod_item] = "1";
 }
 
 
@@ -57,25 +74,19 @@ foreach ($mods as $mod_item) {
 	$page = intval($_GET['g']);
 	$source = intval($_GET['u']);
 	$keyword = trim($_POST['keyword']);
-	// print_r($keyword);exit;
 	$k = trim($_GET['k']);
 	// }
-	if($keyword !=0)
+	if($keyword !='')
 	{
+		// print_r('111');exit;
 		$keyword1 = iconv('gbk', 'utf-8', $keyword);//rewrite 只支持UTF-8编码的中文
 		$lst1.= "-k".htmlentities(urlencode($keyword1));
 		// $condition.=" and  (`company` like '%$keyword%' or `address` like '%$keyword%' )";
 		foreach ($mods as $mod_item) {
-			switch ($mod_item) {
-				case 'company':
-					$condition[$CFG['tb_pre'].'_'.$mod_item].= " and  (`company` like '%$keyword%' or `address` like '%$keyword%' )";
-					break;
-				case 'member':
-					$condition[$CFG['tb_pre'].'_'.$mod_item].= " and  (`company` like '%$keyword%' or `address` like '%$keyword%' )";
-				default:
-					break;
-			}
+			$table = trim($CFG['tb_pre'].$mod_item);
+			$condition[$table].= " and  (`keyword` like '%$keyword%' )";
 		}
+		// print_r($condition);exit;
 		// $condition['company'].=" and  (`company` like '%$keyword%' or `address` like '%$keyword%' )";
 	}
 
@@ -87,22 +98,14 @@ foreach ($mods as $mod_item) {
 	// 	$condition.=" and  (`company` like '%$k%'  or `address` like '%$k%' )";
 	// }
 	//==========================================================================
-
+	// print_r($condition);exit;
 if(!empty($areaid))
 	{
 		$lst = "-r".$areaid;
 			// $condition .= $ARE['child'] ? " AND areaid IN (".$ARE['arrchildid'].")" : " AND areaid=$areaid";
 		foreach ($mods as $mod_item) {
-			// print_r($mod_item);exit;
-			switch ($mod_item) {
-				case 'company':
-				// print_r($mod_item);exit;
-					$condition[$CFG['tb_pre'].'_'.$mod_item].= $ARE['child'] ? " AND areaid IN (".$ARE['arrchildid'].")" : " AND areaid=$areaid";
-					break;
-
-				default:
-					break;
-			}
+			$table = trim($CFG['tb_pre'].$mod_item);
+			$condition[$table].= $ARE['child'] ? " AND areaid IN (".$ARE['arrchildid'].")" : " AND areaid=$areaid";
 		}
 		// $condition['company'] .= $ARE['child'] ? " AND areaid IN (".$ARE['arrchildid'].")" : " AND areaid=$areaid";
 	}
@@ -130,37 +133,47 @@ $pagesize = $MOD['pagesize'];
 $offset = ($page-1)*$pagesize;
 // $items = $db->count($table, $condition['company'], $CFG['db_expires']);
 $items = 0;
+$sql = array();
 foreach ($mods as $mod_item) {
-	switch ($mod_item) {
-		case 'company':
-			$items += $db->count($table, $condition[$CFG['tb_pre'].'_'.$mod_item], $CFG['db_expires']);
-			// $condition[$CFG['tb_pre'].'_'.$mod_item].= $ARE['child'] ? " AND areaid IN (".$ARE['arrchildid'].")" : " AND areaid=$areaid";
-			break;
-
-		default:
-			break;
-	}
+	$table = trim($CFG['tb_pre'].$mod_item);
+	$sql[] = "select count(*) as tmpcount from $table WHERE {$condition[$table]}";
 }
+$sql = implode(" union all ",$sql);
+$items = mysql_fetch_array($db->query("select sum(tmpcount) as items from ($sql) a"))['items'];
 verify();
-// print_r($condition[$CFG['tb_pre'].'_'.'company']);exit;
 $pages = housepages($items, $page, $lst,$pagesize);
 $tags = array();
 if($items) {
+	$sql = array();//{$offset},{$pagesize}
 	foreach ($mods as $mod_item) {
+		$table = trim($CFG['tb_pre'].$mod_item);
 		switch ($mod_item) {
 			case 'company':
-				$result = $db->query("SELECT ".$MOD['fields']." FROM {$table} WHERE {$condition[$CFG['tb_pre'].'_'.$mod_item]} ORDER BY ".$MOD['order']." LIMIT {$offset},{$pagesize}", ($CFG['db_expires'] && $page == 1) ? 'CACHE' : '', $CFG['db_expires']);
-				while($r = $db->fetch_array($result)) {
-					//if($lazy && isset($r['thumb']) && $r['thumb']) $r['thumb'] = AJ_SKIN.'image/lazy.gif" original="'.$r['thumb'];
-					$tags[] = $r;
-				}
+				// $sql[] = "select * from $table WHERE {$condition[$table]}";
+				$sql[] = "select company as title,company,telephone,areaid,address from $table WHERE {$condition[$table]}";
 				break;
-
+			case 'member':
+				$sql[] = "select username as title,company,mobile as telephone,areaid,address from $table WHERE {$condition[$table]}";
+				break;
+			case 'newhouse_6':
+				$sql[] = "select title,company,telephone,areaid,address from $table WHERE {$condition[$table]}";
+				break;
+			case 'rent_7':
+				$sql[] = "select title,company,telephone,areaid,address from $table WHERE {$condition[$table]}";
+				break;
 			default:
+				// code...
 				break;
 		}
 	}
+	$sql = implode(" union all ",$sql)." LIMIT ".$offset.','.$pagesize;
+	// print_r($sql);exit;
+	$result = $db->query($sql);
+	while($r = $db->fetch_array($result)) {
+		$tags[] = array_merge($r,array('mod'=>$mod_item));
+	}
 }
+// print_r($tags);exit;
 $showpage = 1;
 
 $seo_file = 'list';

@@ -147,7 +147,6 @@ return $string;
 function template($template = 'index',$dir = '') {
 global $CFG;
 $to = $dir ?AJ_CACHE.'/tpl/'.$dir.'-'.$template.'.php': AJ_CACHE.'/tpl/'.$template.'.php';
-// print_r($to);
 $isfileto = is_file($to);
 if($CFG['template_refresh'] ||!$isfileto) {
 if($dir) $dir = $dir.'/';
@@ -155,6 +154,7 @@ $from = AJ_ROOT.'/template/'.$CFG['template'].'/'.$dir.$template.'.htm';
 if($CFG['template'] != 'default'&&!is_file($from)) {
 $from = AJ_ROOT.'/template/default/'.$dir.$template.'.htm';
 }
+// print_r($from);exit;
 if(!$isfileto ||filemtime($from) >filemtime($to) ||(filesize($to) == 0 &&filesize($from) >0)) {
 require_once AJ_ROOT.'/include/template.func.php';
 template_compile($from,$to);

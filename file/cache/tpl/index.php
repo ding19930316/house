@@ -86,7 +86,7 @@ GoMobile('<?php echo $head_mobile;?>');
 <div class="search-box-wrap">
   <div class="search-box-bg"></div>
 <div class="search-box-con">
-  <div class="search-box clear" id="homeSearchMain"><form class="clear" action="<?php echo $MODULE['1']['linkurl'];?>company/search.php"><input class="txt" name="kw" placeholder="中文名称/地名/楼盘名/开发商" autocomplete="off" id=""><input class="btn home-ico ico-search" type="submit" value="搜索"></form>
+  <div class="search-box clear" id="homeSearchMain"><form class="clear" action="<?php echo $MODULE['1']['linkurl'];?>company/list.html" method = "post"><input class="txt" name="keyword" placeholder="中文名称/地名/楼盘名/开发商" autocomplete="off" id=""><input class="btn home-ico ico-search" type="submit" value="搜索"></form>
     <div id="suggest-cont" class="suggest-wrap"></div>
     <div class="city_list">
       <span><a href="<?php echo $MODULE['1']['linkurl'];?>company/list-r6.html">崇安区</a></span><span>|</span>

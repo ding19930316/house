@@ -11,7 +11,7 @@ isset($TYPE[$typeid]) or $typeid = 99;
 $dtype = $typeid != 99 ? " AND typeid=$typeid" : '';
 $maincat = get_maincat(0, $moduleid);
 $condition = 'status=3 ';
-
+// print_r($table);exit;
 
 if($catid) $condition .= $CAT['child'] ? " AND catid IN (".$CAT['arrchildid'].")" : " AND catid=$catid";
 //$condition .= ($CAT['child']) ? " AND catid IN (".$CAT['arrchildid'].")" : " AND catid=$catid";
