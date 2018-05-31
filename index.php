@@ -75,11 +75,12 @@ $xiqoqu = get_xiqoqu(0);
 	// 	// code...
 	// }
 	//中介等人员信息
-	$query = "select * from aijiacms_member";
+	$query = "select * from aijiacms_company limit 0,40";
 	$result = $db->query($query, 'CACHE', 0);
 	while($r = $db->fetch_array($result)) {
 		$members_r[] = $r;
 	}
+	$members_m = array_slice($members_r,0,3);
 
 	foreach ($tags1 as $tagskey => $tagsvalue) {
 		$query = "SELECT * FROM aijiacms_newhouse_6 WHERE username='{$tagsvalue['username']}' ORDER BY level desc,editdate desc,vip desc,edittime desc LIMIT 0,12";

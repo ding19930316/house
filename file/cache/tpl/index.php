@@ -131,34 +131,51 @@ GoMobile('<?php echo $head_mobile;?>');
   <style type="text/css">
 /* css 重置 */
 *{margin:0; padding:0; list-style:none; }
-body{ background:#fff; font:normal 12px/22px 宋体;  }
+body{ background: rgb(245,245,245); font:normal 12px/22px 宋体;  }
 img{ border:0;  }
 a{ text-decoration:none; color:#333;  }
 a:hover{ color:#1974A1;  }
 /* 本例子css */
 .slideTxtBox{ border:1px solid #ddd; text-align:left; border-radius:5px; }
-.slideTxtBox .hd{ height:30px; line-height:30px;     background: #000; opacity: .55; padding:0 10px 0 20px;   border-bottom:1px solid #000;  position:relative; }
-.slideTxtBox .hd ul{ float:left;  position:absolute; left:20px; top:-1px; height:32px;   }
-.slideTxtBox .hd ul li{ float:left;     text-align: center;
-  padding-left:12px;
-  padding-right:12px;
-    font-size: 16px;
-    color: white;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.8);}
-.slideTxtBox .hd ul li.on{ height:30px;  background:#fff; border:1px solid #ddd; border-bottom:2px solid #fff; color:#000}
+.slideTxtBox .hd{ height:30px; line-height:30px;  position:relative; }
+.slideTxtBox .hd ul{ float:left;  position:absolute; top:-1px;  }
+.slideTxtBox .hd ul li{ float:left;     text-align: center;}
+.slideTxtBox .hd ul li.on{ background:#fff; border:1px solid #ddd; border-bottom:2px solid #fff; color:#000}
 .slideTxtBox .bd ul{ padding:15px;  zoom:1;  }
 .slideTxtBox .bd li{ height:24px; line-height:24px;   }
 .slideTxtBox .bd li .date{ float:right; color:#999;  }
+.hd li{
+  float: left;
+  width: 300px;
+  height: 46px;
+  margin-top: 1px;
+  font-size: 20px;
+  line-height: 46px;
+  border-right: 1px solid #e2e2e2;
+  text-align: center;
+  background: #f1f1f1;
+  cursor: pointer;
+}
+.hd li.on{
+  height: 46px;
+  border-top: 2px solid #065fb9;
+  color: #065fb9;
+  background: #FFFFFF;
+}
 .x4{
   width:220px;
   padding:10px;
   display: inline-block;
 }
 .x2{
+  margin-top: 30px;
   padding:10px;
   display: inline-block;
   width: 22.5%;
   text-align: center;
+  background: white;
+  box-shadow: 0px 2px 5px #CCC;
+  outline: 1px solid #DDD;
 }
 .x2 img{
   margin:0px auto;
@@ -175,14 +192,25 @@ a:hover{ color:#1974A1;  }
       <!-- {foreach name=foreach_name key=k item=v from=$tags1}
         <li><?php echo $v['truename'];?></li>
       {/foreach} -->
-      <?php if(is_array($members_r)) { foreach($members_r as $k => $t) { ?>
-      <li><?php echo $t['truename'];?></li>
+      <?php if(is_array($members_m)) { foreach($members_m as $k => $t) { ?>
+      <li><?php echo $t['company'];?></li>
       <?php } } ?>
     </ul>
   </div>
   <div class="bd">
-    <?php if(is_array($tag)) { foreach($tag as $k => $t) { ?>
-      <li><?php echo $k;?></li>
+    <?php if(is_array($members_m)) { foreach($members_m as $k => $t) { ?>
+      <div class="height:500px">
+        <div class="x2">
+          <a href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
+            <img src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $t['username'];?>&size=large" alt="" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
+          </a>
+          <div class="" style="text-align:left;white-space:nowrap;padding:5px;">
+            <p>所属公司：<a href="<?php echo userurl(get_agent($t['companyid']), '');?>" target="_blank"><?php echo $t['company'];?></a></p>
+            <!-- <p class="num_house">房源：<a href="<?php echo userurl($t['username'], '');?>" target="_blank">售(<?php echo get_num('sale_5',$t['username']);?>)</a> <a href="<?php echo userurl($t['username'], '');?>" target="_blank">租(<?php echo get_num('rent_7',$t['username']);?>)</a></p> -->
+            <p>电话：<?php echo $t['telephone'];?></p>
+          </div>
+        </div>
+      </div>
     <?php } } ?>
     <!-- {foreach from=$tags key=num item="book"}
       <li class="x4">
@@ -211,13 +239,17 @@ a:hover{ color:#1974A1;  }
   <h3 class="sub-title" style="color: #333;">
     其他推荐
   </h3>
-  <div class="" style="margin:0 -10px">
+  <div class="" style="margin:0 -10px;">
     <?php if(is_array($members_r)) { foreach($members_r as $k => $t) { ?>
       <div class="x2">
         <a href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
           <img src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $t['username'];?>&size=large" alt="" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
         </a>
-        <?php echo $t['truename'];?>
+        <div class="" style="text-align:left;white-space:nowrap;padding:5px;">
+          <p>所属公司：<a href="<?php echo userurl(get_agent($t['companyid']), '');?>" target="_blank"><?php echo $t['company'];?></a></p>
+          <!-- <p class="num_house">房源：<a href="<?php echo userurl($t['username'], '');?>" target="_blank">售(<?php echo get_num('sale_5',$t['username']);?>)</a> <a href="<?php echo userurl($t['username'], '');?>" target="_blank">租(<?php echo get_num('rent_7',$t['username']);?>)</a></p> -->
+          <p>电话：<?php echo $t['telephone'];?></p>
+        </div>
       </div>
     <?php } } ?>
   </div>
