@@ -9,6 +9,7 @@ if($CFG['authadmin'] == 'cookie') {
 } else {
 	session_destroy();
 }
+// exit("111");
 $db->query("DELETE FROM {$db->pre}online WHERE userid=$_userid");
 set_cookie('auth', '');
 set_cookie('userid', '');

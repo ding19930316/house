@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 $could_inquiry = check_group($_groupid, $MOD['group_inquiry']);
 if($username == $_username || $domain) $could_inquiry = true;
@@ -43,7 +43,7 @@ if($itemid) {
 	$typeid = isset($typeid) ? intval($typeid) : 0;
 	$view = isset($view) ? 1 : 0;
 	$url = "file=$file";
-	$condition = "username='$username' AND status=3";
+	$condition = "company='$username' AND status=3";
 	if($typeid) {
 		$MTYPE = get_type('product-'.$userid);
 		$condition .= " AND mycatid='$typeid'";
@@ -66,7 +66,7 @@ if($itemid) {
 			$condition.=" AND price>=200  AND price<500";}
 	if($p == 3){
 			$condition.=' AND price>=500 AND price<1000';
-			
+
 		}
 	if($p== 4){
 			$condition.=' AND price>=1000 AND price<1500';
@@ -81,7 +81,7 @@ if($itemid) {
 			$condition.=' AND 3000<=price';
 		}
 			//面积范围
-			 
+
 	if($a== 1){
 			$condition.=' AND houseearm<40';
 		}
@@ -89,7 +89,7 @@ if($itemid) {
 			$condition.=" AND houseearm>40  AND houseearm<60";}
 	if($a == 3){
 			$condition.=' AND 60<=houseearm AND houseearm<80';
-			
+
 		}
 	if($a== 4){
 			$condition.=' AND 80<=houseearm AND houseearm<100';
@@ -111,7 +111,7 @@ if($itemid) {
 			$condition.=" AND room=2";}
 	if($r == 3){
 			$condition.=' AND room=3';
-			
+
 		}
 	if($r== 4){
 			$condition.=' AND room=4';
@@ -119,7 +119,7 @@ if($itemid) {
 	if($r == 5){
 			$condition.=' AND 5<=room ';
 		}
-   
+
 	//list_order 排序转换
 switch ($_GET['order']){
 	case "dd":
@@ -160,7 +160,7 @@ switch ($_GET['order']){
 	$pages = home_pages($items, $pagesize, $demo_url, $page);
 	$lists = array();
 	if($items) {
-		$result = $db->query("SELECT ".$MOD['fields']." FROM {$table} WHERE $condition ORDER BY edittime DESC LIMIT $offset,$pagesize");
+		$result = $db->query("SELECT * FROM {$table} WHERE $condition ORDER BY edittime DESC LIMIT $offset,$pagesize");
 		while($r = $db->fetch_array($result)) {
 			$r['alt'] = $r['title'];
 			$r['title'] = set_style($r['title'], $r['style']);

@@ -1,8 +1,9 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 class member {
 	var $userid;
 	var $username;
+	var $companyid;
 	var $db;
 	var $table_member;
 	var $table_company;
@@ -109,7 +110,7 @@ class member {
 		if(strlen($password) < $MOD['minpassword'] || strlen($password) > $MOD['maxpassword']) return $this->_(lang($L['member_payword_len'], array($MOD['minpassword'], $MOD['maxpassword'])));
 		return true;
 	}
-		
+
 		function is_clean($string) {
 		$chars = array("\\", "'",'"','/','<','>',"\r","\t","\n");
 		foreach($chars as $v) {
@@ -129,10 +130,11 @@ class member {
 		$areaid = intval($member['areaid']);
 		if(!$areaid || !$this->db->get_one("SELECT areaid FROM {$this->db->pre}area WHERE areaid=$areaid")) return $this->_($L['member_areaid_null']);
 		$groupid = $this->userid ? $member['groupid'] : $member['regid'];
-		if($groupid > 5) {
+		// if($groupid > 5&&$_POST['post']['rlcompany'] == "") {
+		if($_POST['post']['rlcompany'] == "") {//这里是验证公司信息的
 			if(strlen($member['company']) < 2) return $this->_($L['member_company_null']);
 			if(preg_match("/[0-9]+/", $member['company']) || !$this->is_clean($member['company'])) return $this->_($L['member_company_bad']);
-			//if($this->company_exists($member['company'])) return $this->_($L['member_company_reg']);
+			if($this->company_exists($member['company'])) return $this->_($L['member_company_reg']);
 			//if(strlen($member['type']) < 2) return $this->_($L['member_type_null']);
 			if(strlen($member['telephone']) < 6) return $this->_($L['member_telephone_null']);
 		}
@@ -151,11 +153,43 @@ class member {
 			if($member['groupid'] > 5 && !$this->is_company($member['company'])) return false;
 			if(!$this->is_password($member['password'], $member['cpassword'])) return false;
 		}
+		// print_r("111");exit;
 		return true;
 	}
-	
+function set_company($post){
+	// company
+	// telephone
+	// type
+	//areaid
+	//address
+	//code
+	//rigister_time注册时间
+	//owner//法人代表
+	//comemail公司邮箱
+	//register_mon注册资本
+	//intruce经营范围
+	//website公司主页
+	$member = array();
+	$member['company'] = isset($post['company']) ? trim($post['company']) : '';
+	$member['comemail'] = isset($post['comemail']) ? trim($post['comemail']) : '';
+	$member['telephone'] = isset($post['telephone']) ? trim($post['telephone']) : '';
+	$member['type'] = isset($post['type']) ? trim($post['type']) : '';
+	$member['areaid'] = isset($post['areaid']) ? trim($post['areaid']) : '';
+	$member['address'] = isset($post['comaddress']) ? trim($post['comaddress']) : '';
+	$member['code'] = isset($post['code']) ? trim($post['code']) : '';
+	$member['rigister_time'] = isset($post['rigister_time']) ? trim($post['rigister_time']) : '';
+	$member['owner'] = isset($post['code']) ? trim($post['owner']) : '';
+	$member['register_mon'] = isset($post['register_mon']) ? trim($post['register_mon']) : '';
+	$member['intruce'] = isset($post['intruce']) ? trim($post['intruce']) : '';
+	$member['website'] = isset($post['website']) ? trim($post['website']) : '';
+	$member['keyword'] = $post['company'].','.$post['address'].','.$post['owner'];
+	return $member;
+}
 function set_member($member) {
 		global $MOD;
+		$member['companyid'] = $this->companyid;
+		$member['company'] = $member['company']?$member['company']:$member['rlcompany'];
+		// print_r($member['companyid']);exit;
 	    $member['email'] = trim($member['email']);
 		$member['mail'] = isset($member['mail']) ? trim($member['mail']) : '';
 		is_email($member['mail']) or $member['mail'] = '';
@@ -172,13 +206,13 @@ function set_member($member) {
 		$member['postcode'] = isset($member['postcode']) ? trim($member['postcode']) : '';
 		is_numeric($member['postcode']) or $member['postcode'] = '';
 		$member['mode'] = (isset($member['mode']) && is_array($member['mode']) && $member['mode']) ? implode(',', $member['mode']) : '';
-		$member['keyword'] = $member['company'];
+		$member['keyword'] = $member['company'].','.$member['address'].','.$member['truename'].','.$member['comaddress'].','.$member['owner'];
 		$member['homepage'] = isset($member['homepage']) ? fix_link($member['homepage']) : '';
 		$member['capital'] = isset($member['capital']) ? dround($member['capital']) : '';
 		$member['sound'] = intval($member['sound']);
-		$member['letter'] = GetPinyin($member['company']);
-		if($this->userid) {		
-			$member['keyword'] = $member['company'].strip_tags(area_pos($member['areaid'], ',')).','.$member['business'].','.$member['sell'].','.$member['buy'].','.$member['mode'];
+		// $member['letter'] = GetPinyin($member['company']);
+		if($this->userid) {
+			// $member['keyword'] = $member['company'].strip_tags(area_pos($member['areaid'], ',')).','.$member['business'].','.$member['sell'].','.$member['buy'].','.$member['mode'];
 			clear_upload($member['thumb'].$member['introduce'], $this->userid);
 			$new = $member['introduce'];
 			if($member['thumb']) $new .= '<img src="'.$member['thumb'].'">';
@@ -240,7 +274,8 @@ function set_member($member) {
 
 	function company_exists($company) {
 		$condition = "company='$company'";
-		if($this->userid) $condition .= " AND userid!=$this->userid";
+		// if($this->userid) $condition .= " AND userid!=$this->userid";
+		// if($this->userid) $condition;
 		return $this->db->get_one("SELECT userid FROM {$this->table_company} WHERE $condition");
 	}
 
@@ -251,43 +286,77 @@ function set_member($member) {
 	}
 
 	function add($member) {
+																// print_r("111");exit;
 		global $AJ, $AJ_TIME, $AJ_IP, $MOD, $L;
 		if(!$this->is_member($member)) return false;
+		// print_r("111");exit;
+
+		// $member = $this->set_member($member);
+		// $company = $this->set_company($member);
+		// print_r($company);exit;
+		// $member['linkurl'] = userurl($member['username']);
+		// $member['password'] = $member['payword'] = md5(md5($member['password']));
+		// $member['sound'] = 1;
+		$member_fields = array('username','company','passport', 'password','payword','email','sound','gender','truename','mobile','msn','qq','ali','skype','department','career','groupid','regid','areaid','edittime','inviter','companyid','keyword');
+		$company_fields = array('username','groupid','company','type','catid','catids','areaid', 'mode','capital','regunit','size','regyear','sell','buy','business','telephone','fax','mail','address','postcode','code','homepage','introduce','rigister_time','website','intruce','register_mon','comemail','owner','thumb','keyword','linkurl','letter');
+		$member_sqlk = $member_sqlv = $company_sqlk = $company_sqlv = '';
+		//
+		// $member_fields = array('username','company','passport', 'password','payword','email','sound','gender','truename','mobile','msn','qq','ali','skype','department','career','groupid','regid','areaid','edittime','inviter','companyid');
+		// $company_fields = array('username','groupid','company','type','catid','catids','areaid', 'mode','capital','regunit','size','regyear','sell','buy','business','telephone','fax','mail','address','postcode','code','homepage','introduce','rigister_time','website','intruce','register_mon','comemail','owner','thumb','keyword','linkurl','letter');
+		// $member_sqlk = $member_sqlv = $company_sqlk = $company_sqlv = '';
+
+		//插入公司信息
+		if(!$this->companyid){
+			$company = $this->set_company($member);
+			foreach($company as $k=>$v) {
+				if(in_array($k, $company_fields)) {$company_sqlk .= ','.$k; $company_sqlv .= ",'$v'";}
+			}
+			$company_sqlk = substr($company_sqlk, 1);
+			$company_sqlv = substr($company_sqlv, 1);
+			$this->db->query("INSERT INTO {$this->table_company} ($company_sqlk) VALUES ($company_sqlv)");
+			$this->companyid = $this->company_exists($member['company'])['userid'];
+		}else{
+			$membermore  = $this->db->get_one("select * from {$this->table_company} where userid = $this->companyid");
+			$member = array_merge($membermore,$member);
+			// print_r($member);exit;
+		}
+		//插入公司信息end
+
+		//插入member信息
 		$member = $this->set_member($member);
 		$member['linkurl'] = userurl($member['username']);
 		$member['password'] = $member['payword'] = md5(md5($member['password']));
 		$member['sound'] = 1;
-		$member_fields = array('username','company','passport', 'password','payword','email','sound','gender','truename','mobile','msn','qq','ali','skype','department','career','groupid','regid','areaid','edittime','inviter','companyid');
-		$company_fields = array('username','groupid','company','type','catid','catids','areaid', 'mode','capital','regunit','size','regyear','sell','buy','business','telephone','fax','mail','address','postcode','homepage','introduce','thumb','keyword','linkurl','letter');
-		$member_sqlk = $member_sqlv = $company_sqlk = $company_sqlv = '';
 		foreach($member as $k=>$v) {
 			if(in_array($k, $member_fields)) {$member_sqlk .= ','.$k; $member_sqlv .= ",'$v'";}
-			if(in_array($k, $company_fields)) {$company_sqlk .= ','.$k; $company_sqlv .= ",'$v'";}
 		}
-        $member_sqlk = substr($member_sqlk, 1);
-        $member_sqlv = substr($member_sqlv, 1);
-        $company_sqlk = substr($company_sqlk, 1);
-        $company_sqlv = substr($company_sqlv, 1);
+		$member_sqlk = substr($member_sqlk, 1);
+		$member_sqlv = substr($member_sqlv, 1);
+		// print_r("INSERT INTO {$this->table_member} ($member_sqlk,regip,regtime,loginip,logintime)  VALUES ($member_sqlv,'$AJ_IP','$AJ_TIME','$AJ_IP','$AJ_TIME')");exit;
 		$this->db->query("INSERT INTO {$this->table_member} ($member_sqlk,regip,regtime,loginip,logintime)  VALUES ($member_sqlv,'$AJ_IP','$AJ_TIME','$AJ_IP','$AJ_TIME')");
-		$this->userid = $this->db->insert_id();
+		// print_r("select max(userid) as userid from {$this->table_member}");exit;
+		$rs = $this->db->query("select max(userid) as userid from {$this->table_member}");
+		$this->userid = $member['userid'] = $this->db->fetch_array($rs)['userid'];
+		//插入member信息end
+
 		if(!$this->userid) return 0;
-		$member['userid'] = $this->userid;
-		$this->username = $member['username'];
-	    $this->db->query("INSERT INTO {$this->table_company} (userid, $company_sqlk) VALUES ('$this->userid', $company_sqlv)");
-		$content_table = content_table(4, $this->userid, is_file(AJ_CACHE.'/4.part'), $this->table_company_data);
-	    $this->db->query("INSERT INTO {$content_table} (userid, content) VALUES ('$this->userid', '$member[content]')");
-		if($MOD['credit_register'] > 0) {
-			credit_add($this->username, $MOD['credit_register']);
-			credit_record($this->username, $MOD['credit_register'], 'system', $L['member_record_reg'], $AJ_IP);
-		}
-		if($MOD['money_register'] > 0) {
-			money_add($this->username, $MOD['money_register']);
-			money_record($this->username, $MOD['money_register'], $L['in_site'], 'system', $L['member_record_reg'], $AJ_IP);
-		}
-		if($MOD['sms_register'] > 0) {
-			sms_add($this->username, $MOD['sms_register']);
-			sms_record($this->username, $MOD['sms_register'], 'system', $L['member_record_reg'], $AJ_IP);
-		}
+		// $member['userid'] = $this->userid;
+		// $this->username = $member['username'];
+		// $content_table = content_table(4, $this->userid, is_file(AJ_CACHE.'/4.part'), $this->table_company_data);
+	  //   $this->db->query("INSERT INTO {$content_table} (userid, content) VALUES ('$this->userid', '$member[content]')");
+		// if($MOD['credit_register'] > 0) {
+		// 	credit_add($this->username, $MOD['credit_register']);
+		// 	credit_record($this->username, $MOD['credit_register'], 'system', $L['member_record_reg'], $AJ_IP);
+		// }
+		//
+		// if($MOD['money_register'] > 0) {
+		// 	money_add($this->username, $MOD['money_register']);
+		// 	money_record($this->username, $MOD['money_register'], $L['in_site'], 'system', $L['member_record_reg'], $AJ_IP);
+		// }
+		// if($MOD['sms_register'] > 0) {
+		// 	sms_add($this->username, $MOD['sms_register']);
+		// 	sms_record($this->username, $MOD['sms_register'], 'system', $L['member_record_reg'], $AJ_IP);
+		// }
 		return $this->userid;
 	}
 
@@ -296,7 +365,7 @@ function set_member($member) {
 		$member = $this->set_member($member);
 		$r = $this->get_one();
 		$member['linkurl'] = userurl($r['username'], '', $member['domain']);
-		$member_fields = array('company','passport','sound','email','msn','qq','ali','skype','gender','truename','mobile','department','career','groupid','areaid', 'edittime','black','bank','account','vemail','vmobile','vbank','vtruename','vcompany','vtrade','trade','support','inviter','companyid');
+		$member_fields = array('company','passport','sound','email','msn','qq','ali','skype','gender','truename','mobile','department','career','groupid','areaid', 'edittime','black','bank','account','vemail','vmobile','vbank','vtruename','vcompany','vtrade','trade','support','inviter','companyid','address');
 		$company_fields = array('company','type','areaid', 'catid','catids','business','mode','regyear','regunit','capital','size','address','postcode','telephone','fax','mail','homepage','sell','buy','introduce','thumb','keyword','linkurl','groupid','domain','icp','validated','validator','validtime','skin','template','letter');
 		$member_sql = $company_sql = '';
 		foreach($member as $k=>$v) {
@@ -369,6 +438,7 @@ function set_member($member) {
 			$this->lock($login_lock, $LOCK, $AJ_IP, $AJ_TIME);
 			return $this->_($L['member_login_not_member']);
 		}
+						// print_r("1111");exit;
 		if(!$admin) {
 			if($user['password'] != (is_md5($login_password) ? md5($login_password) : md5(md5($login_password)))) {
 				$this->lock($login_lock, $LOCK, $AJ_IP, $AJ_TIME);
@@ -389,7 +459,7 @@ function set_member($member) {
 		}
 		$cookietime = $AJ_TIME + ($login_cookietime ? intval($login_cookietime) : 86400*7);
 		$auth = encrypt($user['userid']."\t".$user['username']."\t".$user['groupid']."\t".$user['password']."\t".$user['admin']);
-        set_cookie('auth', $auth, $cookietime);
+    set_cookie('auth', $auth, $cookietime);
 		set_cookie('userid', $user['userid'], $cookietime);
 		set_cookie('username', $user['username'], $AJ_TIME + 86400*365);
 		$this->db->query("UPDATE {$this->table_member} SET loginip='$AJ_IP',logintime=$AJ_TIME,logintimes=logintimes+1 WHERE userid=$userid");
@@ -505,7 +575,7 @@ function set_member($member) {
 	}
 
 	function delupload($username, $userid) {
-			if(!$userid || !$username) return;		
+			if(!$userid || !$username) return;
 		$result = $this->db->query("SELECT fileurl FROM {$this->db->pre}upload_".($userid%10)." WHERE username='$username'");
 		while($r = $this->db->fetch_array($result)) {
 			 delete_upload($r['fileurl'], $userid);
@@ -519,7 +589,7 @@ function set_member($member) {
 		if(!$this->username_exists($cusername)) return $this->_($L['member_rename_not_member']);
 		if(!$this->is_username($nusername)) return false;
 		$tables = array('alert', 'ask', 'comment', 'honor', 'finance_card', 'finance_cash', 'finance_charge', 'finance_pay', 'finance_record', 'finance_sms', 'guestbook', 'link', 'admin_log', 'login', 'mail_list', 'spread', 'news',  'upgrade',  'news', 'page', 'address', 'oauth', 'vote_record', 'gift_order', 'poll_record', 'member', 'company','article_8','buy_16','rent_7','newhouse_6','sale_5','info_13','photo_12','video_14','group');
-		
+
 		foreach($tables as $table) {
 			$this->db->query("UPDATE {$AJ_PRE}{$table} SET username='$nusername' WHERE username='$cusername'");
 		}
@@ -548,7 +618,7 @@ function set_member($member) {
 				$this->db->query("UPDATE {$this->table_company} SET groupid='$groupid' WHERE userid=$userid");
 				userclean($user['username']);
 			}
-			
+
 		}
 		return true;
 	}

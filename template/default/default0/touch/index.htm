@@ -1,0 +1,472 @@
+{template 'header', $TP}
+	<header class="index_header">
+		<div class="fl">
+			<a href="index.php" class="a_down">{$AJ[city_sitename]}</a>
+		</div>
+		<div class="fr">
+			<a href="javascript:" id="dh" class="daohang_ico"></a>
+		</div>
+		<a href="index.php" class="logo">
+			<img src="{if $AJ[waplogo]}{$AJ[waplogo]}{else}{AJ_SKIN}image/waplogo.png{/if}" alt="{$AJ[sitename]}">
+		</a>
+	</header>
+    <div class="content_header"></div>
+<script>
+	$("#dh").on("click",function(){
+		al({
+			id:"daohang",
+			targetElement: '.content_header',
+			t:"频道导航",
+			p:'<div class="pd_list"><ul><li><a href="index.php">首页</a></li><li><a href="index.php?moduleid=6">新房</a></li>><li><a href="index.php?moduleid=5">二手房</a></li><li><a href="index.php?moduleid=7">租房</a></li><li><a href="index.php?moduleid=8">资讯</a></li></ul></div>'
+		})
+	})
+</script>
+	<div class="index">	
+	<div class="search" id="hs"><img src="{AJ_SKIN}images/mobile/index_seach.png"></div>
+	   <script>
+$("#hs").on("click",function(){
+	al({
+		id:'sousuo',
+		t:"房源搜索",
+		animationStart:'block',
+		animationEnd:'none',
+		isBlur:'none',
+			p:'<div id="form_search"><form action="index.php" method="get"><input type="hidden" name="moduleid"  value="6" /><div class="category"><p><span class="theact">新房</span><i></i></p><ul><li><label><input type="radio" name="moduleid" rel="新房" value="6" /> 新房</label></li><li><label><input type="radio" name="cell" rel="租房" value="7" /> 租房</label></li><li><label><input type="radio" name="moduleid" rel="二手房" value="5" /> 二手房</label></li><li><label><input type="radio" name="moduleid" rel="资讯" value="news" /> 资讯</label></li></ul></div><input type="search" class="key" x-webkit-speech="" name="kw" placeholder="请输入关键词"><button type="submit" class="search_ico_red"></button></form></div></div>',
+		of:function(){
+			var $pop=$("#h_pop"),
+				$f=$("#form_search form"),
+				$t=$("#form_search .key");
+			$t[0].oninput=function(){
+				$.ajax({
+					url: "",
+					dataType: 'json',
+					data: $f.serialize(),
+					success:function(data) {
+						if (data.length > 0) {
+							var i = 0;
+							l = data.length,
+							str = "";
+							for (; i < l; i++) {
+								str += '<a href="'+data[i].href+'">' + data[i].name + '</a>';
+							}
+							$pop.html(str);
+						} else {
+							$pop.empty();
+						}
+					}
+				});
+			}
+		}
+	})
+});
+</script>
+		<div id="swipe">
+    <div class="swipe">
+	<!--{php $tags=tag("moduleid=8&condition=status=3 and level=2 and thumb!=''&areaid=$cityid&length=16&order=hits desc&pagesize=5&target=_blank&template=null");}-->
+	{loop $tags $k $t}
+                        <a href="index.php?moduleid=8&amp;itemid={$t[itemid]}" class="fl"><img src="{imgurl($t[thumb])}"/></a>
+                          {/loop}
+             
+    </div>
+    <p>
+                  <i class="on"></i>
+                    <i ></i>
+                    <i ></i>
+                    <i ></i>
+                    <i ></i>
+            </p>
+</div>
+		<nav class="cf">
+			<a href="index.php?moduleid=6">
+				<img src="{AJ_SKIN}images/mobile/ico1.png">新房</a>
+			<a href="index.php?moduleid=5">
+				<img src="{AJ_SKIN}images/mobile/ico3.png">二手房</a>
+			<a href="index.php?moduleid=7">
+				<img src="{AJ_SKIN}images/mobile/ico4.png">租房</a>
+		 <a href="index.php?moduleid=8">
+				<img src="{AJ_SKIN}images/mobile/ico6.png">资讯</a>
+			
+		</nav>		
+		
+		<section class="news_list">
+			<h3>
+				<a href="index.php?moduleid=8" class="a_right">今日头条</a>
+			</h3>
+			<ul><!--{php $tags=tag("moduleid=8&condition=status=3 and level=1&areaid=$cityid&length=40&order=addtime desc&pagesize=6&target=_blank&template=null");}-->
+	{loop $tags $k $t}
+                       <li> <a href="index.php?moduleid=8&amp;itemid={$t[itemid]}" >{$t[title]}</a></li>
+                          {/loop}
+							</ul>
+		</section>
+		<section class="h_list">
+			<h3 id="swipe3a">
+				<a href="javascript:" data-i="0" class="on">新房</a>
+				<i class="l"></i>
+				<a href="javascript:" data-i="1">热门楼盘</a>
+			
+			</h3>
+			<div id="swipe3">
+				<div class="swipe">
+					<div class="fl">
+						<ul class="i_sh_list">
+							<li>
+								<span class="s1">区域</span>
+																<i></i>
+																{php $mainarea = get_mainarea($cityid)}
+									{loop $mainarea $k $v}
+														<a href="index.php?moduleid=6&areaid={$v[areaid]}">{$v[areaname]}</a>
+														 {/loop}
+															</li>
+							<li>
+								<span class="s2">价格</span>	<i></i>
+																{php $range_arr = getbox_name('range','newhouse_6')}
+					    {loop $range_arr $key $v}
+										<a  href="index.php?moduleid=6&p={$key}">{$v}</a>
+										 {/loop}
+															</li>
+							<li>
+								<span class="s3">类型</span>
+																<i></i>
+																 {php $maincat = get_maincat(0,6)}
+						 {loop $maincat $k $v}
+										<a href="index.php?moduleid=6&catid={$v[catid]}">{$v[catname]}</a>
+									  {/loop}
+															</li>
+							<li>
+								<span class="s6">特色</span>
+																<i></i>
+																									{php $lpts_arr = getbox_name('lpts','newhouse_6')}
+					    {loop $lpts_arr $key $v}
+					<a href="index.php?moduleid=6&c={$key}">{$v}</a>{/loop}
+															</li>
+						</ul>
+												<a href="index.php?moduleid=6" class="i_sh_bottom"><span>查看全部楼盘</span></a>
+											</div>
+					<div class="fl">
+						<div class="house_list">	<!--{php $tags=tag("moduleid=6&condition=status=3  and isnew=1 and thumb!=''&areaid=$cityid&length=10&pagesize=3&order=addtime desc&target=_blank&template=null");}-->
+{loop $tags $k $t}
+															<a href="index.php?moduleid=6&amp;itemid={$t[itemid]}">
+									<img src="{imgurl($t[thumb])}">
+									<h5><span class="fr red">{if $t[price]}{$t[price]}元/㎡{else}待定{/if}</span>{$t[title]}</h5>
+									<span class="gray">[{area_poss($t[areaid], ' ')}]</span><br>
+									{dsubstr($t[address], 28, '..')}<br>
+									<span class="red">{dsubstr($t[tedian], 28, '..')}</span>
+								</a>
+										 {/loop}
+													</div>
+												<a href="index.php?moduleid=6" class="i_sh_bottom"><span>查看全部楼盘</span></a>
+											</div>
+				
+										<div class="fl news">
+						<form action="" id="group_join">
+							<input type="hidden" id="gj_h_id" name="id">
+							<input type="text" id="gj_house" placeholder="预约楼盘">
+							<input type="text" id="gj_mobile" name="mobile" placeholder="手机号">
+							<button style="width:120px" class="fr" id="get_code">获取验证码</button>
+							<input style="width:120px" type="text" id="gj_code" name="code" placeholder="验证码">
+							<button type="submit">提交预约</button>
+						</form>
+					</div>
+									</div>
+			</div>
+		</section>
+		<section class="h_list">
+			<h3 id="swipe4a">
+				<a href="javascript:" data-i="0" class="on">二手房</a>
+				<i class="l"></i>
+				<a href="javascript:" data-i="1">个人房源</a>
+				<i class="l"></i>
+				<a href="javascript:" data-i="2">商铺</a>
+			</h3>
+			<div id="swipe4">
+				<div class="swipe">
+					<div class="fl">
+						<ul class="i_sh_list">
+							<li>
+								<span class="s1">区域</span>
+																<i></i>
+																	{php $mainarea = get_mainarea($cityid)}
+									{loop $mainarea $k $v}
+														<a  href="index.php?moduleid=5&areaid={$v[areaid]}">{$v[areaname]}</a>
+														 {/loop}
+																
+							</li>
+							<li>
+								<span class="s2">价格</span>
+																<i></i>
+																{php $range_arr = getbox_name('range','sale_5')}
+					    {loop $range_arr $key $v}
+										<a  href="index.php?moduleid=5&p={$key}">{$v}</a>
+										 {/loop}
+															</li>
+							<li>
+								<span class="s4">面积</span>
+																<i></i>
+														 {php $mianji = array('40平米以下', '40-60平米', '60-80平米', '80-100平米', '100-120平米', '120-150平米','150平米以上');}
+{loop $mianji $k $v} 	<a href="index.php?moduleid=5&c={$k+1}">{$v}</a>
+								 {/loop}
+																
+							</li>
+							<li>
+								<span class="s5">户型</span>
+																{php $huxing = array('一室', '二室', '三室', '四室', '五室以上');}
+{loop $huxing $k $v}	<a href="index.php?moduleid=5&h={$k+1}">{$v}</a>
+								 {/loop}
+															</li>
+						</ul>
+												<a href="index.php?moduleid=5" class="i_sh_bottom"><span>查看全部房源</span></a>
+											</div>
+					<div class="fl">
+						<div class="house_list">
+							<!--{php $tags=tag("moduleid=5&condition=status=3&areaid=$cityid&typeid=0&length=22&pagesize=3&order=addtime desc&target=_blank&template=null");}-->
+ {loop $tags $i $t}
+														<a href="index.php?moduleid=5&amp;itemid={$t[itemid]}">
+								<img src="{imgurl($t[thumb])}">
+								<i class="tag0"></i>
+																<u>个人</u>
+																<h5><span class="fr red">{if $t[price]}{$t[price]}万{else}面议{/if}</span>{$t[title]}</h5>
+								<p><span class="gray">[{area_pos($t[areaid], '')}]</span></p>
+								<p>{if $t[room]}{$t[room]}室{else}待定{/if}{if $t[hall]}{$t[hall]}厅{/if}&nbsp;{$t[houseearm]}平米&nbsp;{$t[floor1]}/{$t[floor2]}层&nbsp;房龄：{$t[houseyear]}年&nbsp;								</p>
+							</a>{/loop}
+													</div>
+												<a href="index.php?moduleid=5&typeid=0" class="i_sh_bottom"><span>查看全部个人房源</span></a>
+											</div>
+					<div class="fl">
+						<div class="house_list">
+													<!--{php $tags=tag("moduleid=5&condition=status=3&areaid=$cityid&catid=10&length=22&pagesize=3&order=addtime desc&target=_blank&template=null");}-->
+ {loop $tags $i $t}
+														<a href="index.php?moduleid=5&amp;itemid={$t[itemid]}">
+								<img src="{imgurl($t[thumb])}">
+								<i class="tag0"></i>
+																
+																<h5><span class="fr red">{if $t[price]}{$t[price]}万{else}面议{/if}</span>{$t[title]}</h5>
+								<p><span class="gray">[{area_pos($t[areaid], '')}]</span></p>
+								<p>{if $t[room]}{$t[room]}室{else}待定{/if}{if $t[hall]}{$t[hall]}厅{/if}&nbsp;{$t[houseearm]}平米&nbsp;{$t[floor1]}/{$t[floor2]}层&nbsp;房龄：{$t[houseyear]}年&nbsp;								</p>
+							</a>{/loop}
+													</div>
+											</div>
+				</div>
+			</div>
+		</section>
+		<section class="h_list">
+				<h3 id="swipe2a">
+				<a href="javascript:" data-i="0" class="on">租房</a>
+				<i class="l"></i>
+				<a href="javascript:" data-i="1">个人房源</a>
+				<i class="l"></i>
+				<a href="javascript:" data-i="2">商铺</a>
+			</h3>
+			<div id="swipe2">
+				<div class="swipe">
+					<div class="fl">
+						<ul class="i_sh_list">
+							<li>
+								<span class="s1">区域</span>
+																<i></i>
+																	{php $mainarea = get_mainarea($cityid)}
+									{loop $mainarea $k $v}
+														<a  href="index.php?moduleid=7&areaid={$v[areaid]}">{$v[areaname]}</a>
+														 {/loop}
+																
+							</li>
+							<li>
+								<span class="s2">价格</span>
+																<i></i>
+																{php $range_arr = getbox_name('range','rent_7')}
+					    {loop $range_arr $key $v}
+										<a  href="index.php?moduleid=7&p={$key}">{$v}</a>
+										 {/loop}
+															</li>
+							<li>
+								<span class="s4">面积</span>
+																<i></i>
+														 {php $mianji = array('40平米以下', '40-60平米', '60-80平米', '80-100平米', '100-120平米', '120-150平米','150平米以上');}
+{loop $mianji $k $v} 	<a href="index.php?moduleid=7&c={$k+1}">{$v}</a>
+								 {/loop}
+																
+							</li>
+							<li>
+								<span class="s5">户型</span>
+																{php $huxing = array('一室', '二室', '三室', '四室', '五室以上');}
+{loop $huxing $k $v}	<a href="index.php?moduleid=7&h={$k+1}">{$v}</a>
+								 {/loop}
+															</li>
+						</ul>
+												<a href="index.php?moduleid=7" class="i_sh_bottom"><span>查看全部房源</span></a>
+											</div>
+					<div class="fl">
+						<div class="house_list">
+							<!--{php $tags=tag("moduleid=7&condition=status=3&areaid=$cityid&typeid=0&length=22&pagesize=3&order=addtime desc&target=_blank&template=null");}-->
+ {loop $tags $i $t}
+														<a href="index.php?moduleid=7&amp;itemid={$t[itemid]}">
+								<img src="{imgurl($t[thumb])}">
+								<i class="tag0"></i>
+																<u>个人</u>
+																<h5><span class="fr red">{if $t[price]}{$t[price]}元/月{else}面议{/if}</span>{$t[title]}</h5>
+								<p><span class="gray">[{area_pos($t[areaid], '')}]</span></p>
+								<p>{if $t[room]}{$t[room]}室{else}待定{/if}{if $t[hall]}{$t[hall]}厅{/if}&nbsp;{$t[houseearm]}平米&nbsp;{$t[floor1]}/{$t[floor2]}层&nbsp;房龄：{$t[houseyear]}年&nbsp;								</p>
+							</a>{/loop}
+													</div>
+												<a href="index.php?moduleid=5&typeid=0" class="i_sh_bottom"><span>查看全部个人房源</span></a>
+											</div>
+					<div class="fl">
+						<div class="house_list">
+													<!--{php $tags=tag("moduleid=7&condition=status=3&areaid=$cityid&catid=15&length=22&pagesize=3&order=addtime desc&target=_blank&template=null");}-->
+ {loop $tags $i $t}
+														<a href="index.php?moduleid=7&amp;itemid={$t[itemid]}">
+								<img src="{imgurl($t[thumb])}">
+								<i class="tag0"></i>
+																
+																<h5><span class="fr red">{if $t[price]}{$t[price]}元/月{else}面议{/if}</span>{$t[title]}</h5>
+								<p><span class="gray">[{area_pos($t[areaid], '')}]</span></p>
+								<p>{if $t[room]}{$t[room]}室{else}待定{/if}{if $t[hall]}{$t[hall]}厅{/if}&nbsp;{$t[houseearm]}平米&nbsp;{$t[floor1]}/{$t[floor2]}层&nbsp;房龄：{$t[houseyear]}年&nbsp;								</p>
+							</a>{/loop}
+													</div>
+											</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	{template 'footer', $TP}
+<script>
+	$("#i_close").on("click",function(){
+		$("#fixed").remove();
+	})
+
+	var $swi=$("#swipe i");
+	swipe = Swipe(document.getElementById('swipe'), {
+		startSlide: 0,
+		auto: 4000,
+		transitionEnd: function(index, element) {
+			var $t=$swi.filter(".on"),
+				l=$swi.length-1;
+			$swi.removeClass("on")
+			if($t.index()==l)
+				$swi.eq(0).addClass("on")
+			else
+				$t.next().addClass("on")
+		}
+	});
+	var $sw2i=$("#swipe2a a").on("click",function(){
+		swipe2.slide($(this).data("i"))
+	});
+	var $sw3i=$("#swipe3a a").on("click",function(){
+		swipe3.slide($(this).data("i"))
+	});
+	var $sw4i=$("#swipe4a a").on("click",function(){
+		swipe4.slide($(this).data("i"))
+	});
+	var swipe2 = Swipe(document.getElementById('swipe2'),{
+		transitionEnd: function(index, element) {
+			$sw2i.removeClass("on").eq(index).addClass("on")
+		}
+	});
+	var swipe3 = Swipe(document.getElementById('swipe3'),{
+		transitionEnd: function(index, element) {
+			$sw3i.removeClass("on").eq(index).addClass("on")
+		}
+	});
+	var swipe4 = Swipe(document.getElementById('swipe4'),{
+		transitionEnd: function(index, element) {
+			$sw4i.removeClass("on").eq(index).addClass("on")
+		}
+	});
+
+$(".i_sh_list").on("click","i",function(){
+	$(this).parent().toggleClass("on")
+})
+$("#group_join").on("submit",function(){
+	if(!$("#gj_h_id").val().length){
+		alert("预约楼盘必须通过下拉列表选择");
+		$("#gj_house").focus();
+	}else if(!/^1[3458]\d{9}$/.test($("#gj_mobile").val())){
+		alert("手机号码格式错误")
+		$("#gj_mobile").focus();
+	}else if(!$("#gj_code").val().length){
+		alert("验证码不得为空")
+		$("#gj_code").focus();
+	}else
+		$.ajax({
+			url:"groupbuy",
+			dataType:"json",
+			data:$("#group_join").serialize(),
+			success:function(data){
+				alert(data.alert)
+				if(data.state=="succ"){
+					$("#gj_house").val("")
+					$("#gj_mobile").val("")
+					$("#gj_code").val("")
+					$("#gj_h_id").val("")
+				}
+			}
+		})
+	return false;
+})
+$("#get_code").on("click",function(){
+	var $t=$(this);
+	if(!/^1[3458]\d{9}$/.test($("#gj_mobile").val())){
+		alert("手机号码格式错误")
+		$("#gj_mobile").focus();
+	}else
+		$.ajax({
+			url:"/getcode.html",
+			dataType:"json",
+			data:{
+				mobile:$("#gj_mobile").val()
+			},
+			success:function(data){
+				if (data.state == "succ") {
+					$t.prop("disabled",true).text("等待120秒");
+					var i = 119;
+					var setin = setInterval(function() {
+						$t.html("等待" + i + "秒")
+						if (--i < 0) {
+							$t.prop("disabled",false).html("获取验证码");
+							clearInterval(setin);
+						}
+					}, 999)
+				}
+			}
+		})
+	return false;
+})
+var $t=$("#gj_house").on("focus",function(){
+	al({
+		t:"选择楼盘",
+		p:'<input type="search" style="width:100%" id="gj_select" x-webkit-speech name="key" placeholder="请输入关键字或拼音"><div id="h_pop2"></div>',
+		of:function(){
+			var $pop=$("#h_pop2").on("click","a",function(){
+					al.remove.call($(".alert"));
+					$("#gj_house").val($(this).text());
+					$("#gj_h_id").val($(this).data("val"))
+				}),
+				$t=$("#gj_select");
+			$t.focus()[0].oninput=function(){
+				$.ajax({
+					url: "hgetname.html",
+					dataType: 'json',
+					data:{
+						key:$t.val()
+					},
+					success:function(data) {
+						if (data.length > 0) {
+							var i = 0;
+							l = data.length,
+							str = "";
+							for (; i < l; i++) {
+								str += '<a href="javascript:" data-val="'+data[i].hid+'">' + data[i].name + '</a>';
+							}
+							$pop.html(str);
+						} else {
+							$pop.empty();
+						}
+					}
+				});
+			}
+		}
+	})
+})
+</script>
+</body>
+</html>

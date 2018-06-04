@@ -1,25 +1,53 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 isset($file) or $file = 'homepage';
 if(isset($update) || isset($preview)) {
 	$db->cids = 1;
 	userclean($username);
 }
-$COM = userinfo($username);
-if(!$COM || ($COM['groupid'] < 5 && $COM['groupid'] > 1)) {
+// $COM = userinfo($username);
+$COM = companyinfo($username);
+// print_r($COM);exit;
+// print_r($username);exit;
+if(!$COM) {
 	userclean($username);
 	$head_title = $L['not_company'];
 	dhttp(404, $AJ_BOT);
 	include template('com-notfound', 'message');
 	exit;
 }
-if(!$COM['edittime'] && !$MOD['openall']) {
-	dhttp(404, $AJ_BOT);
-	$head_title = $COM['company'];
-	include template('com-opening', 'message');
+
+if($member){
+	// print_r($member);exit;
+	$COM = get_userinfo($member);
+	// print_r($COM);exit;
+	if(!$COM) {
+		userclean($username);
+		$head_title = $L['not_company'];
+		dhttp(404, $AJ_BOT);
+		include template('com-notfound', 'message');
+		exit;
+	}
+	$houses = get_houses('newhouse_6',$COM['username']);//新房
+	$sales = get_houses('sale_5',$COM['username']);//二手房
+	$rents = get_houses('rent_7',$COM['username']);//出租
+	// print_r($sales);exit;
+	$file = 'member';
+	include AJ_ROOT.'/module/company/'.$file.'.inc.php';
 	exit;
 }
+// if(!$COM['edittime'] && !$MOD['openall']) {
+// 	dhttp(404, $AJ_BOT);
+// 	$head_title = $COM['company'];
+// 	include template('com-opening', 'message');
+// 	exit;
+// }
+
+//这里查询conpany下的member信息
+$members = get_members($COM['userid']);
+// print_r($members);exit;
 $domain = $COM['domain'];
+// print_r($domain);exit;
 if($domain) {
 	if(!isset($preview) && !isset($update) && !isset($key)) {
 		if($CFG['com_domain']) {
@@ -36,6 +64,8 @@ if($domain) {
 			if(strpos($AJ_URL, $domain) === false) dheader(userurl($username, ($file && $file != 'homepage') ? 'file='.$file : '', $domain));
 		}
 	}
+	// print_r($COM);exit;
+
 	$AJ['rewrite'] = intval($CFG['com_rewrite']);
 }
 $userid = $COM['userid'];
@@ -62,18 +92,18 @@ if($COM['styletime'] && $COM['styletime'] < $AJ_TIME) {//SKIN Expired
 if($clean) userclean($username);
 $COM['year'] = vip_year($COM['fromtime']);
 $COMGROUP = cache_read('group-'.$COM['groupid'].'.php');
-if(!isset($COMGROUP['homepage']) || !$COMGROUP['homepage']) {
-	$head_title = $COM['company'];
-	$head_keywords = $COM['keyword'];
-	$head_description = $COM['introduce'];
-	$member = $COM;
-	$content_table = content_table(4, $userid, is_file(AJ_CACHE.'/4.part'), $AJ_PRE.'company_data');
-	$r = $db->get_one("SELECT content FROM {$content_table} WHERE userid=$userid", 'CACHE');
-	$content = $r['content'];
-	$member['thumb'] = $member['thumb'] ? $member['thumb'] : AJ_SKIN.'image/company.jpg';
-	include template('show', $module);
-	exit;
-}
+// if(!isset($COMGROUP['homepage']) || !$COMGROUP['homepage']) {
+// 	$head_title = $COM['company'];
+// 	$head_keywords = $COM['keyword'];
+// 	$head_description = $COM['introduce'];
+// 	$member = $COM;
+// 	$content_table = content_table(4, $userid, is_file(AJ_CACHE.'/4.part'), $AJ_PRE.'company_data');
+// 	$r = $db->get_one("SELECT content FROM {$content_table} WHERE userid=$userid", 'CACHE');
+// 	$content = $r['content'];
+// 	$member['thumb'] = $member['thumb'] ? $member['thumb'] : AJ_SKIN.'image/company.jpg';
+// 	include template('show', $module);
+// 	exit;
+// }
 $api_map = ($MOD['map'] && $COMGROUP['map']) ? $MOD['map'] : '';
 $api_stats = ($MOD['stats'] && $COMGROUP['stats']) ? $MOD['stats'] : '';
 $api_kf = ($MOD['kf'] && $COMGROUP['kf']) ? $MOD['kf'] : '';
@@ -167,7 +197,11 @@ foreach($side_order as $k=>$v) {
 	}
 	if($side_num[$k] < 1 || $side_num[$k] > 50) $side_num[$k] = 10;
 }
-$HSIDE = $_HSIDE;
+
+// $HSIDE = $_HSIDE;
+//边栏设置
+$HSIDE = array(0=>'网站公告',3=>'联系方式');
+
 $side_pos = isset($HOME['side_pos']) && $HOME['side_pos'] ? 1 : 0;
 $side_width = isset($HOME['side_width']) && $HOME['side_width'] ? $HOME['side_width'] : 200;
 $show_stats = isset($HOME['show_stats']) && $HOME['show_stats'] == 0 ? 0 : 1;
@@ -220,6 +254,7 @@ if($bannert == 2) {
 		$bannert = 0;
 	}
 }
+// print_r("111");exit;
 $bannerw = (isset($HOME['bannerw']) && $HOME['bannerw']) ? intval($HOME['bannerw']) : 960;
 $bannerh = (isset($HOME['bannerh']) && $HOME['bannerh']) ? intval($HOME['bannerh']) : 200;
 $could_comment = $MOD['comment'];
@@ -251,5 +286,7 @@ if(!$AJ_BOT) {
 		$db->query("UPDATE LOW_PRIORITY {$table} SET hits=hits+1 WHERE userid=$userid", 'UNBUFFERED');
 	}
 }
+$MENU = array_slice($MENU,0,4);
+// print_r($file);exit;
 include AJ_ROOT.'/module/company/'.$file.'.inc.php';
 ?>

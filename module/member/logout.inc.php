@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
 require MD_ROOT.'/member.class.php';
@@ -7,6 +7,7 @@ $do->logout();
 $session = new dsession();
 session_destroy();
 $forward = $forward ? linkurl($forward) : AJ_PATH;
+// print_r($forward);exit;
 $action = 'logout';
 $api_msg = $api_url = '';
 if($MOD['passport']) {

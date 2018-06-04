@@ -1,0 +1,68 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="{$back_link}"><span>返回</span></a></div></td>
+<td><div class="head_name"><a href="{$head_link}"><span>{$head_name}</span></a></div></td>
+<td class="head_bar_td_w55 t_r"><a href="index.php?moduleid={$moduleid}&amp;action=category"><img src="image/sort.png" width="40" height="40" alt="行业分类"/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="main">
+{if $itemid}
+	<div class="title"><strong>{$title}</strong></div>
+	<div class="info">日期:<small>{$editdate}</small>&nbsp;&nbsp;点击:<small>{$hits}</small></div>
+	{if $user_status == 3}
+	<div class="album">
+	<table>
+	<tr>
+	<td class="album_p" onclick="photo_prev();">&nbsp;</td>
+	<td><div id="album"><img src="{$P[middle]}" id="photo"/></div></td>
+	<td class="album_n" onclick="photo_next();">&nbsp;</td>
+	</tr>
+	<tr>
+	<td></td>
+	<td class="t_c">
+	<span id="photo_page">{$page}</span> / {$items}
+	</td>
+	<td></td>
+	</tr>
+	</table>
+	</div>
+	<div style="display:none;">
+	{loop $T $i $p}
+	<div id="image_{$i}">{$p[middle]}</div>
+	<div id="intro_{$i}">{$p[introduce]}</div>
+	{/loop}
+	</div>
+	<script type="text/javascript">
+	var cur = {$page};
+	var max = {$items};
+	</script>
+	<script type="text/javascript" src="image/photo.js"></script>
+	<div class="content">
+	<div id="photo_intro">{$P[introduce]}</div>
+	</div>
+	{else}
+	{template 'chip-content', $TP}
+	{/if}
+	<div class="content">{$content}</div>
+{else}
+	{loop $lists $v}
+	<div class="listimg">
+	<a href="index.php?moduleid={$moduleid}&amp;itemid={$v[itemid]}"><img src="{if $v[thumb]}{$v[thumb]}{else}image/nopic.png{/if}" width="75" height="55" alt=""/></a>
+	<ul>
+	<li><a href="index.php?moduleid={$moduleid}&amp;itemid={$v[itemid]}"><strong>{$v[title]}</strong></a></li>
+	<li><span>{$v[items]} 张图片</span></li>
+	<li><em>{$v[date]}</em></li>
+	</ul>
+	</div>
+	{/loop}
+{/if}
+	{if $pages}<div class="pages">{$pages}</div>{/if}
+	{template 'chip-search', $TP}
+</div>
+{template 'footer', $TP}

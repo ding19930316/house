@@ -1,6 +1,20 @@
 <?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
+
+//拼音检索
+if($_POST['pingyin'])
+{
+	$result = $db->query("select * from aijiacms_company where 1");
+	while($r = $db->fetch_array($result)) {
+		$tags[] = array_merge($r);
+	}
+	foreach($tags as $v){
+		$nar[] = $v['company'];
+	}
+	echo json_encode($nar);
+	exit;
+}
 // print_r($_GET);exit;
 $keyword = $_POST['keyword'];
 $condition = array();
@@ -8,8 +22,10 @@ $mods = array(
 	'company',
 	'member',
 	'newhouse_6',//小区
-	'rent_7'
+	'rent_7',
+	'sale_5'
 );
+// print_r($_GET);exit;
 
 // $result = $db->query("SELECT * FROM `aijiacms_company` ,`aijiacms_member`  WHERE 1 ");
 // // print_r($result);exit;
@@ -42,40 +58,39 @@ foreach ($mods as $mod_item) {
 // unset($CAT['moduleid']);
 // extract($CAT);
 // $maincat = get_maincat($child ? $catid : $parentid, $moduleid);
-//==========================================================================
-
+// ==========================================================================
+//
 // $condition = "groupid>5 ";
-
-//==========================================================================
-// $param = $_GET['param'];
-// 	if(!empty($param)&&stristr($param,'-')!=false)
-// 	{
-// 		$param_arr = explode('-', $param);
-// 		foreach($param_arr as $_v) {
-// 				if($_v)
-// 				{
-// 					if(preg_match ( '/([a-z])([0-9_]+)/', $_v, $matchs))
-// 					{
-// 						$$matchs[1] = trim($matchs[2]);
-// 					}
-// 				}
-// 			}
-// 	    $areaid = $r;
-// 		$ord = $n;
-// 		$source = $u;
-// 		$page = $g;
-// 	}
-// 	else
-// 	{
+//
+// ==========================================================================
+$param = $_GET['param'];
+	if(!empty($param)&&stristr($param,'-')!=false)
+	{
+		$param_arr = explode('-', $param);
+		foreach($param_arr as $_v) {
+				if($_v)
+				{
+					if(preg_match ( '/([a-z])([0-9_]+)/', $_v, $matchs))
+					{
+						$$matchs[1] = trim($matchs[2]);
+					}
+				}
+			}
+	    $areaid = $r;
+		$ord = $n;
+		$source = $u;
+		$page = $g;
+	}
+	else
+	{
 //==========================================================================
 
  	$areaid = intval($_GET['r']);
 	$ord = intval($_GET['n']);
 	$page = intval($_GET['g']);
 	$source = intval($_GET['u']);
-	$keyword = trim($_POST['keyword']);
 	$k = trim($_GET['k']);
-	// }
+	}
 	if($keyword !='')
 	{
 		// print_r('111');exit;
@@ -150,16 +165,19 @@ if($items) {
 		switch ($mod_item) {
 			case 'company':
 				// $sql[] = "select * from $table WHERE {$condition[$table]}";
-				$sql[] = "select company as title,company,telephone,areaid,address from $table WHERE {$condition[$table]}";
+				$sql[] = "select userid as id,company as title,company,telephone,areaid,address,'$table' as modtype from $table WHERE {$condition[$table]}";
 				break;
 			case 'member':
-				$sql[] = "select username as title,company,mobile as telephone,areaid,address from $table WHERE {$condition[$table]}";
+				$sql[] = "select userid as id,truename as title,company,mobile as telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";
 				break;
 			case 'newhouse_6':
-				$sql[] = "select title,company,telephone,areaid,address from $table WHERE {$condition[$table]}";
+				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";
 				break;
 			case 'rent_7':
-				$sql[] = "select title,company,telephone,areaid,address from $table WHERE {$condition[$table]}";
+				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";
+				break;
+			case 'sale_5':
+				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";
 				break;
 			default:
 				// code...
@@ -170,7 +188,7 @@ if($items) {
 	// print_r($sql);exit;
 	$result = $db->query($sql);
 	while($r = $db->fetch_array($result)) {
-		$tags[] = array_merge($r,array('mod'=>$mod_item));
+		$tags[] = $r;
 	}
 }
 // print_r($tags);exit;

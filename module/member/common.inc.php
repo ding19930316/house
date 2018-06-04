@@ -1,9 +1,11 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 if($AJ_BOT) dhttp(403);
 define('MD_ROOT', AJ_ROOT.'/module/'.$module);
+// print_r($_edittime);exit;
 require MD_ROOT.'/global.func.php';
 require AJ_ROOT.'/include/module.func.php';
+// print_r($_edittime);exit;
 if(defined('AJ_ADMIN')) {
 	$GROUP = cache_read('group.php');
 } else {

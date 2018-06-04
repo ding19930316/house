@@ -1,0 +1,14 @@
+{template 'header', $TP}
+<div class="nav">
+<a href="index.php">首页</a> >
+<a href="index.php?moduleid={$moduleid}">{$MOD[name]}</a> >
+提示信息 >
+</div>
+<div class="main">
+<span style="color:red;">{$msg}</span>
+{if $forward}
+<br/>
+<meta http-equiv="refresh" content="2;URL={$forward}">
+<a href="{$forward}">点击跳转</a>
+{/if}
+{template 'footer', $TP}

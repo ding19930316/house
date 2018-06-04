@@ -6,8 +6,9 @@
 // print_r($member);exit;
 require 'common.inc.php';
 $username = $domain = '';
-if(isset($homepage) && check_name($homepage)) {
+if(isset($homepage)) {
 	$username = $homepage;
+	// print_r($username);exit;
 } else if(!$cityid) {
 	$host = get_env('host');
 	if(substr($host, 0, 4) == 'www.') {
@@ -34,10 +35,12 @@ if(isset($homepage) && check_name($homepage)) {
 		}
 	}
 }
+// print_r($username);exit;
 if($username) {
 	$moduleid = 4;
 	$module = 'company';
-	$MOD = cache_read('module-'.$moduleid.'.php');
+	// $MOD = cache_read('module-'.$moduleid.'.php');
+	// print_r($module);exit;
 	include load('company.lang');
 	require AJ_ROOT.'/module/'.$module.'/common.inc.php';
 	include AJ_ROOT.'/module/'.$module.'/init.inc.php';
@@ -75,21 +78,23 @@ $xiqoqu = get_xiqoqu(0);
 	// 	// code...
 	// }
 	//中介等人员信息
-	$query = "select * from aijiacms_company limit 0,40";
+	$query = "select * from aijiacms_company order by level desc limit 0,40";//这里做名次
 	$result = $db->query($query, 'CACHE', 0);
 	while($r = $db->fetch_array($result)) {
 		$members_r[] = $r;
 	}
-	$members_m = array_slice($members_r,0,3);
+	$members_m = array_slice($members_r,0,4);
 
-	foreach ($tags1 as $tagskey => $tagsvalue) {
-		$query = "SELECT * FROM aijiacms_newhouse_6 WHERE username='{$tagsvalue['username']}' ORDER BY level desc,editdate desc,vip desc,edittime desc LIMIT 0,12";
+	foreach ($members_m as $tagskey => $tagsvalue) {
+		$members_houses[$tagsvalue['company']] = array();
+		// print_r("SELECT * FROM aijiacms_member WHERE companyid='{$tagsvalue['userid']}' LIMIT 0,8");exit;
+		$query = "SELECT * FROM aijiacms_member WHERE companyid='{$tagsvalue['userid']}' LIMIT 0,8";
 		$result = $db->query($query, 'CACHE', 0);
 		while($r = $db->fetch_array($result)) {
-			$members_houses[$tagsvalue['truename']][] = $r;
+			$members_houses[$tagsvalue['company']][] = $r;
 		}
 	}
-
+	// print_r($members_houses);exit;
 	$query = "select * from aijiacms_newhouse_6 WHERE 1 ORDER BY level desc,editdate desc,vip desc,edittime desc LIMIT 0,12";
 	$result = $db->query($query, 'CACHE', 0);
 	while($r = $db->fetch_array($result)) {

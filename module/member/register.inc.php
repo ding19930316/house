@@ -34,8 +34,8 @@ if($could_emailcode) {
 	if($action == $action_sendcode) {
 		$email = isset($value) ? trim($value) : '';
 		if(!is_email($email)) exit('2');
-		if($do->email_exists($email)) exit('3');
-		if(!$do->is_email($email)) exit('4');
+		if($do->email_exists($email)) exit('3');//是否存在email
+		if(!$do->is_email($email)) exit('4');//是否是email格式
 		isset($_SESSION['email_send']) or $_SESSION['email_send'] = 0;
 		if($_SESSION['email_time'] && $AJ_TIME - $_SESSION['email_time'] < 60) exit('5');
 		if($_SESSION['email_send'] > 9) exit('6');
@@ -60,7 +60,7 @@ if($could_mobilecode) {
 		$mobile = isset($value) ? trim($value) : '';
 		if(!is_mobile($mobile)) exit('2');
 		isset($_SESSION['mobile_send']) or $_SESSION['mobile_send'] = 0;
-		if($do->mobile_exists($mobile)) exit('3');
+		if($do->mobile_exists($mobile)) exit('3');//验证电话是否存在
 		if($_SESSION['mobile_time'] && $AJ_TIME - $_SESSION['mobile_time'] < 180) exit('5');
 		if($_SESSION['mobile_send'] > 4) exit('6');
 
@@ -83,6 +83,7 @@ isset($post_fields) or $post_fields = array();
 if($MFD || $CFD) require AJ_ROOT.'/include/fields.func.php';
 $GROUP = cache_read('group.php');
 if($submit) {
+			// print_r($post);exit;
 	if($action != crypt_action('register')) dalert($L['check_sign'].'(1)');
 	$post['passport'] = isset($post['passport']) && $post['passport'] ? $post['passport'] : $post['username'];
 	if($MOD['passport'] == 'uc') {
@@ -91,10 +92,10 @@ if($submit) {
 		list($uid, $rt_username, $rt_password, $rt_email) = uc_user_login($passport, $post['password']);
 		if($uid == -2) dalert($L['register_msg_passport'], '', 'parent.Dd("passport").focus();');
 	}
-	$msg = captcha($captcha, $MOD['captcha_register'], true);
-	if($msg) dalert($msg);
-	$msg = question($answer, $MOD['question_register'], true);
-	if($msg) dalert($msg);
+	// $msg = captcha($captcha, $MOD['captcha_register'], true);
+	// if($msg) dalert($msg);
+	// $msg = question($answer, $MOD['question_register'], true);
+	// if($msg) dalert($msg);
 	$post['email'] = trim($post['email']);
 	if($_SESSION['regemail'] != md5(md5($post['email'].AJ_KEY.$AJ_IP))) dalert($L['check_sign'].'(2)');
 	$RG = array();
@@ -110,18 +111,26 @@ if($submit) {
 	if($could_mobilecode) {
 		if(!preg_match("/[0-9]{6}/", $post['mobilecode']) || $_SESSION['mobile_code'] != md5($post['mobile'].'|'.$post['mobilecode'])) dalert($L['register_pass_mobilecode'], '', $reload_captcha.$reload_question);
 	}
+	// print_r($post);exit;
 	if($post['regid'] == 5) $post['company'] = $post['truename'];
 	$post['groupid'] = $MOD['checkuser'] ? 4 : $post['regid'];
 	$post['content'] = $post['introduce'] = $post['thumb'] = $post['banner'] = $post['catid'] = $post['catids'] = '';
 	$post['edittime'] = 0;
 	$inviter = get_cookie('inviter');
+
 	$post['inviter'] = $inviter ? decrypt($inviter) : '';
+	// print_r($post);exit;
+	if($post['rlcompany'] !=""){
+		$do->companyid = $post['companyid'] = $do->company_exists($post['rlcompany'])['userid'];
+	}
 	if($do->add($post)) {
 		$userid = $do->userid;
 		$username = $post['username'];
 		$email = $post['email'];
 		if($MFD) fields_update($post_fields, $do->table_member, $userid, 'userid', $MFD);
 		if($CFD) fields_update($post_fields, $do->table_company, $userid, 'userid', $CFD);
+		// print_r($post_fields);exit;
+
 		if($MOD['passport'] == 'uc') {
 			$uid = uc_user_register($passport, $post['password'], $post['email']);
 			if($uid > 0 && $MOD['uc_bbs']) uc_user_regbbs($uid, $passport, $post['password'], $post['email']);

@@ -1,0 +1,28 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="{$back_link}"><span>返回</span></a></div></td>
+<td><div class="head_name"><a href="{$head_link}"><span>{$head_name}</span></a></div></td>
+<td class="head_bar_td_w55 t_r"><a href="./"><img src="image/home.png" width="40" height="40" alt="首页"/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="main">
+{if $itemid}
+	<div class="title"><strong>{$title}</strong></div>
+	<div class="info">更新日期:<small>{$editdate}</small>&nbsp;&nbsp;点击:<small>{$hits}</small></div>
+	<div class="content">{$content}</div>
+{else}
+	<ul class="listtxt">
+	{loop $lists $v}
+	<li><a href="index.php?action={$action}&amp;itemid={$v[itemid]}"><strong>{$v[title]}</strong></a></li>
+	{/loop}
+	</ul>
+{/if}
+	{if $pages}<div class="pages">{$pages}</div>{/if}
+</div>
+{template 'footer', $TP}

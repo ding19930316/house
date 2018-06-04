@@ -1,49 +1,53 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 $could_inquiry = check_group($_groupid, $MOD['group_inquiry']);
 if($username == $_username || $domain) $could_inquiry = true;
 $moduleid = 6;
 $module = 'newhouse';
-$MOD = cache_read('module-'.$moduleid.'.php');
+// $MOD = cache_read('module-'.$moduleid.'.php');
 $table = $AJ_PRE.$module.'_'.$moduleid;
 $table_data = $AJ_PRE.$module.'_data_'.$moduleid;
 if($itemid) {
-	$item = $db->get_one("SELECT * FROM {$table} WHERE itemid=$itemid");
-	if(!$item || $item['status'] < 3 || $item['username'] != $username) dheader($MENU[$menuid]['linkurl']);
-	unset($item['template']);
-	extract($item);
-	$CAT = get_cat($catid);
-	$content_table = content_table($moduleid, $itemid, $MOD['split'], $table_data);
-	$t = $db->get_one("SELECT content FROM {$content_table} WHERE itemid=$itemid");
-	$content = $t['content'];
-	$CP = $MOD['cat_property'] && $CAT['property'];
-	if($CP) {
-		require AJ_ROOT.'/include/property.func.php';
-		$options = property_option($catid);
-		$values = property_value($moduleid, $itemid);
-	}
-	$adddate = timetodate($addtime, 5);
-	$editdate = timetodate($edittime, 5);
-	$todate = $totime ? timetodate($totime, 3) : 0;
-	$expired = $totime && $totime < $AJ_TIME ? true : false;
-	$linkurl = $MOD['linkurl'].$linkurl;
-	$thumbs = get_albums($item);
-	$albums =  get_albums($item, 1);
-	$album_js = 1;
-	$amount = number_format($amount, 0, '.', '');
-	$inquiry_url = $MODULE[4]['linkurl'].'home.php?action=message&job=inquiry&&itemid='.$itemid.'&template='.$template.'&skin='.$skin.'&title='.rawurlencode($title).'&username='.$username.'&sign='.crypt_sign($itemid.$template.$skin.$title.$username);
-	$order_url = $MODULE[4]['linkurl'].'home.php?action=message&job=order&&itemid='.$itemid.'&template='.$template.'&skin='.$skin.'&title='.rawurlencode($title).'&username='.$username.'&sign='.crypt_sign($itemid.$template.$skin.$title.$username);
-	$update = '';
-	include AJ_ROOT.'/include/update.inc.php';
-	$head_canonical = $linkurl;
-	$head_title = $title.$AJ['seo_delimiter'].$head_title;
-	$head_keywords = $keyword;
-	$head_description = $introduce ? $introduce : $title;
+	// print_r($itemid);exit;
+	dheader($CFG['url'].'house/show.php/itemid-'.$itemid.'/');
+	// header("Location: $CFG['url'].'house/show.php/itemid-'.$itemid");
+	// exit;
+	// $item = $db->get_one("SELECT * FROM {$table} WHERE itemid=$itemid");
+	// if(!$item || $item['status'] < 3 || $item['username'] != $username) dheader($MENU[$menuid]['linkurl']);
+	// unset($item['template']);
+	// extract($item);
+	// $CAT = get_cat($catid);
+	// $content_table = content_table($moduleid, $itemid, $MOD['split'], $table_data);
+	// $t = $db->get_one("SELECT content FROM {$content_table} WHERE itemid=$itemid");
+	// $content = $t['content'];
+	// $CP = $MOD['cat_property'] && $CAT['property'];
+	// if($CP) {
+	// 	require AJ_ROOT.'/include/property.func.php';
+	// 	$options = property_option($catid);
+	// 	$values = property_value($moduleid, $itemid);
+	// }
+	// $adddate = timetodate($addtime, 5);
+	// $editdate = timetodate($edittime, 5);
+	// $todate = $totime ? timetodate($totime, 3) : 0;
+	// $expired = $totime && $totime < $AJ_TIME ? true : false;
+	// $linkurl = $MOD['linkurl'].$linkurl;
+	// $thumbs = get_albums($item);
+	// $albums =  get_albums($item, 1);
+	// $album_js = 1;
+	// $amount = number_format($amount, 0, '.', '');
+	// $inquiry_url = $MODULE[4]['linkurl'].'home.php?action=message&job=inquiry&&itemid='.$itemid.'&template='.$template.'&skin='.$skin.'&title='.rawurlencode($title).'&username='.$username.'&sign='.crypt_sign($itemid.$template.$skin.$title.$username);
+	// $order_url = $MODULE[4]['linkurl'].'home.php?action=message&job=order&&itemid='.$itemid.'&template='.$template.'&skin='.$skin.'&title='.rawurlencode($title).'&username='.$username.'&sign='.crypt_sign($itemid.$template.$skin.$title.$username);
+	// $update = '';
+	// include AJ_ROOT.'/include/update.inc.php';
+	// $head_canonical = $linkurl;
+	// $head_title = $title.$AJ['seo_delimiter'].$head_title;
+	// $head_keywords = $keyword;
+	// $head_description = $introduce ? $introduce : $title;
 } else {
 	$typeid = isset($typeid) ? intval($typeid) : 0;
 	$view = isset($view) ? 1 : 0;
 	$url = "file=$file";
-	$condition = "username='$username' AND status=3";
+	$condition = "company='$username' AND status=3";
 	if($typeid) {
 		$MTYPE = get_type('product-'.$userid);
 		$condition .= " AND mycatid='$typeid'";
@@ -63,12 +67,16 @@ if($itemid) {
 	if(!$pagesize || $pagesize > 100) $pagesize = 16;
 	if($view) $pagesize = ceil($pagesize/2);
 	$offset = ($page-1)*$pagesize;
+	// print_r($condition);exit;
 	$r = $db->get_one("SELECT COUNT(*) AS num FROM {$table} WHERE $condition", 'CACHE');
 	$items = $r['num'];
+	// print_r($items);exit;
 	$pages = home_pages($items, $pagesize, $demo_url, $page);
 	$lists = array();
 	if($items) {
-		$result = $db->query("SELECT ".$MOD['fields']." FROM {$table} WHERE $condition ORDER BY edittime DESC LIMIT $offset,$pagesize");
+		$result = $db->query("SELECT * FROM {$table} WHERE $condition ORDER BY edittime DESC LIMIT $offset,$pagesize");
+		// print_r("SELECT ".$MOD['fields']." FROM {$table} WHERE $condition ORDER BY edittime DESC LIMIT $offset,$pagesize");
+		// exit;
 		while($r = $db->fetch_array($result)) {
 			$r['alt'] = $r['title'];
 			$r['title'] = set_style($r['title'], $r['style']);
@@ -79,6 +87,7 @@ if($itemid) {
 			}
 			$lists[] = $r;
 		}
+		// print_r($lists);exit;
 		$db->free_result($result);
 	}
 }

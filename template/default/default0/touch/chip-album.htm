@@ -1,0 +1,22 @@
+<div class="album">
+<table>
+<tr>
+<td class="album_p" onclick="album_prev();">&nbsp;</td>
+<td><div id="album"><img src="{str_replace('.thumb.', '.middle.', $thumb)}" id="photo"/></div></td>
+<td class="album_n" onclick="album_next();">&nbsp;</td>
+</tr>
+<tr>
+<td></td>
+<td class="t_c">
+<span class="album_c" id="dot_0" style="display:none;" onclick="album_show(0);">&nbsp;</span>
+<span class="album_o" id="dot_1" style="display:none;" onclick="album_show(1);">&nbsp;</span>
+<span class="album_o" id="dot_2" style="display:none;" onclick="album_show(2);">&nbsp;</span>
+</td>
+<td></td>
+</tr>
+</table>
+</div>
+<script type="text/javascript">
+var TB = ['{str_replace('.thumb.', '.middle.', $thumb)}', '{str_replace('.thumb.', '.middle.', $thumb1)}', '{str_replace('.thumb.', '.middle.', $thumb2)}'];
+</script>
+<script type="text/javascript" src="image/album.js"></script>

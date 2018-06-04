@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 $could_inquiry = check_group($_groupid, $MOD['group_inquiry']);
 if($username == $_username || $domain) $could_inquiry = true;
@@ -43,7 +43,8 @@ if($itemid) {
 	$typeid = isset($typeid) ? intval($typeid) : 0;
 	$view = isset($view) ? 1 : 0;
 	$url = "file=$file";
-	$condition = "username='$username' AND status=3";
+	// print_r($username);exit;
+	$condition = "company='$username' AND status=3";
 	if($typeid) {
 		$MTYPE = get_type('product-'.$userid);
 		$condition .= " AND mycatid='$typeid'";
@@ -64,11 +65,11 @@ if($itemid) {
 		}
 	if($p == 2){
 			$condition.=" AND price>=30  AND price<50";
-			
+
 		}
 	if($p == 3){
 			$condition.=' AND 50<=price AND price<80';
-			
+
 		}
 	if($p== 4){
 			$condition.=' AND 80<=price AND price<100';
@@ -90,7 +91,7 @@ if($itemid) {
 			$condition.=" AND houseearm>40  AND houseearm<60";}
 	if($a == 3){
 			$condition.=' AND 60<=houseearm AND houseearm<80';
-			
+
 		}
 	if($a== 4){
 			$condition.=' AND 80<=houseearm AND houseearm<100';
@@ -112,7 +113,7 @@ if($itemid) {
 			$condition.=" AND room=2";}
 	if($r == 3){
 			$condition.=' AND room=3';
-			
+
 		}
 	if($r== 4){
 			$condition.=' AND room=4';

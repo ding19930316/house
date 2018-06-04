@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 login();
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
@@ -22,7 +22,7 @@ switch($action) {
 			} else {
 				message($do->errmsg);
 			}
-		} else {		
+		} else {
 			$addtime = timetodate($AJ_TIME);
 			$head_title = $L['link_title_add'];
 		}
@@ -65,6 +65,7 @@ switch($action) {
 		$head_title = $L['link_title'];
 	break;
 }
+// print_r($condition);exit;
 $nums = array();
 $limit_used = 0;
 for($i = 2; $i < 4; $i++) {

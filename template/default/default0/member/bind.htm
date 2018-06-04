@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset={AJ_CHARSET}"/>
+<title>帐号绑定</title>
+<script type="text/javascript" src="{AJ_STATIC}lang/{AJ_LANG}/lang.js"></script>
+<script type="text/javascript" src="{AJ_STATIC}file/script/config.js"></script>
+<script type="text/javascript" src="{AJ_STATIC}file/script/jquery.js"></script>
+<script type="text/javascript" src="{AJ_STATIC}file/script/common.js"></script>
+<script type="text/javascript" src="{AJ_STATIC}file/script/page.js"></script>
+<style>
+* {word-break:break-all;font-family:Verdana,Arial;}
+body {margin:0;font-size:12px;color:#333333;background:#FFFFFF;}
+input,select,textarea,td {font-size:12px;}
+img {border:none;}
+ul li {list-style-type:none;}
+ol li {list-style-type:decimal;}
+ul,form {margin:0px;padding:0px;}
+a:link,a:visited,a:active {color:#1C6797;text-decoration:none;}
+a:hover {color:#FF6600;}
+.m {width:560px;margin:auto;}
+.t {border-bottom:#EEEEEE 1px solid;padding:20px 0 0 0;}
+.u {padding:15px 0 0 6px;border-top:#CCCCCC 1px dotted;}
+.l {background:#E2F4FF;padding:20px;margin:0 85px 0 85px;}
+.r {background:#E2F4FF;padding:20px;margin:0 85px 0 85px;text-align:center;}
+.i {width:150px;font-size:13px;}
+</style>
+</head>
+<body>
+<div class="m">
+	<br/>
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+	<td><a href="{$MODULE[1][linkurl]}"><img src="{if $AJ[logo]}{$AJ[logo]}{else}{AJ_SKIN}image/logo.png{/if}" alt="{$AJ[sitename]}"/></a></td>
+	<td width="70" align="center"><img src="{if $avatar}{$avatar}{else}{AJ_PATH}api/oauth/avatar.png{/if}" width="50"/></td>
+	<td>来自 <img src="{AJ_PATH}api/oauth/{$site}/ico.png" align="absmiddle"/> {$OAUTH[$site][name]} 的 {if $url}<a href="{$url}" target="_blank">{/if}<strong style="color:#1C6797;">{if $nickname}{$nickname}{else}用户{/if}</strong>{if $url}</a>{/if}，您好!<div style="padding-top:5px;">现在可以连接 <span style="color:#FF6600;">{$AJ[sitename]}</span> 了</div></td>
+	</tr>
+	</table>
+
+	<br/>
+	<div class="u"><strong>已经是会员：</strong>使用已有用户名连接</div>
+	<br/>
+	
+	<div class="l">
+	<form method="post" action="{$MODULE[2][linkurl]}{$AJ[file_login]}"  onsubmit="return Dcheck();">
+	<input name="forward" type="hidden" id="forward" value="{$forward}">
+	<table cellpadding="3" cellspacing="4" width="100%">
+	<tr>
+	<td align="right">户名或邮件：</td>
+	<td>
+	<input name="username" type="text" id="username" class="i"/>
+	</td>
+	</tr>
+	<tr>
+	<td align="right">密 码：</td>
+	<td>
+	<input name="password" type="password" id="password" class="i"/>
+	<a href="send.php">&nbsp;忘记了密码？</a>
+	</td>
+	</tr>
+	{if $MOD[captcha_login]}
+	<tr>
+	<td align="right">验证码：</td>
+	<td>{template 'captcha', 'chip'}</td>
+	</tr>
+	{/if}
+	<tr>
+	<td width="80"> </td>
+	<td>
+	<input type="submit" name="submit" value=" 绑 定 "/>&nbsp;&nbsp;
+	<input type="button" value=" 取 消 " onclick="Go('{$MODULE[1][linkurl]}');"/>
+	</td>
+	</tr>
+	</table>
+	</form>	
+	</div>
+	<br/><br/>
+
+	<div class="u"><strong>还不是会员：</strong>创建新用户</div>
+	<br/>
+
+	<div class="r">
+	<input type="button" value="创建新用户并绑定" onclick="Go('{$MODULE[2][linkurl]}{$AJ[file_register]}?forward={$forward}');"/>
+	</div>		
+</div>
+<script type="text/javascript">
+function Dcheck() {
+	if(Dd('username').value == '') {
+		confirm('请输入您在{$AJ[sitename]}的户名或邮件');
+		Dd('username').focus();
+		return false;
+	}
+	if(Dd('password').value == '') {
+		confirm('请输入您在{$AJ[sitename]}的密码');
+		Dd('password').focus();
+		return false;
+	}
+{if $MOD[captcha_login]}
+	if(!is_captcha(Dd('captcha').value)) {
+		confirm('请填写验证码');
+		Dd('captcha').focus();
+		return false;
+	}
+{/if}
+}
+</script>
+</body>
+</html>

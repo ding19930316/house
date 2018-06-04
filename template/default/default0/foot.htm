@@ -1,0 +1,24 @@
+<div class="clear"></div>
+<div id="foot" style="padding-bottom:20px;">
+  <div class="footer" id="webpage">
+  <p class="hui">
+		<a href="{$MODULE[1][linkurl]}">网站首页</a>
+		<!--{tag("table=webpage&condition=item=1&areaid=$cityid&order=listorder desc,itemid desc&template=list-webpage")}-->
+		| <a href="{$MODULE[1][linkurl]}sitemap/">网站地图</a>
+		{if $EXT[guestbook_enable]} | <a href="{$EXT[guestbook_url]}">网站留言</a>{/if}
+		{if $EXT[ad_enable]} | <a href="{$EXT[ad_url]}">广告服务</a>{/if}
+		{if $EXT[gift_enable]} | <a href="{$EXT[gift_url]}">积分换礼</a>{/if}
+		{if $EXT[feed_enable]} | <a href="{$EXT[feed_url]}">RSS订阅</a>{/if}
+		
+	<br /> 
+  {$AJ[copyright]}
+  <br /> 
+  <span>{if $AJ[icpno]} <a href="http://www.miibeian.gov.cn" target="_blank">{$AJ[icpno]}</a>{/if}</span>
+  </p>
+  </div>
+</div>
+  </div>
+</div>
+<script type="text/javascript">show_task('{$aijiacms_task}');</script>
+</body>
+</html>

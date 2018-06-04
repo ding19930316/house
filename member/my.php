@@ -3,6 +3,7 @@ require 'config.inc.php';
 require '../common.inc.php';
 if($AJ_BOT) dhttp(403);
 if(!$_userid  &&  $mid!=16) dheader($MODULE[2]['linkurl'].'publish.php');
+// print_r($mid);exit;
 if($mid) {
 	$group_editor = $MG['editor'];
 	in_array($group_editor, array('Default', 'Aijiacms', 'Simple', 'Basic')) or $group_editor = 'Aijiacms';
@@ -11,7 +12,8 @@ if($mid) {
 	$show_oauth = $MST['oauth'];
 	$show_menu = $MST['show_menu'] ? true : false;
 	if(!$_userid) $action = 'add';//Guest
-	if($_groupid > 5 && !$_edittime && $action == 'add') dheader('edit.php?tab=2');
+	// print_r($_edittime);exit;
+	// if($_groupid > 5 && !$_edittime && $action == 'add') dheader('edit.php?tab=2');
 	if($_groupid > 4 && (($MST['vemail'] && $MG['vemail']) || ($MST['vmobile'] && $MG['vmobile']) || ($MST['vtruename'] && $MG['vtruename']) || ($MST['vcompany'] && $MG['vcompany']))) {
 		$V = $db->get_one("SELECT vemail,vmobile,vtruename,vcompany FROM {$AJ_PRE}member WHERE userid=$_userid");
 		if($MST['vemail'] && $MG['vemail']) {
@@ -27,6 +29,7 @@ if($mid) {
 			$V['vcompany'] or dheader('validate.php?action=company&itemid=1');
 		}
 	}
+	// print_r("111");exit;
 	if($_credit < 0 && $MST['credit_less'] && $action == 'add') dheader('credit.php?action=less');
 	if($submit) {
 		check_post() or dalert($L['bad_data']);//safe
@@ -63,18 +66,21 @@ if($mid) {
 	if($mid == 9 && isset($resume)) $vid = -9;
 	if(!$MYMODS || !in_array($vid, $MYMODS)) message('', $MODULE[2]['linkurl'].$AJ['file_my']);
 
-	$IMVIP = isset($MG['vip']) && $MG['vip']; 
-	$moduleid = $mid;
+	$IMVIP = isset($MG['vip']) && $MG['vip'];
+	$moduleid = $mid;//mid
 	$module = $MODULE[$moduleid]['module'];
 	if(!$module) message();
 	$MOD = cache_read('module-'.$moduleid.'.php');
 	$my_file = AJ_ROOT.'/module/'.$module.'/my.inc.php';
 	if(is_file($my_file)) {
+		// print_r($my_file);exit;
+
 		require $my_file;
 	} else {
 		dheader($MODULE[2]['linkurl']);
 	}
 } else {
+	// print_r("111");exit;
 	require AJ_ROOT.'/module/'.$module.'/my.inc.php';
 }
 ?>

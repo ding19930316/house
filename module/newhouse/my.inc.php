@@ -1,14 +1,22 @@
-<?php 
+<?php
+// print_r("111");exit;
 defined('IN_AIJIACMS') or exit('Access Denied');
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
-$MG['sell_limit'] > -1 or dalert(lang('message->without_permission_and_upgrade'), 'goback');
+// print_r("111");exit;
+
+// $MG['sell_limit'] > -1 or dalert(lang('message->without_permission_and_upgrade'), 'goback');
+// print_r("111");exit;
+
 $MTYPE = get_type('product-'.$_userid);
+// print_r("111");exit;
+
 require AJ_ROOT.'/include/post.func.php';
 include load($module.'.lang');
 include load('my.lang');
 require MD_ROOT.'/newhouse.class.php';
+// print_r("111");exit;
 $do = new newhouse($moduleid);
-
+// print_r("1111");exit;
 if(in_array($action, array('add', 'edit'))) {
 	$FD = cache_read('fields-'.substr($table, strlen($AJ_PRE)).'.php');
 	if($FD) require AJ_ROOT.'/include/fields.func.php';
@@ -50,6 +58,7 @@ switch($action) {
 		$could_color = check_group($_groupid, $MOD['group_color']) && $MOD['credit_color'] && $_userid;
 
 		if($submit) {
+			// print_r($post);exit;
 			if($fee_add && $fee_add > ($fee_currency == 'money' ? $_money : $_credit)) dalert($L['balance_lack']);
 			if($need_password && !is_payword($_username, $password)) dalert($L['error_payword']);
 
@@ -72,8 +81,10 @@ switch($action) {
 			if($msg) dalert($msg);
 			$msg = question($answer, $need_question, true);
 			if($msg) dalert($msg);
+			// print_r("1111");exit;
 
 			if($do->pass($post)) {
+				print_r("1111");exit;
 				$CAT = get_cat($post['catid']);
 				if(!$CAT || !check_group($_groupid, $CAT['group_add'])) dalert(lang($L['group_add'], array($CAT['catname'])));
 				if($MOD['upload_thumb'] && $MG['upload'] && strlen($post['thumb']) < 5) dalert($L['sell_upload_image']);
@@ -111,7 +122,7 @@ switch($action) {
 						credit_add($_username, -$fee_add);
 						credit_record($_username, -$fee_add, 'system', lang($L['credit_record_add'], array($MOD['name'])), 'ID:'.$do->itemid);
 					}
-				}				
+				}
 				$msg = $post['status'] == 2 ? $L['success_check'] : $L['success_add'];
 				$js = '';
 				if(isset($post['sync_sina']) && $post['sync_sina']) $js .= sync_weibo('sina', $moduleid, $do->itemid);
@@ -227,7 +238,7 @@ switch($action) {
 				if($MOD['credit_refresh']) $_credit = $_credit - $MOD['credit_refresh'];
 			} else {
 				$f++;
-			}			
+			}
 		}
 		if($MOD['credit_refresh'] && $s) {
 			$credit = $s*$MOD['credit_refresh'];
@@ -267,5 +278,6 @@ if($_userid) {
 	}
 	$nums[0] = count($MTYPE);
 }
+// print_r('my_'.$module);exit;
 include template($MOD['template_my'] ? $MOD['template_my'] : 'my_'.$module, 'member');
 ?>

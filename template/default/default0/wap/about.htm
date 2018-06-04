@@ -1,0 +1,16 @@
+{template 'header', $TP}
+<div class="nav">
+<a href="index.php">首页</a> >
+<a href="index.php?action={$action}">关于网站</a> >
+</div>
+<div class="main">
+{if $itemid}
+	<strong>{$title}</strong><br/>
+	{$content}
+{else}
+	{loop $lists $v}
+	&middot;<a href="index.php?action={$action}&amp;itemid={$v[itemid]}">{$v[title]}</a><br/>
+	{/loop}
+{/if}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+{template 'footer', $TP}

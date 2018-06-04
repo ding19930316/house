@@ -112,10 +112,86 @@ GoMobile('<?php echo $head_mobile;?>');
 </div>
 </div>
   <h3 class="sub-title">
-专做客户做不了、划不来、不愿做的事
+寻找中介、快速定位中介
 </h3>
   <div class="wrapper"><div class="notice-bar"><i class="i left"></i><!--<span class="label left"><a target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>">最新成交</a></span>--><div class="list-wrap left"><ul id="slide-news"></ul></div></div></div></div>
-  <section class="list-banner" mod-id="lj-home-nav-3-content">
+  <style media="screen">
+  .link-box {
+    background: #f8f8f8;
+    padding: 40px 0 50px 0;
+    font-size: 12px;
+    font-family: "Microsoft YaHei",微软雅黑,"Hiragino Sans GB",Tahoma,Arial,"\5b8b\4f53",SimSun,sans-serif;
+  }
+  .link-box .main{
+    width: 1030px;
+    margin: 0 auto;
+    padding: 30px 0;
+  }
+  .link-list li {
+    width: 246px;
+    text-align: center;
+    margin-right: 145px;
+    display: list-item;
+    float:left;
+  }
+  .link-list a {
+    display: block;
+    color: #323942;
+    text-decoration: none;
+  }
+  .link-list h3{
+    line-height: 40px;
+    font-size: 24px;
+    margin-top: 30px;
+    font-weight: normal;
+  }
+  .link-list p{
+    line-height: 30px;
+    font-size: 14px;
+    color: #8e99a9;
+  }
+  .link-icon {
+    width: 90px;
+    height: 90px;
+    display: inline-block;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    background: url(static/images/ind-icon.png) no-repeat;
+  }
+  .link-icon1 {
+    background-position: 0 0;
+  }
+  .link-icon2{
+    background-position: 0 -96px;
+  }
+  .link-icon3{
+    background-position: 0 -192px;
+  }
+  .link-icon4 {
+    background-position: 0 -288px;
+  }
+  .no-margin-r{
+    margin-right:0px !important;
+  }
+  </style>
+  <div class="link-box">
+      <div class="main">
+          <ul class="link-list clear">
+              <li>
+                  <a href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=1" target="_blank" ><span class="link-icon link-icon1"></span><h3>中介注册</h3><p>已有所属公司,快速认领所属公司。</p></a>
+              </li>
+              <li>
+                  <a href="/jingjiren" target="_blank"><span class="link-icon link-icon3"></span><h3>经纪人注册</h3><p>经纪人填写个人信息,快速注册。</p></a>
+              </li>
+              <li class="no-margin-r">
+                  <a href="/owner" target="_blank" ><span class="link-icon link-icon4"></span><h3>个人注册</h3><p>快速注册,填写个人信息。</p></a>
+              </li>
+          </ul>
+      </div>
+  </div>
+  <!-- <section class="list-banner" mod-id="lj-home-nav-3-content">
   <div class="wrapper">
   <ul class="clear">
   <li class="banner-1">
@@ -125,9 +201,9 @@ GoMobile('<?php echo $head_mobile;?>');
 </li>、
   <li class="banner-2"><h3 class="shadow">经纪人注册</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=2"><div class="foot-ico foot-ico-2"></div><div class="ico-fix ico-fix-2"></div></a></li>
   <li class="banner-3"><h3 class="shadow">个人注册</h3><a class="coner" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>member/register.php?regtype=3"><div class="foot-ico foot-ico-3"></div><div class="ico-fix ico-fix-3"></div></a></li>
-  </ul></div></section>
+  </ul></div></section> -->
         <?php $tags=tag("moduleid=5&condition=status=3 and thumb<>''&areaid=$cityid&length=22&pagesize=10&order=addtime desc&target=_blank&template=null");?>
-<section class="rent" style="border-bottom: 1px solid #d9d9d9;"><div class="wrapper">
+<section class="rent" style="border-bottom: 1px solid #d9d9d9;background-color:#fff"><div class="wrapper">
   <style type="text/css">
 /* css 重置 */
 *{margin:0; padding:0; list-style:none; }
@@ -136,31 +212,86 @@ img{ border:0;  }
 a{ text-decoration:none; color:#333;  }
 a:hover{ color:#1974A1;  }
 /* 本例子css */
-.slideTxtBox{ border:1px solid #ddd; text-align:left; border-radius:5px; }
-.slideTxtBox .hd{ height:30px; line-height:30px;  position:relative; }
-.slideTxtBox .hd ul{ float:left;  position:absolute; top:-1px;  }
-.slideTxtBox .hd ul li{ float:left;     text-align: center;}
-.slideTxtBox .hd ul li.on{ background:#fff; border:1px solid #ddd; border-bottom:2px solid #fff; color:#000}
-.slideTxtBox .bd ul{ padding:15px;  zoom:1;  }
-.slideTxtBox .bd li{ height:24px; line-height:24px;   }
-.slideTxtBox .bd li .date{ float:right; color:#999;  }
+.slideTxtBox{height:auto}
+.hd{
+  width:100%;
+  height: 48px;
+  padding-left: 1px;
+  /* background: url(../image/menubg.gif); */
+  margin-bottom: 30px !important;
+}
 .hd li{
   float: left;
-  width: 300px;
+  width: 24.8%;
   height: 46px;
   margin-top: 1px;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 46px;
   border-right: 1px solid #e2e2e2;
   text-align: center;
   background: #f1f1f1;
   cursor: pointer;
 }
+.hd li:nth-child(1){
+  border-left:1px solid #e2e2e2;
+}
 .hd li.on{
+  width: 25%;;
   height: 46px;
+  line-height: 46px;
+  font-size: 18px;
   border-top: 2px solid #065fb9;
   color: #065fb9;
   background: #FFFFFF;
+}
+.bd{
+  width: 100%;
+  height: auto;
+}
+.bd li{
+  float: left;
+  width: 20%;
+  height: auto;
+  padding: 20px 14px 10px;
+  border: 1px solid #e2e2e2;
+  margin-right: 28px;
+  position: relative;
+}
+.bd li:nth-child(4n){
+  margin-right: 0px;
+}
+.bd li:nth-child(n+5){
+  margin-top: 30px;
+}
+.bd li div.imgbar{
+  width: 180px;
+  height: 30px;
+  line-height: 40px;
+  padding: 0 10px;
+  position: absolute;
+  top: 212px;
+  z-index: 100;
+  font-size: 16px;
+  z-index: 100;
+  font-weight: bold;
+  color: #FFFFFF;
+  overflow: hidden;
+  background: #000000;
+  opacity: 0.5;
+}
+.bd li div.imgtxt{
+  width: 180px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  position: absolute;
+  top: 208px;
+  z-index: 100;
+  font-size: 16px;
+  z-index: 100;
+  font-weight: bold;
+  color: white;
+  overflow: hidden;
 }
 .x4{
   width:220px;
@@ -168,50 +299,55 @@ a:hover{ color:#1974A1;  }
   display: inline-block;
 }
 .x2{
-  margin-top: 30px;
-  padding:10px;
-  display: inline-block;
-  width: 22.5%;
-  text-align: center;
-  background: white;
-  box-shadow: 0px 2px 5px #CCC;
-  outline: 1px solid #DDD;
+  float: left;
+  width: 20%;
+  height: 300px;
+  padding: 20px 14px 10px;
+  border: 1px solid #e2e2e2;
+  margin-right: 28px;
+  position: relative;
+}
+.x2:nth-child(n+5){
+    margin-top: 30px;
+}
+.x2:nth-child(4n){
+    margin-right: 0px;
 }
 .x2 img{
   margin:0px auto;
-  width: 100%;
-  height: 280px;
 }
 </style>
 <h3 class="sub-title" style="color: #333;">
-  房源推荐
+  优秀中介推荐
 </h3>
 <div class="slideTxtBox">
   <div class="hd">
     <ul>
-      <!-- {foreach name=foreach_name key=k item=v from=$tags1}
-        <li><?php echo $v['truename'];?></li>
-      {/foreach} -->
-      <?php if(is_array($members_m)) { foreach($members_m as $k => $t) { ?>
-      <li><?php echo $t['company'];?></li>
-      <?php } } ?>
+      <?php foreach($members_houses as $k =>$v){?>
+        <li><?php echo $k;?></li>
+      <?}?>
     </ul>
   </div>
   <div class="bd">
-    <?php if(is_array($members_m)) { foreach($members_m as $k => $t) { ?>
-      <div class="height:500px">
-        <div class="x2">
-          <a href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
-            <img src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $t['username'];?>&size=large" alt="" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
-          </a>
-          <div class="" style="text-align:left;white-space:nowrap;padding:5px;">
-            <p>所属公司：<a href="<?php echo userurl(get_agent($t['companyid']), '');?>" target="_blank"><?php echo $t['company'];?></a></p>
-            <!-- <p class="num_house">房源：<a href="<?php echo userurl($t['username'], '');?>" target="_blank">售(<?php echo get_num('sale_5',$t['username']);?>)</a> <a href="<?php echo userurl($t['username'], '');?>" target="_blank">租(<?php echo get_num('rent_7',$t['username']);?>)</a></p> -->
-            <p>电话：<?php echo $t['telephone'];?></p>
-          </div>
-        </div>
-      </div>
-    <?php } } ?>
+    <?php foreach($members_houses as $k =>$v){?>
+      <ul style= "min-height:600px">
+        <?php foreach($v as $t){
+          $url = $MODULE[1][linkurl]."index.php?homepage=".$k."&member=".$t['userid'];
+          ?>
+          <li>
+            <a href="<?php echo $url;?>" title="<?php echo $t['truename']?>" target="_blank">
+              <img style="width:200px;height:222px" src="http://img2.efw.cn/news/201804/20180416113800153102.jpg" alt="<?php echo $t['truename']?>">
+            </a>
+            <div class="imgbar"></div>
+            <div class="imgtxt">
+              <a href="<?php echo $url;?>" style="color:white;" title="" target="_blank"><?php echo $t['truename']?></a>
+            </div>
+            <div class="text1"><span class="fl fb">电话:<?php echo $t['mobile']?></span></div>
+            <!-- <div class="imgyouhui"><a href="" title="品牌实木地板 保养极好" target="_blank">品牌实木地板 保养极好</a></div> -->
+          </li>
+        <?}?>
+      </ul>
+    <?}?>
     <!-- {foreach from=$tags key=num item="book"}
       <li class="x4">
         <?php echo $book['title'];?>
@@ -239,16 +375,15 @@ a:hover{ color:#1974A1;  }
   <h3 class="sub-title" style="color: #333;">
     其他推荐
   </h3>
-  <div class="" style="margin:0 -10px;">
+  <div>
     <?php if(is_array($members_r)) { foreach($members_r as $k => $t) { ?>
       <div class="x2">
-        <a href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
-          <img src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $t['username'];?>&size=large" alt="" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
+        <a href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['company'];?>">
+          <img style="width:200px;height:222px" src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $t['username'];?>&size=large" alt="" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
         </a>
         <div class="" style="text-align:left;white-space:nowrap;padding:5px;">
-          <p>所属公司：<a href="<?php echo userurl(get_agent($t['companyid']), '');?>" target="_blank"><?php echo $t['company'];?></a></p>
-          <!-- <p class="num_house">房源：<a href="<?php echo userurl($t['username'], '');?>" target="_blank">售(<?php echo get_num('sale_5',$t['username']);?>)</a> <a href="<?php echo userurl($t['username'], '');?>" target="_blank">租(<?php echo get_num('rent_7',$t['username']);?>)</a></p> -->
           <p>电话：<?php echo $t['telephone'];?></p>
+          <p style="word-break: normal;white-space:normal">所属公司：<a href="<?php echo userurl(get_agent($t['companyid']), '');?>" target="_blank"><?php echo $t['company'];?></a></p>
         </div>
       </div>
     <?php } } ?>

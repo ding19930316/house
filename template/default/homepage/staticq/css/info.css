@@ -1,0 +1,122 @@
+/*------布局------*/
+#Content{width:980px;margin:15px auto 0;overflow:hidden}#Left{float:left;width:745px;overflow:hidden}#Right{float:left;width:220px;margin-left:15px;overflow:hidden}
+
+/*------图标------*/
+.JSQ,.Tel,.YuYue,.FaSong,.JuBao,.ShouCang,.ButtonY,.Back,.IconMap,.Yes,.No{background:url('../images/infoicon.gif') no-repeat}
+.telicon2{background:url('../images/infoicon2.gif') no-repeat;float:left;background-position:left -104px;width:275px;color:#8e1a13;font-size:28px;height:61px;padding-left:67px;line-height:45px;margin:15px 5px 10px;font-family:Arial,Microsoft YaHei,SimHei;letter-spacing:1px;font-weight:bold;-webkit-text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;-moz-text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;*filter: Glow(Color=#fff, Strength=1)}
+
+.YuYue,.FaSong,.JuBao,.ShouCang{height:25px;line-height:25px;overflow:hidden;display:block;float:left;font-family:SimSun;font-size:12px;padding-left:30px;margin:0 8px}
+.YuYue{background-position:-316px 0}.FaSong{background-position:-316px -25px}.JuBao{background-position:-316px -50px}.ShouCang{background-position:-316px -75px}
+.JSQ{background-position:-212px 5px;padding-left:7px;margin:0 3px 0 20px}.Back{background-position:-175px -40px;padding-left:13px;font-size:12px}.IconMap{background-position:-224px 1px;padding-left:12px;margin-left:10px;cursor:pointer;}
+.IconSF,.IconZF,.IconHZ,.IconQG,.IconQZ{width:70px;height:70px;background:url(../images/infoclass.gif) no-repeat;position:absolute;left:0;top:0}
+.IconSF{background-position:left 0}.IconQG{background-position:left -70px}.IconZF{background-position:left -140px}.IconHZ{background-position:left -210px}.IconQZ{background-position:left -280px}
+
+/*------概况------*/
+#BasicInfo,.MoreInfo{padding:15px 10px;border:1px solid #e1e4eb;position:relative;font-size:14px}
+#BasicInfo,#UserInfo{background:url('../images/infobg.gif') repeat-x}
+#BasicInfo h1{width:658px;height:45px;padding-left:30px;line-height:45px;font-size:24px;text-align:center;font-family:Microsoft YaHei,SimHei;color:#ee0000}
+#BasicInfo .Time{margin:5px 10px 20px 215px;color:#999;font-size:12px;float:left}
+#BasicInfo .Photo{float:left;width:352px;height:327px;overflow:hidden}
+#BasicInfo .Text{float:right;width:355px;overflow:hidden;font-family:Microsoft YaHei,SimHei}
+#BasicInfo .Text ul{float:left;width:355px;padding-top:5px}
+#BasicInfo .Text li{float:left;width:100%;line-height:37px;font-size:16px;border-bottom:1px dashed #ccc}
+#BasicInfo .Tel{float:left;background-position:left -104px;width:275px;color:#8e1a13;font-size:28px;height:61px;padding-left:67px;line-height:45px;margin:15px 5px 10px;font-family:Arial,Microsoft YaHei,SimHei;letter-spacing:1px;font-weight:bold;-webkit-text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;-moz-text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;text-shadow:#fff 1px 0 0,#fff 0 1px 0,#fff -1px 0 0,#fff 0 -1px 0;*filter: Glow(Color=#fff, Strength=1)}
+#BasicInfo .Menu{margin-left:5px}
+
+/*------图片切换------*/
+.Photo div {overflow:hidden;}
+.Photo .pTop{height:6px; background-image:url(../images/ica_01.gif)}
+.Photo .pMainL{height:255px; width:6px; background-image:url(../images/ica_02.gif); float:left;}
+.Photo .pMainR{height:255px; width:6px; background-image:url(../images/ica_04.gif); float:right;}
+.Photo .pMainC{height:255px; width:340px; float:left;}
+.Photo .pMainC img{width:340px; height:255px;}
+.Photo .pLine{height:5px; background-image:url(../images/ica_05.gif)}
+.Photo .pListL{height:54px; width:6px; background-image:url(../images/ica_06.gif); float:left;}
+.Photo .pListR{height:54px; width:6px; background-image:url(../images/ica_10.gif); float:left;}
+.Photo .pListBtnL{height:54px; width:12px; background-image:url(../images/ica_07.gif); float:left;}
+.Photo .pListBtnR{height:54px; width:12px; background-image:url(../images/ica_09.gif); float:left;}
+.Photo .pListC{height:54px; width:316px; float:left;}
+.Photo .pListC li {width:72px; height:54px; float:left; margin-left:6px;}
+.Photo .pBottom{height:7px; background-image:url(../images/ica_11.gif)}
+
+/*------详情------*/
+.MoreInfo{padding:10px 15px;margin-top:15px; clear:both;}
+.MoreInfo .Text{line-height:160%;padding:5px;}
+.MoreInfo .Text span{line-height:160%;}
+.MoreInfo .Nav{border-bottom:2px solid #409ced;margin-bottom:10px;height:30px}
+.MoreInfo .Nav li{float:left;padding:0 16px;line-height:30px;color:#fff;background:url(../images/index2.gif) right 8px no-repeat}
+.MoreInfo .Nav .current{border:1px solid #409ced;padding:0px 16px;line-height:30px;border-radius:3px 3px 0 0;background:#409ced;font-weight:bold}
+
+/*------配套------*/
+#PeiTao{margin:15px auto 10px;padding:8px 15px;border:1px solid #ffd6ac;background:#fffff0;height:20px}
+#PeiTao li{float:left;width:50px;height:25px;padding-left:20px;line-height:25px}
+#PeiTao .Yes{background-position:-241px 4px;padding-left:20px;height:19px}
+#PeiTao .No{background-position:-241px -20px;padding-left:20px;height:19px}
+
+/*------发布人------*/
+#UserInfo{height:415px;padding:15px 10px;border:1px solid #e1e4eb;text-align:center}
+#UserInfo .Face{width:100px;height:133px;margin-top:10px;padding:2px;border:1px solid #ccc}
+#UserInfo .Name{font-weight:bold;font-size:14px;color:#0066cc;padding:5px;line-height:30px}
+#UserInfo .Message{margin:10px 0;padding-bottom:20px;border-bottom:1px dashed #ccc}
+#UserInfo .Contact{padding:0 10px;margin-bottom:10px;line-height:30px;text-align:left}
+#UserInfo .ButtonY{width:112px;height:30px;margin-left:35px;line-height:30px;display:block;background-position:-60px -26px;font-size:16px;text-align:center;margin-top:10px}
+
+/*------小区------*/
+#ZonePic{height:auto; clear:both; float:left;}#ZonePic li{float:left}
+#ZonePic li img{width:160px;height:120px;margin-right:12px;padding:2px;border:1px solid  #e1e4eb}
+
+/*------小区详情页------*/
+#ZoneTop,#Zone{overflow:hidden;position:relative}
+#ZoneTop .BG{height:50px;border-bottom:1px solid #ccc;}
+#ZoneTop h2{padding-left:15px;line-height:50px;font-size:26px;font-family:Microsoft Yahei,SimHei;color:#000}
+#ZoneTop .ZoneNav{height:36px;position:absolute;right:10px;bottom:0}
+#ZoneTop .ZoneNav li{float:left;font-size:14px;height:34px;margin-right:10px;padding:0 15px;line-height:34px;border:1px solid #ccc;border-bottom:0;background:#f8f8f8}
+#ZoneTop .ZoneNav .On{border-top:2px solid #1f6ecd;background:#FFF;font-weight:bold}
+
+#Zone .Slider{float:left;width:475px;height:360px;overflow:hidden}
+#Zone .Basic {float:right;width:460px;font-size:14px;color:#666;margin-top:15px}
+#Zone .Basic li{padding:5px 0}
+#Zone .Basic .House{padding:5px 0;border:1px solid #ffd6ac;background:#fffff0;text-align:center}
+#Zone .Map{padding-left:15px;background:url('../images/iconlist.gif') no-repeat -27px -171px;color:#ff6600 !important}
+
+#ZoneInfo{background:#e1e4eb;width:100%}#ZoneInfo td{background:#fff}
+#ZoneInfo .TdTit{background:#f1f6ff !important;text-align:center}
+
+.Box .Agent li{float:left;border-bottom:1px dashed #ccc;padding:15px 0}
+.Box .Agent li a{font-size:14px;font-weight:bold;color:#0066cc}
+.Box .Agent .Face{float:left;width:60px;height:80px;padding:0 10px;overflow:hidden}
+.Box .Agent .Info{float:right;width:138px;line-height:20px;overflow:hidden}
+.Box .Agent .Star{margin:3px 0}
+.Box .How{padding:5px;text-align:center;background:#fffff0;overflow:hidden;font-size:14px;font-family:Microsoft YaHei,SimHei}
+
+/*------底部浮动------*/
+.KongBai{height:80px;float:left}
+#Floating{width:100%;position:fixed;height:80px;background:#008ae5;bottom:0;left:0;z-index:1000;color:#fff;font-family:Microsoft YaHei,SimHei;_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,0)||0)-(parseInt(this.currentStyle.marginBottom,0)||0)))}
+#Floating .Link{margin:10px 0 8px;font-size:16px;text-align:center}
+#Floating .Info{float:left;font-size:18px}
+#Floating .Contact{float:right}#Floating .Body .Contact a{float:left;margin:0 30px}
+#Floating .Mobile{width:226px;height:26px;background:#ef7c1d;padding:2px;display:block;float:right}
+#Floating .Mobile .Number{width:130px;height:21px;border:0;line-height:21px;padding:2px 8px;color:#999;font-size:14px;float:left}
+#Floating .Mobile .Button{background:none;border:0;line-height:26px;color:#fff;width:75px;height:26px;cursor:pointer;font-size:16px}
+
+/*-------弹出层------*/
+.Shadow { position:fixed; top:0; left:0; background-color:#000; height:100px; width:100%; display:none; z-index:998;}
+#ShowBox { z-index:999;position:fixed; top:0; display:none;}
+.validIco {display:none; margin:2px;width:24px;}
+
+
+.yjbu{
+float: right;
+    height: 21px;
+    line-height: 20px;
+    border: 1px solid #ff6666;
+    border-radius: 2px;
+    color: #ff6666;
+    font-size: 12px;
+    padding: 0 6px;
+    overflow: hidden;
+    display: block;
+	margin-top:8px;
+	}
+	
+	.yjbu:visited,.yjbu:link,.yjbu:visited:hover{ color:#ff6666 !important}

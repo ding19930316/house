@@ -65,7 +65,7 @@ GoMobile('<?php echo $head_mobile;?>');
                     <a href="<?php echo AJ_PATH;?>api/city.php" id="city_c">更改城市<i></i></a>
                 </div> <?php } ?>
 <a href="<?php echo $MODULE['1']['linkurl'];?>map" target="_blank" class="i_smap">地图找房</a>
-<form id="i_search" method="post" target="_blank" autocomplete="off" action="">
+<form id="i_search" method="post" target="_blank" autocomplete="off" action="<?php echo $MODULE['1']['linkurl'];?>company/list.html">
 <div  style = "display:none" class="search_item" data-type="<?php echo $MODULE[$searchid]['moduledir'];?>"><span><?php echo $MODULE[$searchid]['name'];?></span><s><i></i><u></u></s></div>
 <ul  style = "display:none"  class="search_item_list none">
 <?php $searchids = array(6,5,7,8,14,16,13);?>

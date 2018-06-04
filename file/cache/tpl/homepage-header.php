@@ -1,108 +1,179 @@
-<?php defined('IN_AIJIACMS') or exit('Access Denied');?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=<?php echo AJ_CHARSET;?>"/>
-<title><?php if($seo_title) { ?><?php echo $seo_title;?><?php } else { ?><?php if($head_title) { ?><?php echo $head_title;?><?php echo $AJ['seo_delimiter'];?><?php } ?>
-<?php echo $COM['company'];?><?php } ?>
-</title>
-<?php if($head_keywords) { ?><meta name="keywords" content="<?php echo $head_keywords;?>"/><?php } ?>
-<?php if($head_description) { ?><meta name="description" content="<?php echo $head_description;?>"/><?php } ?>
-<meta name="generator" content="AIJIACMS HOUSE - www.aijiacms.com"/>
-<meta name="template" content="<?php echo $template;?>"/>
-<?php if($head_mobile) { ?>
-<meta http-equiv="mobile-agent" content="format=xhtml; url=<?php echo $head_mobile;?>"> 
-<meta http-equiv="mobile-agent" content="format=html5; url=<?php echo $head_mobile;?>">
-<?php } ?>
-<link rel="stylesheet" type="text/css" href="<?php echo AJ_STATIC;?><?php echo $MODULE['4']['moduledir'];?>/skin/common.css"/>
-<link rel="stylesheet" type="text/css" href="<?php echo $HSPATH;?>style.css"/>
-<?php if(!AJ_DEBUG) { ?><script type="text/javascript">window.onerror= function(){return true;}</script><?php } ?>
-<script type="text/javascript" src="<?php echo AJ_STATIC;?>lang/<?php echo AJ_LANG;?>/lang.js"></script>
-<script type="text/javascript">
-var DTPath = '<?php echo AJ_PATH;?>';
-var SKPath = '<?php echo AJ_SKIN;?>';
-var EXPath = '<?php echo $MODULE['3']['linkurl'];?>';
-var DTTour = '<?php echo $MODULE['4']['linkurl'];?>tour.php';
-<?php if($itemid && $AJ['anticopy']) { ?>
-document.oncontextmenu=function(e){return false;};
-document.onselectstart=function(e){return false;};
-<?php } ?>
-<?php if(!$domain && AJ_DOMAIN) { ?>
-if(window.location.href.indexOf('<?php echo AJ_DOMAIN;?>') != -1){document.domain = '<?php echo AJ_DOMAIN;?>';}
-<?php } ?>
-</script>
-<script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/homepage.js"></script>
+<?php defined('IN_AIJIACMS') or exit('Access Denied');?><!--大话插件加载-->
+<script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/jquery.js"></script>
+<script type="text/javascript" src="static/dahua/jquery.SuperSlide.2.1.1.js"></script>
+<!--大话插件加载end-->
 <?php if($css) { ?><style type="text/css"><?php echo $css;?></style><?php } ?>
-</head>
-<body<?php if($bgcolor || $background) { ?> style="background:<?php if($bgcolor) { ?><?php echo $bgcolor;?> <?php } ?>
-<?php if($background) { ?>url('<?php echo $background;?>') no-repeat center 0<?php } ?>
-;"<?php } ?>
->
-<div class="m"><div class="top" id="top"><a href="<?php echo $COM['linkurl'];?>" title="<?php echo $COM['company'];?>" rel="sidebar" onclick="window.external.addFavorite(this.href, this.title);return false;">收藏本页</a> | <a href="<?php echo $COM['linkurl'];?>" onclick="javascript:try{this.style.behavior='url(#default#homepage)';this.setHomePage(location.href);}catch(e){}return false;">设为主页</a> | <a href="javascript:Go(DTTour);">随便看看</a><?php if($EXT['wap_enable']) { ?> | <a href="javascript:Go('<?php echo $EXT['wap_url'];?>index.php?moduleid=4&username=<?php echo $username;?>');">手机版</a><?php } ?>
-</div></div>
-<div class="m">
-<div class="sign">
-<?php if($COM['vip']) { ?>
-<div><strong><?php echo $COM['year'];?></strong><span title="指数满分为10"><?php echo $COM['vip'];?></span></div>
-<?php } else { ?>
-<img src="<?php echo AJ_STATIC;?><?php echo $MODULE['4']['moduledir'];?>/image/free_bg.gif" alt="普通会员"/>
-<?php } ?>
+<link rel="stylesheet" rev="stylesheet" href="template/default/homepage/static/css/slick.css" type="text/css" />
+<link rel="stylesheet" rev="stylesheet" href="template/default/homepage/static/css/ershou_web_broker_broker.css" type="text/css" />
+<style media="screen">
+.comrow{
+    padding: 20px;
+    border: 1px solid #ebebeb;
+    overflow: hidden;
+width: 1200px;
+height: 260px;
+margin: 0 auto;
+border: none;
+}
+.left{
+float: left;
+width: 500px;
+height: 100%;
+padding: 20px;
+}
+.right{
+float: right;
+    width: 600px;
+margin-top:20px;
+}
+.right p{
+width: 100%;
+font-size: 14px;
+height: 30px;
+line-height: 30px;
+overflow: hidden;
+margin:0px;
+}
+strong{
+color: #666;
+font-weight: bold;
+}
+.comrow-bot{
+height: auto;
+position: relative;
+}
+</style>
+<div class="comrow">
+<div class="left">
+<style type="text/css">
+/* css 重置 */
+*{margin:0; padding:0; list-style:none; }
+body{ background:#fff; font:normal 12px/22px 宋体;  }
+img{ border:0;}
+a{ text-decoration:none; color:#333;  }
+/* 本例子css */
+.slideBox{ width:450px; height:230px; overflow:hidden; position:relative; border:1px solid #ddd;  }
+.slideBox .hd{ height:15px; overflow:hidden; position:absolute; right:5px; bottom:5px; z-index:1; }
+.slideBox .hd ul{ overflow:hidden; zoom:1; float:left;  }
+.slideBox .hd ul li{ float:left; margin-right:2px;  width:15px; height:15px; line-height:14px; text-align:center; background:#fff; cursor:pointer; }
+.slideBox .hd ul li.on{ background:#f00; color:#fff; }
+.slideBox .bd{ position:relative; height:100%; z-index:0;   }
+.slideBox .bd li{ zoom:1; vertical-align:middle; }
+.slideBox .bd img{ width:450px; height:230px; display:block;  }
+/* 下面是前/后按钮代码，如果不需要删除即可 */
+.slideBox .prev,
+.slideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(images/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+.slideBox .next{ left:auto; right:3%; background-position:8px 5px; }
+.slideBox .prev:hover,
+.slideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
+.slideBox .prevStop{ display:none;  }
+.slideBox .nextStop{ display:none;  }
+</style>
+<div id="slideBox" class="slideBox">
+<div class="hd">
+<ul><li>1</li><li>2</li><li>3</li></ul>
 </div>
-<div class="head">
-<?php if($logo) { ?><div class="logo"><a href="<?php echo $COM['linkurl'];?>"><img src="<?php echo $logo;?>" alt="<?php echo $COM['company'];?>" onload="if(this.width>300)this.width=300;"/></a></div><?php } ?>
-<div>
-<h1><?php echo $COM['company'];?></h1>
-<h4><?php echo dsubstr($COM['business'], $logo ? 60 : 80, '...');?></h4>
-</div>
-</div>
-</div>
-<div class="m">
-<div class="menu" id="menu"<?php if(count($MENU)>8) { ?> style="height:60px;"<?php } ?>
->
+<div class="bd">
 <ul>
-<li class="<?php if($file=='homepage') { ?>menu_on<?php } else { ?>menu_li<?php } ?>
-"><a href="<?php echo $COM['linkurl'];?>"><span>网站首页</span></a></li>
-<?php if(is_array($MENU)) { foreach($MENU as $k => $v) { ?>
-<li class="<?php if($file==$menu_file[$k]) { ?>menu_on<?php } else { ?>menu_li<?php } ?>
-"><a href="<?php echo $v['linkurl'];?>"><span><?php echo $v['name'];?></span></a></li>
-<?php } } ?>
+<li><a href="http://www.SuperSlide2.com" target="_blank"><img src="images/pic1.jpg" /></a></li>
+<li><a href="http://www.SuperSlide2.com" target="_blank"><img src="images/pic2.jpg" /></a></li>
+<li><a href="http://www.SuperSlide2.com" target="_blank"><img src="images/pic3.jpg" /></a></li>
 </ul>
 </div>
+<!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+<a class="prev" href="javascript:void(0)"></a>
+<a class="next" href="javascript:void(0)"></a>
 </div>
-<?php if($bannert || $banner) { ?>
-<div class="m">
-<div class="banner">
-<?php if($bannert == 2) { ?>
 <script type="text/javascript">
-var config = '5|0xFFFFFF|0x333333|80|0xFAFAFA|0x333333|0x000000';
-var files = "<?php echo $banner1;?>|<?php echo $banner2;?><?php if($banner3) { ?>|<?php echo $banner3;?><?php } ?>
-<?php if($banner4) { ?>|<?php echo $banner4;?><?php } ?>
-<?php if($banner5) { ?>|<?php echo $banner5;?><?php } ?>
-";
-var links = '';
-var texts = '';
-document.write('<embed src="<?php echo AJ_PATH;?>file/flash/slide.swf" wmode="opaque" FlashVars="config='+config+'&bcastr_flie='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'&menu="false" quality="high" width="<?php echo $bannerw;?>" height="<?php echo $bannerh;?>" type="application/x-shockwave-flash" extendspage="http://get.adobe.com/flashplayer/"></embed>');
+jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
 </script>
-<?php } else if($bannert == 1) { ?>
-<embed src="<?php echo $bannerf;?>" quality="high" loop="true" extendspage="http://get.adobe.com/flashplayer/" type="application/x-shockwave-flash" width="<?php echo $bannerw;?>" height="<?php echo $bannerh;?>"></embed>
-<?php } else if($banner) { ?>
-<img src="<?php echo $banner;?>" width="100%"/>
-<?php } ?>
+</div>
+<div class="right">
+<h1><b style="font-size:20px"><?php echo $COM['company']?></b></h1>
+<p><strong>电话：</strong><?php echo $COM['telephone']?></p>
+<p><strong>地址：</strong><?php echo $COM['address']?></p>
+<p><strong>法人：</strong><?php echo $COM['owner']?></p>
+<p><strong>邮箱：</strong><?php echo $COM['comemail']?></p>
+<p><strong>注册时间：</strong><?php echo $COM['rigister_time']?></p>
+<p><strong>注册资金：</strong><?php echo $COM['register_mon']?></p>
+<p style="width:100%;height:auto"><strong>介绍：</strong><?php echo $COM['intruce']?></p>
 </div>
 </div>
-<?php } ?>
-<div class="m">
-<div class="pos" id="pos">
-<span class="f_r">
-<script type="text/javascript">show_date();</script>
-</span>
-<span id="position"></span>
+<style media="screen">
+.comrow-bot{
+width: 1200px;
+margin: 0 auto;
+border: none;
+padding: 20px;
+}
+.botli{
+position: relative;
+  width: 100%;
+  height: 134px;
+  cursor: pointer;
+  padding: 23px 0 24px 7px;
+  border-bottom: 1px dashed #999;
+  background-color: #fff;
+}
+</style>
+<div class="w1180">
+    <div class="maincontent">
+        <div class="list-content" id="list-content" style="width:100%">
+        <div class="sortby clearfix"></div>
+      <!-- 经纪人列表 start -->
+<?php foreach($members as $member){?>
+<div class="jjr-itemmod" link="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $COM['company'];?>&member=<?php echo $member['userid'];?>" _soj="esf_list_skfyfdgl" style="width:100%">
+<a class="img" data-sign="true" target="_blank" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $COM['company'];?>&member=<?php echo $member['userid'];?>" _soj="esf_list_skfyfdgl" title="<?php echo $member['truename']?>" alt="<?php echo $member['truename']?>" hidefocus="true">
+<img class="thumbnail" src="static/picture/100x133.jpg" alt="<?php echo $member['truename']?>" width="100" height="133"/>
+</a>
+<div class="jjr-info">
+<div class="jjr-title">
+<h3>
+<a target="_blank" title="<?php echo $member['truename']?>" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $COM['company'];?>&member=<?php echo $member['userid'];?>" _soj="esf_list_skfyfdgl"><?php echo $member['truename']?></a>
+</h3>
+<div class="broker-level clearfix">
+<span class="stars-title"></span>
+<div class="stars-wrap-bk" style="width:90px">
+<p class="stars-bg" style="width:90px"><i class="iconfont">&#xE108;</i><i class="iconfont">&#xE108;</i><i class="iconfont">&#xE108;</i><i class="iconfont">&#xE108;</i><i class="iconfont">&#xE108;</i></p>
+<p class="stars-solid" style="width:90px"><i class="iconfont">&#xE108;</i><i class="iconfont">&#xE108;</i><i class="iconfont">&#xE108;</i><i class="iconfont">&#xE108;</i><i class="iconfont">&#xE108;</i></p>
+</div>
+<!-- 如果持平显示与同城平均水平持平 -->
+</div>
+<div class="brokercard-scorewrap clearfix">
+<span class="brokercard-scoretitle"></span>
+<div class="brokercard-scoredetail">
+<div class="brokercard-sd-cont clearfix">
+<!-- <span class="score-up clearfix no-pd-left" style="border-width:0;padding-left:0;">
+<em>房源：</em><em class="score-num">100</em>
+</span> -->
+</div>
+<div class="brokercard-sd-tip" style="bottom: 35px;">
+<i class="arr-down"><i></i></i>
+<div class="score-up"><span class="mg-r">房源真实：<em class="score-num">100</em><i class="score-tag"></i></span><span>打败了64.6%的同城经纪人</span>            </div>
+<div class="score-up"><span class="mg-r">服务效率：<em class="score-num">100</em><i class="score-tag"></i></span><span>打败了59.7%的同城经纪人</span>            </div>
+<div class="score-up"><span class="mg-r">用户评价：<em class="score-num">100</em><i class="score-tag"></i></span><span>打败了96.4%的同城经纪人</span>            </div>
 </div>
 </div>
-<div class="m">
-<table cellpadding="0" cellspacing="0" width="100%">
-<tr>
-<?php if($side_pos==0) { ?>
-<td width="<?php echo $side_width;?>" valign="top" id="side"><?php include template('side', $template);?></td>
-<td width="10" id="split"></td>
-<?php } ?>
-<td valign="top" id="main">
+</div>
+ </div>
+<p class="jjr-desc">
+<span>电话：</span>
+<!-- <div style="clear:both;display:inline-block;min-width:120px;"> -->
+<?php echo $member['mobile'];?>
+<!-- </div> -->
+</p>
+<p class="jjr-desc xq_tag"><span>地址：</span><?php echo $member['address'];?></p>
+<div>
+<div class="broker-tags clearfix">
+<span><?php echo area_pos($member['areaid'], '');?></span>
+<span class="pink-c">优质中介</span>
+</div>
+</div>
+ </div>
+</div>
+<?}?>
+    </div>
+   </div>
+  </div>
+</body>
+</html>

@@ -1,5 +1,6 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
+// print_r($HSIDE);exit;
 $content_table = content_table(4, $userid, is_file(AJ_CACHE.'/4.part'), $AJ_PRE.'company_data');
 $r = $db->get_one("SELECT content FROM {$content_table} WHERE userid=$userid");
 $COM['content'] = $r['content'];
@@ -37,6 +38,7 @@ $HMAIN = $_HMAIN;
 if($EXT['wap_enable']) $head_mobile = $EXT['wap_url'].'index.php?moduleid=4&username='.$username;
 $seo_title = isset($HOME['seo_title']) && $HOME['seo_title'] ? $HOME['seo_title'] : '';
 $head_title = '';
+// print_r($COM);exit;
 include template('index', $template);
 if(isset($update) && $db->cache_ids && ($username == $_username || $_groupid == 1 || $domain)) {
 	foreach($db->cache_ids as $v) {

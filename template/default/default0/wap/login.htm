@@ -1,0 +1,18 @@
+{template 'header', $TP}
+<div class="nav">
+<a href="index.php">首页</a> >
+<a href="index.php?moduleid={$moduleid}">{$MOD[name]}</a> >
+<a href="index.php?moduleid={$moduleid}&amp;action=login">登录</a> >
+</div>
+<div class="main">
+<div class="fm">
+<form action="index.php" method="post">
+<input type="hidden" name="moduleid" value="{$moduleid}"/>
+<input type="hidden" name="action" value="{$action}"/>
+<input type="hidden" name="forward" value="{$forward}"/>
+户名:<input type="text" name="username" size="15" class="fm_inp"/><br/>
+密码:<input type="password" name="password" size="15" class="fm_inp"/><br/>
+<input type="submit" name="submit" value="登录" class="fm_sbm"/>
+</form>
+</div>
+{template 'footer', $TP}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
 $MG['sell_limit'] > -1 or dalert(lang('message->without_permission_and_upgrade'), 'goback');
@@ -121,7 +121,7 @@ switch($action) {
 						credit_add($_username, -$fee_add);
 						credit_record($_username, -$fee_add, 'system', lang($L['credit_record_add'], array($MOD['name'])), 'ID:'.$do->itemid);
 					}
-				}				
+				}
 				$msg = $post['status'] == 2 ? $L['success_check'] : $L['success_add'];
 				$js = '';
 				if(isset($post['sync_sina']) && $post['sync_sina']) $js .= sync_weibo('sina', $moduleid, $do->itemid);
@@ -194,13 +194,13 @@ switch($action) {
 				$post['status'] = get_status($item['status'], $need_check);
 				$post['hits'] = $item['hits'];
 				$post['username'] = $_username;
-				
-				
+
+
 				if($FD) fields_check($post_fields);
 				if($CP) property_check($post_ppt);
 				if($FD) fields_update($post_fields, $table, $do->itemid);
 				if($CP) property_update($post_ppt, $moduleid, $post['catid'], $do->itemid);
-				
+
 				$do->edit($post);
 					if($swf_upload) {
 				foreach(explode('|', $swf_upload) as $v) {
@@ -251,7 +251,7 @@ switch($action) {
 				if($MOD['credit_refresh']) $_credit = $_credit - $MOD['credit_refresh'];
 			} else {
 				$f++;
-			}			
+			}
 		}
 		if($MOD['credit_refresh'] && $s) {
 			$credit = $s*$MOD['credit_refresh'];
@@ -301,5 +301,6 @@ if($_userid) {
 	}
 	$nums[0] = count($MTYPE);
 }
+// print_r(MENUMODS);exit;
 include template('my_'.$module, 'member');
 ?>

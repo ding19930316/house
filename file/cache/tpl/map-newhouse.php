@@ -1,0 +1,157 @@
+<?php defined('IN_AIJIACMS') or exit('Access Denied');?><!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新房地图找房-<?php if($seo_title) { ?><?php echo $seo_title;?><?php } else { ?><?php if($head_title) { ?><?php echo $head_title;?><?php echo $AJ['seo_delimiter'];?><?php } ?>
+<?php if($city_sitename) { ?><?php echo $city_sitename;?><?php } else { ?><?php echo $AJ['sitename'];?><?php } ?>
+<?php } ?>
+</title>
+<?php if($head_keywords) { ?>
+<meta name="keywords" content="<?php echo $head_keywords;?>"/>
+<?php } ?>
+<?php if($head_description) { ?>
+<meta name="description" content="<?php echo $head_description;?>"/>
+<?php } ?>
+<style type="text/css">
+/*Document By JodJin 2011/11/07*/
+html{width:100%;height:100%;overflow:hidden;border:0;}
+body{background:#fff;font-family:Tahoma,"宋体";font-size:12px;color:#333;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,b,em,span,i,pre,form,fieldset,label,input,textarea,blockquote{padding:0;margin:0;}input,select,textarea,button{vertical-align:middle;font-size:12px;font-family:Tahoma,"宋体";word-wrap:break-word;word-break:break-all;}table{border-collapse:collapse;border-spacing:0;}img{vertical-align:top;border:0;}ul,ol{list-style:none;}li{list-style-type:none;}h1,h2,h3,h4,h5,h6,textarea{font-size:12px;}em,i{font-weight:normal;font-style:normal;}a{color:#333;text-decoration:none;outline:none}a:hover{color:#f60;text-decoration:underline;outline:none}.show{display:block}.hidden{display:none}.fl{float:left;}.fr{float:right}.onetr{display:inline;float:left}.clear{font-size:0;line-height:0;clear:both;height:0;overflow:hidden}.orange{color:#f60}.ablue{color:#296ea0}
+input,select,textarea,button{vertical-align:middle;font-size:12px;font-family:Tahoma,"宋体";word-wrap:break-word;word-break:break-all;}
+#mapheader{height:60px;border-bottom:5px solid #015798;padding:10px 10px 0 10px;background:url(<?php echo AJ_SKIN;?>images/map/shadow_line.gif) repeat-x 0 65px;}
+.fastlink{float:right;color:#999;text-align:right;line-height:27px;}
+.city_logo{float:left;border-left:1px solid #999;margin:11px 0 0 12px;padding-left:12px;}
+#sitecity{float:none;padding:0;}
+#sitecity i{font-family:"黑体";font-size:18px;color:#555;background:url(<?php echo AJ_SKIN;?>images/map/site_nav_bg.gif) right 7px no-repeat;padding-right:10px;cursor:pointer}
+.mapss{float:left;padding:3px 0 0 8px;}
+.mapss_nav{height:22px;color:#999}.mapss_nav a{margin:0 5px;}
+.mapss_nav a.on{font-weight:bold;color:#296ea0}.mapss_nav a:hover.on{text-decoration:none}
+.mapss_cont{padding-left:5px;}
+.mapss_cont .inpt{border:1px solid #7ba3c0;display:inline;float:left;padding:3px 4px;height:16px;width:270px;line-height:16px;}
+.mapss_cont .sbtn{width:45px;height:24px;background:url(<?php echo AJ_SKIN;?>images/map/map_ssbtn.gif);border:0;display:inline;float:left;cursor:pointer;margin-left:8px;}
+#mapnoti{height:23px;background:#f1f7ff;border-bottom:1px solid #dee9f7;padding:0 5px;position:relative;z-index:90}
+.oviews{padding:2px 5px 0 0;float:right}.oviews a{background:url(<?php echo AJ_SKIN;?>images/map/map_views.gif) no-repeat 0 3px;display:block;float:left;height:19px;overflow:hidden;line-height:19px;text-indent:17px;color:#296ea0;margin-left:8px;}a.m_fullp{background-position:0 -13px;}a.m_normp{background-position:0 -29px;}.oviews a:hover{color:#f60;}
+.locachose{position:relative;z-index:10;width:50%}
+.locachose ul{line-height:15px;height:23px;}
+.locachose li{display:inline;float:left;color:#999;}
+.locachose li span{display:block;float:left;padding:2px 5px;border:1px solid #f1f7ff;border-bottom:0;position:relative;z-index:100;top:1px;}
+.locachose li span.onhov{border:1px solid #efae31;border-bottom:0;background:#fff;height:18px;}
+.locachose li a{color:#296ea0;background:url(<?php echo AJ_SKIN;?>images/map/arrow_d.gif) no-repeat right 6px;padding-right:10px;}
+.locachose li a:hover{color:#f60;}
+.hovcont{border:1px solid #efae31;position:absolute;top:23px;z-index:99;background:#fff;display:none;width:340px;padding:8px 0 0 8px;}
+.hovcont p{height:23px;color:#999;}
+.hovcont a{color:#296ea0;display:inline;float:left;height:23px;width:83px;overflow:hidden}
+.hovcont a:hover{color:#f60;}
+a.sales0{background:url(<?php echo AJ_SKIN;?>images/map/sale_ico.gif) no-repeat;color:#fff;text-indent:1px;}
+a.sales1{background:url(<?php echo AJ_SKIN;?>images/map/sale_ico.gif) no-repeat 0 -46px;color:#fff;text-indent:1px;}
+a.sales2{background:url(<?php echo AJ_SKIN;?>images/map/sale_ico.gif) no-repeat 0 -93px;color:#fff;text-indent:1px;}
+a.sales3{background:url(<?php echo AJ_SKIN;?>images/map/sale_ico.gif) no-repeat 0 -139px;color:#fff;text-indent:1px;}
+.sico1{background:url(<?php echo AJ_SKIN;?>images/map/sale_ico.gif) no-repeat;color:#fff;text-indent:1px;}
+.sico2{background:url(<?php echo AJ_SKIN;?>images/map/sale_ico.gif) no-repeat 0 -46px;color:#fff;text-indent:1px;}
+.sico3{background:url(<?php echo AJ_SKIN;?>images/map/sale_ico.gif) no-repeat 0 -93px;color:#fff;text-indent:1px;}
+.sico4{background:url(<?php echo AJ_SKIN;?>images/map/sale_ico.gif) no-repeat 0 -139px;color:#fff;text-indent:1px;}
+#is_loading{padding-top:4px;float:left;display:none;}
+#info_num{background:url(<?php echo AJ_SKIN;?>images/map/foundico.gif) no-repeat 0 6px;padding-left:10px;display:none;line-height:23px;}
+#mapmain{position:relative;width:100%; height:100%;background:#f9f9f9;overflow:hidden;}
+#mapwin{position:absolute;z-index:66;border:3px solid #ddd;width:430px;height:195px;background:#fff;overflow:hidden;display:none}
+#winBox{border:1px solid #9d9d9d;width:412px;height:177px;overflow:hidden;padding:8px;overflow:hidden}
+#winBox a{color:#1361b0}#winBox a:hover{color:#f60}
+#winBox .wintop{height:23px;overflow:hidden;border-bottom:1px solid #e2e2e2;cursor:move}
+#winBox .wintop b{font-size:14px;}
+#winBox .wini{color:#666;margin-left:5px;}
+#winBox .winclose{display:block;float:right;background:url(<?php echo AJ_SKIN;?>images/map/icon_close.gif) no-repeat;width:14px;height:14px;cursor:pointer;margin-top:1px;}
+#winBox a:hover.winclose{background:url(<?php echo AJ_SKIN;?>images/map/icon_close.gif) no-repeat right 0;}
+#winBox .wincont{clear:both;padding-top:8px;}
+#winBox .win_c_r{float:right}
+#winBox .win_c_r img{border:1px solid #e2e2e2;padding:1px;margin-bottom:5px;}
+#winBox .win_c_l{float:left;width:243px;overflow:hidden;height:147px;overflow:hidden;margin-top:-4px;}
+#winBox .win_c_l li{line-height:21px;word-wrap:break-word;word-break:break-all;}
+#winBox .win_c_l li b{font-size:17px;color:#f60;font-family:Tahoma}
+.mNone,.mNone span{display:none;}
+.mBlue span, .mOrange span, .mRed span, .mGreen span, .mPurple span{background:url(<?php echo AJ_SKIN;?>images/map/mbg.gif) no-repeat;position:absolute;color:#fff;}
+.mBlue .left, .mOrange .left, .mRed .left, .mGreen .left, .mPurple .left{width:8px;height:25px;line-height:0;font-size:0;z-index:497;}
+.mBlue .right, .mOrange .right, .mRed .right, .mGreen .right, .mPurple .right{height:25px;line-height:25px;padding-right:8px;white-space:nowrap;z-index:498;left:8px;}
+.mBlue .bottom, .mOrange .bottom, .mRed .bottom, .mGreen .bottom, .mPurple .bottom{width:20px;height:12px;line-height:0;font-size:0;z-index:499;top:22px;}
+.mBlue .left{background-position:left top;}
+.mBlue .right{background-position:right top;}
+.mBlue .bottom{background-position:left -22px;}
+.mOrange .left{background-position:left -34px;}
+.mOrange .right{background-position:right -34px;}
+.mOrange .bottom{background-position:left -56px;}
+.mRed .left{background-position:left -68px;}
+.mRed .right{background-position:right -68px;}
+.mRed .bottom{background-position:left -90px;}
+.mGreen .left{background-position:left -102px;}
+.mGreen .right{background-position:right -102px;}
+.mGreen .bottom{background-position:left -124px;}
+.mPurple .left{background-position:left -136px;}
+.mPurple .right{background-position:right -136px;}
+.mPurple .bottom{background-position:left -158px;}
+#mapbody{background:#e5e3df;height:100%;width:100%;float:left;}
+#rlist {position:absolute;border:1px solid #e5e3df;width:200px;height:100%;margin-left:1px; float:right; background:#fff;overflow:hidden;BORDER-LEFT: #e5e3df 1px solid;}
+#rlist {SCROLLBAR-ARROW-COLOR: #e5e5e5; SCROLLBAR-FACE-COLOR: #ffffff; OVERFLOW-X: hidden; OVERFLOW-Y: auto; SCROLLBAR-DARKSHADOW-COLOR: #e5e3df; SCROLLBAR-HIGHLIGHT-COLOR: #ffffff; SCROLLBAR-SHADOW-COLOR: #ffffff; SCROLLBAR-TRACK-COLOR: #f8f8f8;  SCROLLBAR-3DLIGHT-COLOR: #e5e3df}
+#rlist UL {PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 5px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px}
+#rlist UL LI {BORDER-BOTTOM: #e8e8e8 1px solid; PADDING-BOTTOM: 8px; MARGIN-TOP: 8px; FONT-FAMILY: Georgia; COLOR: #4c4c4c; FONT-SIZE: 12px; CURSOR: hand}
+#rlist UL LI A {COLOR: #3d6dcc; TEXT-DECORATION: none}
+</style>
+<script type="text/javascript">
+var c="mapbody";
+var x=<?php echo $lan;?>;
+var y=<?php echo $lat;?>;
+var z=15;
+var Districts=<?php echo $quyu;?>;
+var Plates=[];
+Plates[1]=[];
+var Protype=<?php echo $cat;?>;
+var Prices=[{name:'4000元以下',vit:'~4000'},{name:'4000-5000元',vit:'4000-5000'},{name:'5000-6000元',vit:'5000-6000'},{name:'6000-7000元',vit:'6000-7000'},{name:'7000-8000元',vit:'7000-8000'},{name:'8000-9000元',vit:'8000-9000'},{name:'9000-10000元',vit:'9000-10000'},{name:'10000元以上',vit:'10000~'}];
+var Sales=[{name:'待售',vit:'1'},{name:'在售',vit:'2'},{name:'尾盘',vit:'3'},{name:'售完',vit:'4'}];
+var params={city:"sy",k:"",district:"",plate:"",protype:"",price:"",sale:"",r:Math.random()};
+</script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=6bd2fcdebab1f867206fdc61a929f5c1f11bad89&v=1.2&services=false"></script>
+<script type="text/javascript" src="<?php echo AJ_SKIN;?>js/map/jquery.js"></script>
+<script type="text/javascript" src="<?php echo AJ_SKIN;?>js/map/mapnewPatch.js"></script>
+<script type="text/javascript" src="<?php echo AJ_SKIN;?>js/map/mapnewApi.js"></script>
+<script type="text/javascript" src="<?php echo AJ_SKIN;?>js/map/mapnewObj.js"></script>
+</head>
+<body>
+<div id="mapheader">
+  <div class="fastlink">您好！欢迎来<?php echo $AJ['sitename'];?><a href="<?php echo $MODULE['2']['linkurl'];?>/login.php" class="ablue">登录</a> | <a href="<?php echo $MODULE['2']['linkurl'];?>register.php" class="ablue">注册</a> | <a href="<?php echo $MODULE['1']['linkurl'];?>" class="agray">网站首页</a><br/>
+   <a href="<?php echo $MODULE['1']['linkurl'];?>" target="_blank">网站首页</a> - <a href="<?php echo $MODULE['6']['linkurl'];?>" target="_blank">新房中心</a> - <a href="<?php echo $MODULE['5']['linkurl'];?>" target="_blank">二手房</a> - <a href="<?php echo $MODULE['8']['linkurl'];?>" target="_blank">房产资讯</a></div>
+  <div class="fl"><a href="/"><img src="<?php if($MODULE[$moduleid]['logo']) { ?><?php echo AJ_SKIN;?>image/logo_<?php echo $moduleid;?>.gif<?php } else if($AJ['logo']) { ?><?php echo $AJ['logo'];?><?php } else { ?><?php echo AJ_SKIN;?>image/logo.png<?php } ?>
+" width="260" height="60"></a></div>
+  <div class="city_logo">
+    <div id="sitecity"><i title="切换城市"><?php if($AJ['city']) { ?> <a href="<?php echo AJ_PATH;?>api/city.php" id="city_c"><?php echo $city_name;?></a><?php } else { ?><?php echo $AJ['city_sitename'];?><?php } ?>
+</i></div>
+    <a href="./"><img src="<?php echo AJ_SKIN;?>images/map/map_logo.gif"></a> </div>
+  <div class="mapss">
+    <div class="mapss_nav"><a href="<?php echo $MODULE['1']['linkurl'];?>map" >二手房地图</a> | <a href="<?php echo $MODULE['1']['linkurl'];?>map/rent.php">租房地图</a> | <a href="<?php echo $MODULE['1']['linkurl'];?>map/newhouse.php" class="on">新房地图</a></div>
+    <div class="mapss_cont">
+    <form action="<?php echo $MODULE['6']['linkurl'];?>search.php"   method="get">
+        <input type="text" name="kw" class="inpt" value="" autocomplate="off">
+        <input type="submit"  class="sbtn" value="">
+      </form>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div id="mapnoti">
+  <input type="hidden" name="ac" value="used">
+  <div class="oviews"><a href="<?php echo $MODULE['6']['linkurl'];?>list.php" target="_blank" hidefocus>列表视图</a><a href="javascript:;" id="tab_m_views" class="m_fullp" hidefocus>全屏地图</a></div>
+  <div class="locachose onetr">
+    <ul>
+      <li><span id="districts"><a href="javascript:;">选择城区</a></span></li>
+      <li><span id="protype"><a href="javascript:;">类型不限</a></span></li>
+      <li><span id="prices"><a href="javascript:;">价格不限</a></span></li>
+      <li><span id="sales"><a href="javascript:;">不限</a></span></li>
+    </ul>
+    <div id="districtsIts" class="hovcont"></div>
+    <div id="protypeIts" class="hovcont"></div>
+    <div id="pricesIts" class="hovcont"></div>
+    <div id="salesIts" class="hovcont"></div>
+  </div>
+  <span id="is_loading" class="onetr"><img src="<?php echo AJ_SKIN;?>images/map/loading.gif"></span><span id="info_num" class="onetr"></span></div>
+<div id="mapmain"> 
+ <div id="mapwin"></div>
+ <div id="mapbody" style="float:left;">地图</div> 
+</div>  
+</body>
+</html>

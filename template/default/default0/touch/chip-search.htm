@@ -1,0 +1,14 @@
+<div class="fm">
+<form action="index.php" method="get">
+<input type="hidden" name="moduleid" value="{$moduleid}"/>
+<input type="hidden" name="catid" value="{$catid}"/>
+<input type="hidden" name="areaid" value="{$areaid}"/>
+<select name="moduleid" class="fm_opt">
+{loop $WAP_MODULE $i $m}
+<option value="{$m[moduleid]}"{if $m[moduleid]==$moduleid} selected{/if}>{$m[name]}</option>
+{/loop}
+</select>
+<input type="text" name="kw" value="{$kw}" size="15" data-widget="quickdelete" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="fm_inp"/>
+<input type="submit" value="搜索" class="fm_sbm"/>
+</form>
+</div>

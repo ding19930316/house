@@ -5,7 +5,7 @@
 <table cellpadding="0" cellspacing="0">
 <tr>
 <td class="tab" id="add"><a href="<?php echo $AJ['file_my'];?>?mid=<?php echo $mid;?>&action=add"><span>添加<?php echo $MOD['name'];?></span></a></td>
-<?php if($_userid) { ?>
+<!-- <?php if($_userid) { ?>
 <td class="tab_nav">&nbsp;</td>
 <td class="tab" id="s3"><a href="<?php echo $AJ['file_my'];?>?mid=<?php echo $mid;?>"><span>已发布<span class="px10">(<?php echo $nums['3'];?>)</span></span></a></td>
 <td class="tab_nav">&nbsp;</td>
@@ -16,6 +16,7 @@
 <td class="tab" id="s4"><a href="<?php echo $AJ['file_my'];?>?mid=<?php echo $mid;?>&status=4"><span>已过期<span class="px10">(<?php echo $nums['4'];?>)</span></span></a></td>
 <td class="tab_nav">&nbsp;</td>
 <?php } ?>
+ -->
 </tr>
 </table>
 </div>
@@ -212,7 +213,6 @@ var property_admin = 0;
 <td class="tl">手机号码：</td>
 <td class="tr"><input name="post[mobile]" id="mobile" type="text" size="18" value="<?php echo $mobile;?>"/> <span id="dmobile" class="f_red"></span></td>
 </tr>
-
 <?php } else { ?>
 <tr>
 <td class="tl">联系人：</td>
@@ -222,7 +222,6 @@ var property_admin = 0;
 <td class="tl">手机号码：</td>
 <td class="tr"><input name="post[mobile]" id="mobile" type="text" size="18" value="<?php echo $user['mobile'];?>"/> <span id="dmobile" class="f_red"></span></td>
 </tr>
-
 <?php } ?>
 <?php if($action=='add' && $could_elite) { ?>
 <tr>
@@ -352,7 +351,7 @@ var property_admin = 0;
 </div>
 <?php } ?>
 </form>
-<?php if($MG['newhouse_limit'] || (!$MG['fee_mode'] && $MOD['fee_add'])) { ?>
+<!-- <?php if($MG['newhouse_limit'] || (!$MG['fee_mode'] && $MOD['fee_add'])) { ?>
 <div class="limit">
 <?php if($MG['newhouse_limit']) { ?>
 总共可发 <span class="f_b f_red"><?php echo $MG['newhouse_limit'];?></span> 条&nbsp;&nbsp;&nbsp;
@@ -367,6 +366,7 @@ var property_admin = 0;
 <?php } ?>
 </div>
 <?php } ?>
+ -->
 <div class="pages"><?php echo $pages;?></div>
 </div>
 <script type="text/javascript">s('mid_<?php echo $mid;?>');m('s<?php echo $status;?>');</script>

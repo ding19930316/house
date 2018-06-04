@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
 $MG['buy_limit'] > -1 or dalert(lang('message->without_permission_and_upgrade'), 'goback');
@@ -81,7 +81,7 @@ switch($action) {
 				$post['status'] = get_status(3, $need_check);
 				$post['hits'] = 0;
 				$post['username'] = $_username;
-				
+
 				if($could_color && $color && $_credit > $MOD['credit_color']) {
 					$post['style'] = $color;
 					credit_add($_username, -$MOD['credit_color']);
@@ -104,7 +104,7 @@ switch($action) {
 						credit_record($_username, -$fee_add, 'system', lang($L['credit_record_add'], array($MOD['name'])), 'ID:'.$do->itemid);
 					}
 				}
-				
+
 				$msg = $post['status'] == 2 ? $L['success_check'] : $L['success_add'];
 				$js = '';
 				if(isset($post['sync_sina']) && $post['sync_sina']) $js .= sync_weibo('sina', $moduleid, $do->itemid);
@@ -217,7 +217,7 @@ switch($action) {
 				if($MOD['credit_refresh']) $_credit = $_credit - $MOD['credit_refresh'];
 			} else {
 				$f++;
-			}			
+			}
 		}
 		if($MOD['credit_refresh'] && $s) {
 			$credit = $s*$MOD['credit_refresh'];

@@ -1,5 +1,20 @@
 <?php defined('IN_AIJIACMS') or exit('Access Denied');?>
 <?php include template('header');?>
+<link href="http://code.jquery.com/ui/1.10.4/themes/ui-darkness/jquery-ui.css" />
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js" ></script>
+<style media="screen">
+ul.ui-autocomplete{
+width:200px;
+height:500px;
+overflow:auto;
+white-space:nowrap;
+border:#7F9DB9 1px solid;
+background-color: #f4f5f5;
+}
+ul.ui-autocomplete li.ui-menu-item{
+border-bottom: #7F9DB9 1px solid;
+}
+</style>
 <link href="<?php echo AJ_SKIN;?>user_jjr.css?v=3" rel="stylesheet" type="text/css" />
 <script>var AGENT_URL="<?php echo $MODULE['6']['linkurl'];?>";var JS_URL="";var IMG_URL="";</script>
 <link href="<?php echo AJ_SKIN;?>style.css" rel="stylesheet" type="text/css" />
@@ -32,6 +47,18 @@
 <form action="<?php echo $AJ['file_register'];?>" method="post" target="send" onsubmit="return check();">
 <input name="action" type="hidden" id="action" value="<?php echo crypt_action('register');?>"/>
 <input name="forward" type="hidden" value="<?php echo $forward;?>"/>
+<?php if($regtype == '1') { ?>
+<div class="reg_title">公司认领</div>
+<table cellpadding="5" cellspacing="5" width="100%">
+<tbody>
+<tr>
+<td class="tl">公司名称 <span class="f_red">*</span></td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[rlcompany]" id="rlcompany" autocomplete="off"></td>
+<td width="400"><input type="button" name="qxrl" value="取消认领" style="font-size:14px;padding:3px;"></td>
+</tr>
+</tbody>
+</table>
+<?php } ?>
 <div class="reg_title">帐户信息</div>
 <table cellpadding="5" cellspacing="5" width="100%">
 <tr>
@@ -45,9 +72,9 @@
 <input type="radio" name="post[regid]" value="6" id="g_6"onclick="reg(1);" /><label for="g_6"> <?php echo $GROUP['6']['groupname'];?></label>
 <input type="radio" name="post[regid]" value="7" id="g_7"onclick="reg(1);" /><label for="g_7"> <?php echo $GROUP['7']['groupname'];?></label>
 <?php } ?>
-<?php if($regtype == '1') { ?>中介<input type="hidden" class = "regtype" reg = "1" name="post[regid]" value="7" /><?php } ?>
+<?php if($regtype == '1') { ?>中介<input type="hidden" class = "regtype" reg = "0" name="post[regid]" value="7" /><?php } ?>
 <?php if($regtype == '2') { ?>经纪人<input type="hidden" class = "regtype" reg = "1" name="post[regid]" value="6" /><?php } ?>
-<?php if($regtype == '3') { ?>个人会员<input type="hidden" class = "regtype" reg = "0" name="post[regid]" value="5" /><?php } ?>
+<?php if($regtype == '3') { ?>个人会员<input type="hidden" class = "regtype" reg = "1" name="post[regid]" value="5" /><?php } ?>
 </td>
 </tr>
 <table cellpadding="5" cellspacing="5" width="100%">
@@ -170,7 +197,7 @@
 <span id="dmobile" class="f_red"></span>&nbsp;
 </td>
 </tr>
-<?php if($could_mobilecode) { ?>
+<!-- <?php if($could_mobilecode) { ?> -->
 <tr onmouseover="Ds('tmobilecode');" onmouseout="Dh('tmobilecode');">
 <td class="tl">手机验证码 <span class="f_red">*</span></td>
 <td><input type="text" class="reg_inp" style="width:80px;" name="post[mobilecode]" id="mobilecode" onblur="validator('mobilecode');"/>
@@ -190,16 +217,20 @@
 <td id="dsendsok">&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
-<?php } ?>
+<!-- <?php } ?>
+ -->
 <tr onmouseover="Ds('tqq');" onmouseout="Dh('tqq');">
 <td class="tl">QQ号码 &nbsp;</td>
 <td><input type="text" class="reg_inp" style="width:200px;" name="post[qq]" id="qq"/></td>
-<td>
 <div class="tips" id="tqq" style="display:none;">
 <div>推荐填写，以便即时在线与您取得联系</div>
 </div>
 <span id="dqq" class="f_red"></span>&nbsp;
 </td>
+</tr>
+<tr>
+<td class="tl">地址 &nbsp;</td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[address]" /></td>
 </tr>
 </table>
 <div id="company_detail" style="display:none">
@@ -208,8 +239,6 @@
 <tr onmouseover="Ds('tcompany');" onmouseout="Dh('tcompany');">
 <td class="tl">公司名称 <span class="f_red">*</span></td>
 <td width="300"><input type="text" class="txt" id="villagename" name="post[company]" value="<?php echo $housename;?>"  >
-<input type="hidden" name="post[companyid]" id="cid" value="">
-<div id="autoVn"></div></td>
 <td>
 <div class="tips" id="tcompany" style="display:none;">
 <div>请填写公司全称，与营业执照保持一致，注册之后将不可更改</div>
@@ -217,15 +246,9 @@
 <span id="dcompany" class="f_red"></span>&nbsp;
 </td>
 </tr>
-<tr onmouseover="Ds('ttype');" onmouseout="Dh('ttype');">
-<td class="tl">公司类型 <span class="f_red">*</span></td>
-<td><?php echo dselect($COM_TYPE, 'post[type]', '请选择', '', 'id="type"', 0);?></td>
-<td>
-<div class="tips" id="ttype" style="display:none;">
-<div>如果没有匹配的类型，请选择其它</div>
-</div>
-<span id="dtype" class="f_red"></span>&nbsp;
-</td>
+<tr>
+<td class="tl">公司地址&nbsp;</td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[comaddress]"/></td>
 </tr>
 <tr onmouseover="Ds('ttelephone');" onmouseout="Dh('ttelephone');">
 <td class="tl">公司电话 <span class="f_red">*</span></td>
@@ -237,33 +260,37 @@
 <span id="dtelephone" class="f_red"></span>&nbsp;
 </td>
 </tr>
+<tr>
+<td class="tl">社会信用代码&nbsp;</td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[code]"/></td>
+</tr>
+<tr>
+<td class="tl">注册时间&nbsp;</td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[register_time]"/></td>
+</tr>
+<tr>
+<td class="tl">注册资本&nbsp;</td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[register_mon]"/></td>
+</tr>
+<tr>
+<td class="tl">法人代表&nbsp;</td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[owner]"/></td>
+</tr>
+<tr>
+<td class="tl">公司邮箱&nbsp;</td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[comemail]"/></td>
+</tr>
+<tr>
+<td class="tl">公司网址&nbsp;</td>
+<td><input type="text" class="reg_inp" style="width:200px;" name="post[website]"/></td>
+</tr>
+<tr>
+<td class="tl">公司简介&nbsp;</td>
+<td><input type="textarea" class="reg_inp" style="width:400px;" name="post[intruce]"/></td>
+</tr>
 </table>
 </div>
 <table cellpadding="5" cellspacing="5" width="100%">
-<?php if($MOD['question_register']) { ?>
-<tr onmouseover="Ds('tanswer');" onmouseout="Dh('tanswer');">
-<td class="tl">验证问题 <span class="f_red">*</span></td>
-<td><?php include template('question', 'chip');?></td>
-<td>
-<div class="tips" id="tanswer" style="display:none;">
-<div>请把问题的答案填写到输入框中</div>
-</div>
-<span id="danswer" class="f_red"></span>&nbsp;
-</td>
-</tr>
-<?php } ?>
-<?php if($MOD['captcha_register']) { ?>
-<tr onmouseover="Ds('tcaptcha');" onmouseout="Dh('tcaptcha');">
-<td class="tl">验证码 <span class="f_red">*</span></td>
-<td><?php include template('captcha', 'chip');?></td>
-<td>
-<div class="tips" id="tcaptcha" style="display:none;">
-<div>请把图形中的字符填写到输入框中<br/>如果看不清楚，请点击图片刷新</div>
-</div>
-<span id="dcaptcha" class="f_red"></span>&nbsp;
-</td>
-</tr>
-<?php } ?>
 <tr>
 <td class="tl">&nbsp;</td>
 <td width="300"><input type="submit" name="submit" value="提交" style="font-size:14px;padding:3px;"/></td>
@@ -276,13 +303,46 @@
 <center class="px14 f_b">请阅读本站服务条款</center>
 <?php include template('agreement', $module);?>
 </div> -->
-<div style="text-align:right;padding:10px 100px 20px 0;"><a href="?print=1" target="_blank">可打印版本</a></div>
-<br/>
 </div>
 </div>
 </div>
 <script type="text/javascript" src="<?php echo AJ_STATIC;?>file/script/guest.js"></script>
 <script type="text/javascript">
+var companys = [];
+$.ajaxSetup({async : false});
+$.ajax({
+     type: "post",
+     url: "<?php echo $MODULE['1']['linkurl'];?>company/list.html",
+     data: {pingyin:true},
+     dataType: "json",
+     success: function(data){
+ companys = data;
+    },
+ });
+$("#rlcompany").autocomplete({
+    source: companys,
+messages: {
+noResults: '',
+results: function() {}
+}
+});
+$(document).ready(function(){
+$("input[name='qxrl']").click(function(){
+var text = $(this).text();
+switch (text) {
+case "取消认领":
+$(this).text("恢复认领").val("恢复认领");
+$("#rlcompany").attr("disabled","disabled");
+$("#rlcompany").val("");
+reg(1);
+break;
+default:
+$(this).text("取消认领").val("取消认领");
+$("#rlcompany").removeAttr("disabled");
+reg(0);
+}
+})
+})
 if(Dd('username').value == '') Dd('username').focus();
 var vid = '';
 function validator(id) {
@@ -412,20 +472,6 @@ Df(f);
 return false;
 }
 }
-<?php if($MOD['question_register']) { ?>
-f = 'answer';
-if(Dd(f).value == '') {
-Dmsg('请回答验证问题', f);
-return false;
-}
-<?php } ?>
-<?php if($MOD['captcha_register']) { ?>
-f = 'captcha';
-if(!is_captcha(Dd(f).value)) {
-Dmsg('请填写验证码', f);
-return false;
-}
-<?php } ?>
 return true;
 }
 function SendCode() {

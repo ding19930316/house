@@ -1,0 +1,26 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="javascript:Dback('index.php?moduleid={$moduleid}');"><span>返回</span></a></div></td>
+<td><div class="head_name"><a href="index.php?moduleid={$moduleid}&amp;action=charge"><span>充值卡充值</span></a></div></td>
+<td class="head_bar_td_w55 t_r"><a href="./"><img src="image/home.png" width="40" height="40" alt="首页"/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="main">
+	<div class="fm">
+	<form action="index.php" method="post">
+	<input type="hidden" name="moduleid" value="{$moduleid}"/>
+	<input type="hidden" name="action" value="{$action}"/>
+	<input type="hidden" name="forward" value="{$forward}"/>
+	卡号:<input type="text" name="number" class="fm_inp"/><br/>
+	密码:<input type="text" name="password" class="fm_inp"/><br/>
+	<input type="submit" name="submit" value="充值" class="fm_sbm"/>
+	</form>
+	</div>
+</div>
+{template 'footer', $TP}

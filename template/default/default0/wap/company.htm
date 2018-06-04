@@ -1,0 +1,106 @@
+{template 'header', $TP}
+<div class="nav">
+<a href="index.php">首页</a> >
+<a href="index.php?moduleid={$moduleid}">{$MOD[name]}</a> >
+{if $catid && !$userid}{wap_pos($CAT)}{/if}
+</div>
+<div class="main">
+{if $userid}
+	<strong>{$company}</strong><br/>
+	<a href="index.php?moduleid={$moduleid}&amp;username={$username}">首页</a>&nbsp;|&nbsp;
+	<a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action=sell">产品</a>&nbsp;|&nbsp;
+	<a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action=news">新闻</a>&nbsp;|&nbsp;
+	<a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action=introduce">介绍</a>&nbsp;|&nbsp;
+	<a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action=contact">联系</a>
+	<br/>
+	{if $action=='introduce'}
+		{if $page==1&&$thumb}<img src="{$thumb}"/><br/>{/if}
+		{$content}<br/>
+	{elseif $action=='news'}
+		{if $itemid}
+			<strong>{$title}</strong><br/>
+			日期:{$adddate}<br/>
+			点击:{$hits}<br/>
+			<a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action={$action}">返回列表</a><br/>
+			{$content}
+		{else}
+			{if $MTYPE}
+			<strong>新闻分类：</strong><a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action={$action}">全部</a>
+				{loop $MTYPE $t}
+				&nbsp;|&nbsp;<a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action={$action}&amp;typeid={$t[typeid]}">{$t[typename]}</a>
+				{/loop}
+			<br/>
+			{/if}
+			{loop $lists $v}
+			[{timetodate($v[addtime], 3)}]&nbsp;<a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action={$action}&amp;itemid={$v[itemid]}">{$v[title]}</a><br/>
+			{/loop}
+		{/if}
+	{elseif $action=='sell'}
+		{if $MTYPE}
+		<strong>产品分类：</strong><a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action={$action}">全部</a>
+			{loop $MTYPE $t}
+			&nbsp;|&nbsp;<a href="index.php?moduleid={$moduleid}&amp;username={$username}&amp;action={$action}&amp;typeid={$t[typeid]}">{$t[typename]}</a>
+			{/loop}
+		<br/>
+		{/if}
+		{loop $lists $v}
+		[{timetodate($v[edittime], 3)}]&nbsp;<a href="index.php?moduleid=5&amp;itemid={$v[itemid]}">{$v[title]}</a><br/>
+		{/loop}
+	{elseif $action=='contact'}
+		{if $could_contact}
+			{if $truename}姓名:{$truename}({if $gender==1}先生{else}女士{/if})<br/>{/if}
+			{if $department}部门:{$department}<br/>{/if}
+			{if $career}职务:{$career}<br/>{/if}
+			{if $mobile}手机:{$mobile}<br/>{/if}
+			{if $telephone}电话:{$telephone}<br/>{/if}
+			{if $fax}传真:{$fax}<br/>{/if}
+			{if $address}地址:{$address}<br/>{/if}
+			{if $postcode}邮编:{$postcode}<br/>{/if}
+			{if $mail}邮件:{$mail}<br/>{/if}
+			{if $homepage}网址:{$homepage}<br/>{/if}
+			{if $qq && $AJ[im_qq]}QQ:{$qq}<br/>{/if}
+			{if $ali && $AJ[im_ali]}阿里旺旺:{$ali}<br/>{/if}
+			{if $msn && $AJ[im_msn]}MSN:{$msn}<br/>{/if}
+			{if $skype && $AJ[im_skype]}Skype:{$skype}<br/>{/if}
+			发信:<a href="index.php?moduleid=2&amp;action=message_send&amp;touser={$username}">点此发送</a><br/>
+		{else}
+		无权查看，请升级<br/>
+		{/if}
+	{else}
+		{if $vip}级别:{VIP} {$vip}<br/>{/if}
+		{if $areaid}所在地区:{area_pos($areaid, '/')}<br/>{/if}
+		{if $type}公司类型:{$type}{if $mode}({$mode}){/if}<br/>{/if}
+		{if $regyear}成立时间:{$regyear}<br/>{/if}
+		{if $capital}注册资本:{$capital}万{$regunit}<br/>{/if}
+		{if $business}经营范围:{$business}<br/>{/if}		
+		<!--{php $tags=tag("moduleid=5&condition=status=3 and elite>0 and username='$username'&pagesize=5&length=$len&order=edittime desc&template=null");}-->
+		{if $tags}
+		<strong>推荐产品</strong><br/>
+		{loop $tags $t}
+		<a href="index.php?moduleid=5&amp;itemid={$t[itemid]}">{$t[title]}</a><br/>
+		{/loop}
+		{/if}
+	{/if}
+{else}
+	<div class="brby"><img src="{AJ_SKIN}image/arrow.gif" align="absmiddle"/> <a href="index.php?moduleid={$moduleid}&amp;action=category">按分类浏览</a>
+	<img src="{AJ_SKIN}image/arrow.gif" align="absmiddle"/> <a href="index.php?moduleid={$moduleid}&amp;action=area">按地区浏览</a></div>
+	{loop $lists $v}
+	&middot;<a href="index.php?moduleid={$moduleid}&amp;username={$v[username]}">{$v[company]}</a><br/>
+	{/loop}
+{/if}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+<div class="fm">
+<form action="index.php" method="get">
+<input type="hidden" name="moduleid" value="{$moduleid}"/>
+<input type="hidden" name="catid" value="{$catid}"/>
+<input type="hidden" name="areaid" value="{$areaid}"/>
+<select name="moduleid" class="fm_opt">
+{loop $WAP_MODULE $i $m}
+<option value="{$m[moduleid]}"{if $m[moduleid]==$moduleid} selected{/if}>{$m[name]}</option>
+{/loop}
+</select>
+<input type="text" name="kw" value="{$kw}" size="10" class="fm_inp"/>
+<input type="submit" value="搜索" class="fm_sbm"/>
+</form>
+</div>
+{template 'footer', $TP}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 if(!$_userid) dheader($MODULE[2]['linkurl'].'publish.php');
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
@@ -22,7 +22,7 @@ if($submit) {
 	extract($user);
 	$logintime = timetodate($logintime, 5);
 	$regtime = timetodate($regtime, 5);
-	$userurl = userurl($_username, '', $domain);	
+	$userurl = userurl($_username, '', $domain);
 	$sys = array();
 	$i = 0;
 	$result = $db->query("SELECT itemid,title,addtime,groupids FROM {$AJ_PRE}message WHERE groupids<>'' ORDER BY itemid DESC", 'CACHE');
@@ -43,6 +43,7 @@ if($submit) {
 	$trade = $db->count("{$AJ_PRE}mall_order", "seller='$_username' AND status=0");
 	$expired = $totime && $totime < $AJ_TIME ? true : false;
 	$havedays = $expired ? 0 : ceil(($totime-$AJ_TIME)/86400);
+	// print_r($module);exit;
 	include template('index', $module);
 }
 ?>

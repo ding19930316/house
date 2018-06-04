@@ -146,6 +146,7 @@ return $string;
 }
 function template($template = 'index',$dir = '') {
 global $CFG;
+  // print_r($template);exit;
 $to = $dir ?AJ_CACHE.'/tpl/'.$dir.'-'.$template.'.php': AJ_CACHE.'/tpl/'.$template.'.php';
 $isfileto = is_file($to);
 if($CFG['template_refresh'] ||!$isfileto) {
@@ -830,15 +831,49 @@ $name = $isusername ?'username': 'userid';
 return AJ_PATH.'api/avatar/show.php?'.$name.'='.$var.'&amp;size='.$size;
 }
 }
+function companyinfo($company){
+  global $db,$dc,$CFG;
+  $user = $db->get_one("SELECT * FROM {$db->pre}company where company='$company'");
+  return $user;
+}
+function get_members($companyid){
+  global $db,$dc,$CFG;
+  $result = $db->query("SELECT * FROM {$db->pre}member where companyid='$companyid'");
+	while($r = $db->fetch_array($result)) {
+		$users[] = $r;
+	}
+  return $users;
+}
+function get_houses($table,$username)
+{
+  global $db,$dc,$CFG;
+  // print_r("SELECT * FROM {$db->pre}"."$table where username='$username'");exit;
+  $result = $db->query("SELECT * FROM {$db->pre}"."$table where username='$username'");
+	while($r = $db->fetch_array($result)) {
+		$users[] = $r;
+	}
+  return $users;
+}
+function get_userinfo($userid,$cache = 1) {
+global $db,$dc,$CFG;
+// if($cache &&$CFG['db_expires']) {
+// $user = $dc->get('user-'.$username);
+// if($user) return $user;
+// }
+// $user = $db->get_one("SELECT * FROM {$db->pre}member m, {$db->pre}company c WHERE m.userid=c.userid AND m.username='$username'");
+$user = $db->get_one("SELECT * FROM {$db->pre}member where userid='$userid'");
+return $user;
+}
 function userinfo($username,$cache = 1) {
 global $db,$dc,$CFG;
 if(!check_name($username)) return array();
 $user = array();
-if($cache &&$CFG['db_expires']) {
-$user = $dc->get('user-'.$username);
-if($user) return $user;
-}
-$user = $db->get_one("SELECT * FROM {$db->pre}member m, {$db->pre}company c WHERE m.userid=c.userid AND m.username='$username'");
+// if($cache &&$CFG['db_expires']) {
+// $user = $dc->get('user-'.$username);
+// if($user) return $user;
+// }
+// $user = $db->get_one("SELECT * FROM {$db->pre}member m, {$db->pre}company c WHERE m.userid=c.userid AND m.username='$username'");
+$user = $db->get_one("SELECT * FROM {$db->pre}member where username='$username'");
 if($cache &&$CFG['db_expires'] &&$user) $dc->set('user-'.$username,$user,$CFG['db_expires']);
 return $user;
 }

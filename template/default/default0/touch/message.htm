@@ -1,0 +1,43 @@
+{template 'header', $TP}
+<div class="head_bar">
+<table>
+<tr>
+<td class="head_bar_td_w5">&nbsp;</td>
+<td class="head_bar_td_w50"><div class="head_back"><a href="{$back_link}"><span>返回</span></a></div></td>
+<td><div class="head_name"><a href="index.php?moduleid={$moduleid}&amp;action=message"><span>站内信</span></a</div></td>
+<td class="head_bar_td_w55 t_r"><a href="index.php?moduleid={$moduleid}&amp;action=message_send"><img src="image/edit.png" width="40" height="40" alt=""/></a></td>
+</tr>
+</table>
+</div>
+<div class="head_bar_fix"></div>
+
+<div class="main">
+{if $itemid}
+	<div class="title"><strong>{$title}</strong></div>
+	<div class="info">
+	日期:<small>{$adddate}</small>&nbsp;&nbsp;
+	{if $fromuser}发信人:<a href="index.php?moduleid=4&amp;username={$fromuser}" class="b">{$fromuser}</a>&nbsp;&nbsp;{/if}
+	{if $fromuser}<a href="index.php?moduleid={$moduleid}&amp;action=message_send&amp;touser={$fromuser}&amp;title=RE:{urlencode($title)}" class="b">回复</a>&nbsp;&nbsp;{/if}
+	<a href="index.php?moduleid={$moduleid}&amp;action=message_deletes&amp;itemid={$itemid}" class="b" onclick="return confirm('确定要删除信件吗？');">删除</a>
+	</div>
+	<div class="content">
+	{$content}
+	</div>
+{else}
+	<ul class="listtxt">
+	{loop $lists $v}
+	<li><span class="f_r px11 f_gray">&nbsp;&nbsp;{$v[adddate]}</span><a href="index.php?moduleid={$moduleid}&amp;action={$action}&amp;itemid={$v[itemid]}">{if !$v[isread]}<span class="f_b">{/if}{$v[title]}{if !$v[isread]}</strong>{/if}</a></li>
+	{/loop}
+	</ul>
+{/if}
+{if $pages}<div class="pages">{$pages}</div>{/if}
+	<div class="fm">
+	<form action="index.php" method="get">
+	<input type="hidden" name="moduleid" value="{$moduleid}"/>
+	<input type="hidden" name="action" value="{$action}"/>
+	<input type="text" name="kw" value="{$kw}" size="15" data-widget="quickdelete" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" class="fm_inp"/>
+	<input type="submit" value="搜索" class="fm_sbm"/>
+	</form>
+	</div>
+</div>
+{template 'footer', $TP}
