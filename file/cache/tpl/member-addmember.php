@@ -1,4 +1,19 @@
 <?php defined('IN_AIJIACMS') or exit('Access Denied');?><?php include template('header', 'member');?>
+<link href="../static/css/jquery-ui.min.css" />
+<script type="text/javascript" src="../static/js/jquery-ui.min.js" ></script>
+<style media="screen">
+ul.ui-autocomplete{
+width:200px;
+height:500px;
+overflow:auto;
+white-space:nowrap;
+border:#7F9DB9 1px solid;
+background-color: #f4f5f5;
+}
+ul.ui-autocomplete li.ui-menu-item{
+border-bottom: #7F9DB9 1px solid;
+}
+</style>
 <script type="text/javascript">c(3);</script>
 <div class="tinfo">
 <div class="menu">
@@ -6,7 +21,7 @@
 <tr>
 <!-- <td class="tab" id="add"><a href="addmember.php?action=add"><span>添加经纪人</span></a></td> -->
 <td class="tab_nav">&nbsp;</td>
-<td class="tab" id="s3"><a href="addmember.php"><span>员工管理</span></a></td>
+<td class="tab" id="s3"><a href="addmember.php"><span><?php if($action=='edit_all')echo "中介排序"; else echo "员工管理"?></span></a></td>
 </tr>
 </table>
 </div>
@@ -279,7 +294,40 @@
 <script type="text/javascript">s('addmember');m('s3');</script>
 <?php } else { ?>
 <div class="con">
-<table cellpadding="0" cellspacing="0" class="tb">
+<table cellpadding="0" cellspacing="0" class="tb add">
+<?php if($action == 'edit_all'){?>
+<tr>
+<th>ID</th>
+<th >所在区域</th>
+<th>公司名称</th>
+<th>公司地址</th>
+<th>公司电话</th>
+<th>排名(双击修改)</th>
+<th width="40">设置管理员</th>
+</tr>
+<?php foreach($companys_l as $k => $v){?>
+<tr align="center">
+<td width="32" height="30" ><?php echo $v['userid'];?></td>
+<td><?php echo area_pos($v['areaid'], '');?></td>
+<td><?php echo $v['company'];?></td>
+<td><?php echo $v['address'];?></td>
+<td><?php echo $v['telephone'];?></td>
+<td class="double_click" companyid = '<?php echo $v['userid'];?>'><?php echo $v['level'];?></td>
+<td>
+<select class = "setmaster" companyid="<?php echo $v['userid'];?>">
+<option value="">
+</option>
+<?php foreach($companys_l_s[$v['userid']] as $m){?>
+<option value="<?php echo $m['userid']?>" <?php if($m['companymaster']) echo "selected"?>>
+<?php echo $m['truename'];?>
+</option>
+<?}?>
+</select>
+</td>
+</tr>
+<?}?>
+</table>
+<?}else{?>
 <tr>
 <th>ID</th>
 <th >会员名</th>
@@ -301,11 +349,152 @@
 </tr>
 <?php } } ?>
 </table>
+<?}?>
 </div>
+<?if($action == 'edit_all'){?><div class= "addcompany" style="cursor: pointer;float:right;width:60;background-color:#1F5288;text-align:center;border-radius:2px;color:#fff;padding-left:4px;padding-right:4px">添加中介</div><?}?>
 <?php if($MG['addmember_limit']) { ?>
 <div class="limit">总共可发 <span class="f_b f_red"><?php echo $MG['addmember_limit'];?></span> 条&nbsp;&nbsp;&nbsp;当前已发 <span class="f_b"><?php echo $limit_used;?></span> 条&nbsp;&nbsp;&nbsp;还可以发 <span class="f_b f_blue"><?php echo $limit_free;?></span> 条</div>
 <?php } ?>
 <div class="pages"><?php echo $pages;?></div>
+<script type="text/javascript">
+$(document).ready(function(){
+//================初始化数据
+var preval = "";//定义双击修改的时候的初始值
+var company_arr = [];
+if(JSON.stringify('<?php echo $companys_n?>') != '{}'){
+var companys = $.parseJSON('<?php echo $companys_n?>');
+}else{
+var companys = {};
+}
+for (x in companys)
+  {
+   company_arr.push(x);
+  }
+//===========end
+//===========选择管理员
+$("select.setmaster").bind("change",function(){
+var companyid = $(this).attr("companyid");
+// console.log($(this));
+var val = $(this).val();
+$.post("addmember.php?action=edit_all",{v:val,companyid:companyid,type:'setmaster'},function(res){
+console.log(res);
+});
+});
+//=========end
+//双击修改排序========================
+$(".double_click").dblclick(function(){
+var db_this = $(this);
+var companyid = db_this.attr("companyid");
+var preval = db_this.html();
+db_this.html("<input/>");
+var input = $(this).find("input");
+input.blur(function(){
+var inputval = $(this).val();
+if(isNaN(inputval)){//不是数字
+// db_this.html(preval);
+}else{
+$.post("addmember.php?action=edit_all",{level:inputval,companyid:companyid,type:'doubleset'},function(res){
+db_this.html(inputval);
+});
+}
+});
+});
+//========================
+//================添加按钮实现
+$(".addcompany").click(function(){
+// var companys = ["dasdsa","dasdsa","derwer23"];
+var tr = "<tr>";
+tr += "<td></td><td></td><td><input class = 'findcompany'/ style='width:90%'></td><td></td><td></td><td></td><td></td></tr>";
+$("table.tb.add").append(tr);
+$(".findcompany").autocomplete({
+source: company_arr,
+messages: {
+noResults: '',
+results: function() {}
+}
+});
+$("input.findcompany").blur(function(){
+var input_obj = $(this);
+var input_obj_val = input_obj.val();
+var td_select = '';
+var exit_n = $.inArray(input_obj_val, company_arr)
+  if(exit_n !=-1)
+{
+var input_obj_info = companys[input_obj_val];
+// console.log(input_obj_info);
+input_obj.closest("tr").find("td").each(function(index){
+switch (index) {
+case 0:
+$(this).html(input_obj_info.userid);
+break;
+case 1:
+// $(this).html(input_obj_info.areaid);
+break;
+case 2:
+$(this).html(input_obj_info.company);
+break;
+case 3:
+$(this).html(input_obj_info.address);
+break;
+case 4:
+$(this).html(input_obj_info.telephone);
+break;
+case 5:
+$(this).html(input_obj_info.level);
+$(this).addClass("double_click").attr("companyid",input_obj_info.userid);
+break;
+case 6:
+var a_html = "<select class = 'setmaster' companyid="+input_obj_info.userid+"><option value=''></option></select>";
+$(this).html(a_html);
+break;
+}
+$.post("addmember.php?action=edit_all",{type:"getline",companyid:input_obj_info.userid,areaid:input_obj_info.areaid},function(res){
+if(JSON.stringify(res) != '{}'){
+res = $.parseJSON(res);
+var options = '';
+for(x in res){
+options += "<option value="+res[x].userid+">"+res[x].truename+"</option>";
+}
+$("select[companyid="+input_obj_info.userid+"]").append(options);
+}
+});
+console.log(index);
+$("select.setmaster").bind("change",function(){
+var companyid = $(this).attr("companyid");
+// console.log($(this));
+var val = $(this).val();
+$.post("addmember.php?action=edit_all",{v:val,companyid:companyid,type:'setmaster'},function(res){
+console.log(res);
+});
+});
+// $(this).html();
+$(".double_click").dblclick(function(){
+var db_this = $(this);
+var companyid = db_this.attr("companyid");
+var preval = db_this.html();
+db_this.html("<input />");
+var input = $(this).find("input");
+input.blur(function(){
+var inputval = $(this).val();
+if(isNaN(inputval)){//不是数字
+db_this.html(preval);
+}else{
+$.post("addmember.php?action=edit_all",{level:inputval,companyid:companyid,type:'doubleset'},function(res){
+db_this.html(inputval);
+});
+}
+});
+});
+});
+company_arr.splice(exit_n,1);
+}else{
+input_obj.val("");
+}
+});
+});
+//====================end
+});
+</script>
 <script type="text/javascript">s('addmember');m('s3');</script>
 <?php } ?>
 <?php if($action=='add' || $action=='edit') { ?>
@@ -507,3 +696,5 @@ i--;
 </script>
 <?php } ?>
 </div></div></div>
+</body>
+</html>

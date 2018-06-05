@@ -92,22 +92,6 @@ $(this).removeClass("on").find("div").hide();
 </ul>
 <?php } ?>
  -->
- <?php if($MG['homepage'] || $show_menu) { ?>
-<h3>
-<s></s><b class="l7">员工管理</b>
-</h3>
-<ul>
- <!-- <li ><a href="<?php echo $MODULE['2']['linkurl'];?>home.php" >商铺设置</a></li> -->
-             <?php if(($MG['addmember_limit']>-1 && $MG['homepage']) || $show_menu) { ?>
-<li ><a href="<?php echo $MODULE['2']['linkurl'];?>addmember.php">员工管理</a></li>
-<?php } ?>
-<!-- <?php if(($MG['link_limit']>-1 && $MG['homepage']) || $show_menu) { ?>
-<li ><a href="<?php echo $MODULE['2']['linkurl'];?>link.php" >友情链接</a></li>
-<?php } ?>
- -->
-</ul>
-<?php } ?>
-<?php if($_userid || $show_menu) { ?>
 <h3>
 <s></s><b class="l8">资料修改</b>
 </h3>
@@ -122,7 +106,45 @@ $(this).removeClass("on").find("div").hide();
         <!-- <li ><a href="validate.php?action=company">执业资格证认证</a></li> -->
        <!-- <li ><a href="<?php echo $MODULE['2']['linkurl'];?>edit.php">密码</a></li> -->
 </ul>
+<?php if($right['adminmaster']||$right['companymaster']){?>
+<h3>
+<s></s><b class="l7">员工管理</b>
+</h3>
+<ul>
+ <!-- <li ><a href="<?php echo $MODULE['2']['linkurl'];?>home.php" >商铺设置</a></li> -->
+ <?php if(($MG['addmember_limit']>-1 && $MG['homepage']) || $show_menu) { ?>
+<li ><a href="<?php echo $MODULE['2']['linkurl'];?>addmember.php">员工管理</a></li>
 <?php } ?>
+<!-- <?php if(($MG['link_limit']>-1 && $MG['homepage']) || $show_menu) { ?>
+<li ><a href="<?php echo $MODULE['2']['linkurl'];?>link.php" >友情链接</a></li>
+<?php } ?>
+ -->
+</ul>
+<?}?>
+<?php if($right['adminmaster']){?>
+<h3>
+<s></s><b class="l8">管理员</b>
+</h3>
+<ul>
+<li ><a href="<?php echo $MODULE['2']['linkurl'];?>addmember.php?action=edit_all" >中介排序</a></li>
+</ul>
+<?}?>
+<?php if($right['quyumaster']){?>
+<h3>
+<s></s><b class="l8">区域管理</b>
+</h3>
+<ul>
+<li ><a href="<?php echo $MODULE['2']['linkurl'];?>edit.php" >区域管理</a></li>
+ <li ><a href="avatar.php" >头像</a></li>
+<!-- <?php if($show_oauth) { ?>
+<li ><a href="<?php echo $MODULE['2']['linkurl'];?>oauth.php" >一键登录</a></li>
+<?php } ?>
+ -->
+<!-- <li ><a href="validate.php?action=truename">身份证认证</a></li> -->
+<!-- <li ><a href="validate.php?action=company">执业资格证认证</a></li> -->
+ <!-- <li ><a href="<?php echo $MODULE['2']['linkurl'];?>edit.php">密码</a></li> -->
+</ul>
+<?}?>
 </div>
 <script type="text/javascript">
 seajs.use(["jquery","cookie"],function($){

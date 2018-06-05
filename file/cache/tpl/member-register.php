@@ -1,7 +1,9 @@
 <?php defined('IN_AIJIACMS') or exit('Access Denied');?>
 <?php include template('header');?>
-<link href="http://code.jquery.com/ui/1.10.4/themes/ui-darkness/jquery-ui.css" />
-<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js" ></script>
+<link href="../static/css/jquery-ui.min.css" />
+<script type="text/javascript" src="/file/script/jquery.ui.autocomplete.js" ></script>
+<!-- <link href="http://code.jquery.com/ui/1.10.4/themes/ui-darkness/jquery-ui.css" /> -->
+<!-- <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js" ></script> -->
 <style media="screen">
 ul.ui-autocomplete{
 width:200px;
@@ -53,7 +55,7 @@ border-bottom: #7F9DB9 1px solid;
 <tbody>
 <tr>
 <td class="tl">公司名称 <span class="f_red">*</span></td>
-<td><input type="text" class="reg_inp" style="width:200px;" name="post[rlcompany]" id="rlcompany" autocomplete="off"></td>
+<td><input type="text" class = "checkri"style="width:270px" class="reg_inp" style="width:200px;" name="post[rlcompany]" id="rlcompany" autocomplete="off"></td>
 <td width="400"><input type="button" name="qxrl" value="取消认领" style="font-size:14px;padding:3px;"></td>
 </tr>
 </tbody>
@@ -324,6 +326,12 @@ $("#rlcompany").autocomplete({
 messages: {
 noResults: '',
 results: function() {}
+}
+});
+$(".checkri").blur(function(){
+if($.inArray($(this).val(), companys) == -1)
+{
+$(this).val("");
 }
 });
 $(document).ready(function(){

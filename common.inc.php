@@ -199,6 +199,22 @@ if(!IN_ADMIN) {
 // die('11');
 // die($_groupid);
 $MG = cache_read('group-'.$_groupid.'.php');
-// print_r($MG);exit;
+
+//权限提取
+$right = array();
+// print_r($_userid);exit;
+if($_userid == '1'){
+	$right['adminmaster'] = '1';
+}else{
+	$login_msg = $db->get_one("select * from  {$AJ_PRE}member where userid = '$_userid'");
+	// print_r($login_msg);exit;
+	if($login_msg['quyumaster']){
+		$right['quyumaster'] = '1';
+	}
+	if($login_msg['companymaster']){
+		$right['companymaster'] = '1';
+	}
+}
+// print_r($right);exit;
 
 ?>
