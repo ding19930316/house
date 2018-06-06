@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 login();
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
@@ -6,8 +6,8 @@ require MD_ROOT.'/member.class.php';
 require AJ_ROOT.'/include/post.func.php';
 $do = new member;
 $do->userid = $_userid;
-$user = $do->get_one();
-
+$user = $do->get_one_c();
+// print_r($user);exit;
 $MFD = cache_read('fields-member.php');
 $CFD = cache_read('fields-company.php');
 isset($post_fields) or $post_fields = array();
@@ -17,6 +17,7 @@ in_array($group_editor, array('Default', 'Aijiacms', 'Simple', 'Basic')) or $gro
 
 $tab = isset($tab) ? intval($tab) : 0;
 if($submit) {
+	// print_r(111);exit;
 	if($post['password'] && $user['password'] != md5(md5($post['oldpassword']))) message($L['error_password']);
 	if($post['payword'] && $user['payword'] != md5(md5($post['oldpayword']))) message($L['error_payword']);
 	$post['groupid'] = $user['groupid'];
@@ -45,10 +46,16 @@ if($submit) {
 	$post['inviter'] = $user['inviter'];
 	if($post['vmobile']) $post['mobile'] = $user['mobile'];
 	if($post['vtruename']) $post['truename'] = $user['truename'];
+	// print_r(111);exit;
+
 	$post = daddslashes(dstripslashes($post));
 	if($MFD) fields_check($post_fields, $MFD);
 	if($CFD) fields_check($post_fields, $CFD);
+	// print_r(111);exit;
+
 	if($do->edit($post)) {
+		// print_r(111);exit;
+
 		if($MFD) fields_update($post_fields, $do->table_member, $do->userid, 'userid', $MFD);
 		if($CFD) fields_update($post_fields, $do->table_company, $do->userid, 'userid', $CFD);
 		if($user['edittime'] == 0 && $user['inviter'] && $MOD['credit_user']) {
@@ -69,12 +76,15 @@ if($submit) {
 		message($do->errmsg);
 	}
 } else {
+	// print_r($mobile);exit;
+
 	$COM_TYPE = explode('|', $MOD['com_type']);
 	$COM_SIZE = explode('|', $MOD['com_size']);
 	$COM_MODE = explode('|', $MOD['com_mode']);
 	$MONEY_UNIT = explode('|', $MOD['money_unit']);
 	$head_title = $L['edit_title'];
 	extract($user);
+	// print_r($user);exit;
 	$mode_check = dcheckbox($COM_MODE, 'post[mode][]', $mode, 'onclick="check_mode(this, '.$MOD['mode_max'].');"', 0);
 	$content_table = content_table(4, $userid, is_file(AJ_CACHE.'/4.part'), $AJ_PRE.'company_data');
 	$t = $db->get_one("SELECT * FROM {$content_table} WHERE userid=$userid");
@@ -88,6 +98,7 @@ if($submit) {
 	$is_company = $_groupid > 5 || ($_groupid == 4 && $regid > 5);
 	$tab = isset($tab) ? intval($tab) : -1;
 	if($tab == 2 && !$is_company) $tab = 0;
+	// print_r($mobile);exit;
 	include template('edit', $module);
 }
 ?>

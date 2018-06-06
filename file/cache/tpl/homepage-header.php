@@ -91,12 +91,12 @@ jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true});
 <div class="right">
 <h1><b style="font-size:20px"><?php echo $COM['company']?></b></h1>
 <p><strong>电话：</strong><?php echo $COM['telephone']?></p>
-<p><strong>地址：</strong><?php echo $COM['address']?></p>
+<p><strong>地址：</strong><?php echo $COM['comaddress']?></p>
 <p><strong>法人：</strong><?php echo $COM['owner']?></p>
 <p><strong>邮箱：</strong><?php echo $COM['comemail']?></p>
 <p><strong>注册时间：</strong><?php echo $COM['rigister_time']?></p>
 <p><strong>注册资金：</strong><?php echo $COM['register_mon']?></p>
-<p style="width:100%;height:auto"><strong>介绍：</strong><?php echo $COM['intruce']?></p>
+<p style="width:100%;height:auto"><strong>介绍：</strong><?php echo $COM['introduce']?></p>
 </div>
 </div>
 <style media="screen">

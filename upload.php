@@ -3,12 +3,14 @@
 	[Aijiacms house System] Copyright (c) 2008-2013 Aijiacms.COM
 	This is NOT a freeware, use is subject to license.txt
 */
+// print_r($_FILES);exit;
 @set_time_limit(0);
 require 'common.inc.php';
 if($AJ_BOT) dhttp(403);
 $from = isset($from) ? trim($from) : '';
 $swfupload = isset($swfupload) ? 1 : 0;
 $errmsg = '';
+// print_r($_FILES);exit;
 if($swfupload) {//Fix FlashPlayer Bug
 	$swf_userid = intval($swf_userid);
 	if($swf_userid != $_userid && is_md5($swf_auth)) {

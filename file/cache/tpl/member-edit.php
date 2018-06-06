@@ -1,12 +1,6 @@
 <?php defined('IN_AIJIACMS') or exit('Access Denied');?><?php include template('header',$module);?>
 <?php echo load('profile.js');?>
 <div class="tinfo">
-<?php if($is_company && !$_edittime) { ?>
-<div class="warn">贵公司尚未完善详细资料！完善的商业信息有助于获得别人的信任，结交潜在的商业伙伴，获取商业机会，请尽快完善</div>
-<?php } ?>
-<?php if(isset($success)) { ?>
-<div class="ok">资料保存成功，您可以：<a href="edit.php" class="t">继续完善</a> &nbsp;|&nbsp; <a href="<?php echo $AJ['file_my'];?>" class="t">发布信息</a> &nbsp;|&nbsp; <a href="./" class="t">返回会员中心首页</a></div>
-<?php } ?>
 <div class="menu">
 <table cellpadding="0" cellspacing="0">
 <tr>
@@ -58,7 +52,6 @@
 /> 女士
 </td>
 </tr>
-<?php if(!$is_company) { ?>
 <tr>
 <td class="tl"><span class="f_red">*</span>所在地区</td>
 <td class="tr"><?php echo ajax_area_select('post[areaid]', '请选择', $areaid);?>&nbsp;<span id="dareaid" class="f_red"></span></td>
@@ -71,11 +64,6 @@
 <td class="tl">邮政编码</td>
 <td class="tr"><input type="text" size="8" name="post[postcode]" id="postalcode" value="<?php echo $postcode;?>"/></td>
 </tr>
-<tr>
-<td class="tl">联系电话</td>
-<td class="tr"><input type="text" size="20" name="post[telephone]" id="telephone" value="<?php echo $telephone;?>"/>&nbsp;<span id="dtelephone" class="f_red"></span></td>
-</tr>
-<?php } ?>
 <?php if($vmobile) { ?>
 <tr>
 <td class="tl">手机号码</td>
@@ -100,12 +88,6 @@
 <tr>
 <td class="tl">QQ</td>
 <td class="tr"><input type="text" size="20" name="post[qq]" id="qq" value="<?php echo $qq;?>"/></td>
-</tr>
-<?php } ?>
-<?php if($AJ['im_ali']) { ?>
-<tr>
-<td class="tl">阿里旺旺</td>
-<td class="tr"><input type="text" size="20" name="post[ali]" id="ali" value="<?php echo $ali;?>"/></td>
 </tr>
 <?php } ?>
 <tr>
@@ -137,27 +119,12 @@
 <td class="tl">现有密码</td>
 <td class="tr f_red"><input type="password" size="20" name="post[oldpassword]" id="oldpassword" autocomplete="off"/>&nbsp; 如要更改密码，需输入现有密码 <span id="doldpassword" class="f_red"></span></td>
 </tr>
-<tr>
-<td class="tl">新支付密码</td>
-<td class="tr"><input type="password" size="20" name="post[payword]" id="payword" onblur="validator('payword');" autocomplete="off"/>&nbsp;<span class="f_gray">如不更改支付密码，请留空</span> <span id="dpayword" class="f_red"></span></td>
-</tr>
-<tr>
-<td class="tl">重复新支付密码</td>
-<td class="tr"><input type="password" size="20" name="post[cpayword]" id="cpayword" autocomplete="off"/>&nbsp;<span id="dcpayword" class="f_red"></span></td>
-</tr>
-<tr>
-<td class="tl">现有支付密码</td>
-<td class="tr f_red"><input type="password" size="20" name="post[oldpayword]" id="oldpayword" autocomplete="off"/>&nbsp; 支付密码默认和注册设置密码相同&nbsp;&nbsp;<a href="send.php?action=payword"  class="t">找回支付密码</a><span id="doldpayword" class="f_red"></span></td>
-</tr>
 </tbody>
 <?php if($is_company) { ?>
 <tbody id="Tabs2" style="display:none;">
 <tr onmouseover="Ds('tcompany');" onmouseout="Dh('tcompany');">
-<td class="tl">公司名称 <span class="f_red">*</span></td>
-<td width="300">
-<input type="hidden" id="userid" name="post[companyid]" value="<?php echo $userid;?>" >
-<input type="text" class="reg_inp" style="width:280px;" name="post[company]" value="<?php echo $_company;?>" id="company" onblur="validator('company');"/></td>
-
+<td class="tl">公司名称 <span class="f_red"></span></td>
+<td width="300"><?php echo $company;?>
 </tr>
 <tr>
 <td class="tl">形象图片</td>
@@ -173,7 +140,7 @@
 <tbody id="Tabs3" style="display:none;">
 <tr>
 <td class="tl"><span class="f_red">*</span>公司地址</td>
-<td class="tr"><input type="text" size="60" name="post[address]" id="daddress" value="<?php echo $address;?>" maxlength="200"/>&nbsp;<span id="ddaddress" class="f_red"></span></td>
+<td class="tr"><input type="text" size="60" name="post[comaddress]" id="daddress" value="<?php echo $comaddress;?>" maxlength="200"/>&nbsp;<span id="ddaddress" class="f_red"></span></td>
 </tr>
 <tr>
 <td class="tl">邮政编码</td>
@@ -193,7 +160,7 @@
 </tr>
 <tr>
 <td class="tl">公司网址</td>
-<td class="tr"><input type="text" size="30" name="post[homepage]" id="homepage" value="<?php echo $homepage;?>"/></td>
+<td class="tr"><input type="text" size="30" name="post[website]"  value="<?php echo $website;?>"/></td>
 </tr>
 </tbody>
 <tbody id="Tabs4" style="display:none;">
@@ -273,7 +240,6 @@ return false;
 <?php if($MFD) { ?><?php echo fields_js($MFD);?><?php } ?>
 <?php if($is_company) { ?>
 <?php if($CFD) { ?><?php echo fields_js($CFD);?><?php } ?>
-
 if(Dd('areaid_1').value == 0) {
 Tab(2);
 Dmsg('请选择公司所在地', 'areaid');

@@ -78,7 +78,7 @@ $xiqoqu = get_xiqoqu(0);
 	// 	// code...
 	// }
 	//中介等人员信息
-	$query = "select * from aijiacms_company order by level desc limit 0,40";//这里做名次
+	$query = "select * from aijiacms_company order by level asc limit 0,40";//这里做名次
 	$result = $db->query($query, 'CACHE', 0);
 	while($r = $db->fetch_array($result)) {
 		$members_r[] = $r;

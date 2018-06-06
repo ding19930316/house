@@ -3,6 +3,7 @@
 	[Aijiacms System] Copyright (c) 2008-2013 Aijiacms.COM
 	This is NOT a freeware, use is subject to license.txt
 */
+// print_r($_FILES);exit;
 define('AJ_DEBUG', 0);
 if(AJ_DEBUG) {
 	error_reporting(E_ALL);
@@ -44,7 +45,7 @@ define('AJ_SKIN', AJ_STATIC.'skin/'.$CFG['skin'].'/');
 define('VIP', $CFG['com_vip']);
 define('errmsg', 'Invalid Request');
 $L = array();
-// print_r($CFG);exit;
+// print_r($_FILES);exit;
 include AJ_ROOT.'/lang/'.AJ_LANG.'/lang.inc.php';
 require AJ_ROOT.'/version.inc.php';
 require AJ_ROOT.'/include/global.func.php';
@@ -65,6 +66,7 @@ $AJ_IP = get_env('ip');
 $AJ_URL = get_env('url');
 $AJ_REF = get_env('referer');
 $AJ_BOT = is_robot();
+// print_r($_FILES);exit;
 header("Content-Type:text/html;charset=".AJ_CHARSET);
 require AJ_ROOT.'/include/db_'.$CFG['database'].'.class.php';
 require AJ_ROOT.'/include/cache_'.$CFG['cache'].'.class.php';
@@ -120,6 +122,7 @@ if($moduleid > 1) {
 	$moduleid = 1;
 	$module = 'aijiacms';
 }
+// print_r($_FILES);exit;
 verify();
 if($AJ['city']) include AJ_ROOT.'/include/city.inc.php';
 if($AJ['city']){

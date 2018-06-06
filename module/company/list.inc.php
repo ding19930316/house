@@ -165,7 +165,7 @@ if($items) {
 		switch ($mod_item) {
 			case 'company':
 				// $sql[] = "select * from $table WHERE {$condition[$table]}";
-				$sql[] = "select userid as id,company as title,company,telephone,areaid,address,'$table' as modtype from $table WHERE {$condition[$table]}";
+				$sql[] = "select userid as id,company as title,company,telephone,areaid,comaddress as address,'$table' as modtype from $table WHERE {$condition[$table]}";
 				break;
 			case 'member':
 				$sql[] = "select userid as id,truename as title,company,mobile as telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";

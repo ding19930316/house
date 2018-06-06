@@ -175,14 +175,14 @@ function set_company($post){
 	$member['telephone'] = isset($post['telephone']) ? trim($post['telephone']) : '';
 	$member['type'] = isset($post['type']) ? trim($post['type']) : '';
 	$member['areaid'] = isset($post['areaid']) ? trim($post['areaid']) : '';
-	$member['address'] = isset($post['comaddress']) ? trim($post['comaddress']) : '';
+	$member['comaddress'] = isset($post['comaddress']) ? trim($post['comaddress']) : '';
 	$member['code'] = isset($post['code']) ? trim($post['code']) : '';
 	$member['rigister_time'] = isset($post['rigister_time']) ? trim($post['rigister_time']) : '';
 	$member['owner'] = isset($post['code']) ? trim($post['owner']) : '';
 	$member['register_mon'] = isset($post['register_mon']) ? trim($post['register_mon']) : '';
 	$member['intruce'] = isset($post['intruce']) ? trim($post['intruce']) : '';
 	$member['website'] = isset($post['website']) ? trim($post['website']) : '';
-	$member['keyword'] = $post['company'].','.$post['address'].','.$post['owner'];
+	$member['keyword'] = $post['company'].','.$post['comaddress'].','.$post['owner'];
 	return $member;
 }
 function set_member($member) {
@@ -298,7 +298,7 @@ function set_member($member) {
 		// $member['password'] = $member['payword'] = md5(md5($member['password']));
 		// $member['sound'] = 1;
 		$member_fields = array('username','company','passport', 'password','payword','email','sound','gender','truename','mobile','msn','qq','ali','skype','department','career','groupid','regid','areaid','edittime','inviter','companyid','keyword');
-		$company_fields = array('username','groupid','company','type','catid','catids','areaid', 'mode','capital','regunit','size','regyear','sell','buy','business','telephone','fax','mail','address','postcode','code','homepage','introduce','rigister_time','website','intruce','register_mon','comemail','owner','thumb','keyword','linkurl','letter');
+		$company_fields = array('username','groupid','company','type','catid','catids','areaid', 'mode','capital','regunit','size','regyear','sell','buy','business','telephone','fax','mail','comaddress','postcode','code','homepage','introduce','rigister_time','website','intruce','register_mon','comemail','owner','thumb','keyword','linkurl','letter');
 		$member_sqlk = $member_sqlv = $company_sqlk = $company_sqlv = '';
 		//
 		// $member_fields = array('username','company','passport', 'password','payword','email','sound','gender','truename','mobile','msn','qq','ali','skype','department','career','groupid','regid','areaid','edittime','inviter','companyid');
@@ -361,12 +361,19 @@ function set_member($member) {
 	}
 
 	function edit($member)	{
-		if(!$this->is_member($member)) return false;
+		// print_r(111);exit;
+
+		// if(!$this->is_member($member)) return false;
+		// print_r(111);exit;
+
 		$member = $this->set_member($member);
 		$r = $this->get_one();
 		$member['linkurl'] = userurl($r['username'], '', $member['domain']);
-		$member_fields = array('company','passport','sound','email','msn','qq','ali','skype','gender','truename','mobile','department','career','groupid','areaid', 'edittime','black','bank','account','vemail','vmobile','vbank','vtruename','vcompany','vtrade','trade','support','inviter','companyid','address');
-		$company_fields = array('company','type','areaid', 'catid','catids','business','mode','regyear','regunit','capital','size','address','postcode','telephone','fax','mail','homepage','sell','buy','introduce','thumb','keyword','linkurl','groupid','domain','icp','validated','validator','validtime','skin','template','letter');
+		$member_fields = array('username','passport', 'password','payword','email','sound','gender','truename','mobile','msn','qq','ali','skype','department','career','regid','areaid','edittime','inviter','keyword','address');
+		if(!$member['password']){
+			$member_fields = array('username','passport','payword','email','sound','gender','truename','mobile','msn','qq','ali','skype','department','career','regid','areaid','edittime','inviter','keyword','address');
+			}
+		$company_fields = array('username','type','catid','catids','areaid', 'mode','capital','regunit','size','regyear','sell','buy','business','telephone','fax','mail','comaddress','postcode','code','introduce','rigister_time','website','intruce','register_mon','comemail','owner','thumb','keyword','linkurl','letter');
 		$member_sql = $company_sql = '';
 		foreach($member as $k=>$v) {
 			if(in_array($k, $member_fields)) $member_sql .= ",$k='$v'";
@@ -383,7 +390,8 @@ function set_member($member) {
         $member_sql = substr($member_sql, 1);
         $company_sql = substr($company_sql, 1);
 	    $this->db->query("UPDATE {$this->table_member} SET $member_sql WHERE userid=$this->userid");
-	    $this->db->query("UPDATE {$this->table_company} SET $company_sql WHERE userid=$this->userid");
+			$this->companyid = $this->db->get_one("select companyid from {$this->table_member} WHERE userid=$this->userid")['companyid'];
+	    $this->db->query("UPDATE {$this->table_company} SET $company_sql WHERE userid=$this->companyid");
 		$content_table = content_table(4, $this->userid, is_file(AJ_CACHE.'/4.part'), $this->table_company_data);
 	    $this->db->query("UPDATE {$content_table} SET content='$member[content]' WHERE userid=$this->userid");
 		$member['userid'] = $this->userid;
@@ -397,7 +405,16 @@ function set_member($member) {
         return $this->db->get_one("SELECT * FROM {$this->table_member} m,{$this->table_company} c WHERE m.userid=c.userid AND $condition");
 	}
 
+	function get_one_c($username = '') {
+		$condition = $username ? "m.username='$username'" : "m.userid='$this->userid'";
+		// print_r("SELECT * FROM {$this->table_member} m,{$this->table_company} c WHERE m.companyid=c.userid AND $condition");exit;
+				return $this->db->get_one("SELECT * FROM {$this->table_member} m,{$this->table_company} c WHERE m.companyid=c.userid AND $condition");
+	}
+
+
+
 	function get_list($condition, $order = 'userid DESC') {
+				// print_r("SELECT * FROM {$this->table_member} WHERE $condition ORDER BY $order LIMIT $offset,$pagesize");exit;
 		global $pages, $page, $pagesize, $offset, $sum;
 		if($page > 1 && $sum) {
 			$items = $sum;

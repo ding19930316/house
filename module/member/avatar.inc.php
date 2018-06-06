@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 login();
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
@@ -37,7 +37,7 @@ switch($action) {
 		dmsg($L['avatar_delete'], 'avatar.php?itemid='.$AJ_TIME);
 	break;
 	default:
-		$head_title = $L['avatar_title'];	
+		$head_title = $L['avatar_title'];
 	break;
 }
 include template('avatar', $module);

@@ -16,8 +16,7 @@ switch($action) {
 		if($submit) {
 			if($do->pass($post)) {
 				$post['company'] = $_company;
-				//$useridd=$userid;
-				$post['companyid'] = $_userid;
+				$post['companyid'] = $db->get_one("select companyid from {$this->table_member} WHERE userid='$_userid'")['companyid'];
 				$post['groupid'] = $post['groupid'];
 			 $post['company'] = $post['truename'];
 			$post['passport'] = $post['passport'] ? $post['passport'] : $post['username'];
@@ -119,6 +118,7 @@ switch($action) {
 			$action = '';
 			$condition = "company='$_company'";
 			if($keyword) $condition .= " AND member LIKE '%$keyword%'";
+			// print_r($condition);exit;
 			$lists = $do->get_list($condition);
 			$head_title = $L['addmember_title'];
 		}
@@ -126,6 +126,8 @@ switch($action) {
 	default:
 		$condition = "company='$_company'";
 		if($keyword) $condition .= " AND member LIKE '%$keyword%'";
+		// print_r($condition);exit;
+
 		$lists = $do->get_list($condition);
 		$head_title = $L['addmember_title'];
 	break;
@@ -134,5 +136,6 @@ switch($action) {
 $limit_used = $r['num'];
 
 $limit_free = $MG['addmember_limit'] && $MG['addmember_limit'] > $limit_used ? $MG['addmember_limit'] - $limit_used : 0;
+// print_r($lists);exit;
 include template('addmember', $module);
 ?>
