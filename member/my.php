@@ -32,6 +32,7 @@ if($mid) {
 	// print_r("111");exit;
 	if($_credit < 0 && $MST['credit_less'] && $action == 'add') dheader('credit.php?action=less');
 	if($submit) {
+		// print_r(111);exit;
 		check_post() or dalert($L['bad_data']);//safe
 		$BANWORD = cache_read('banword.php');
 		if($BANWORD && isset($post)) {

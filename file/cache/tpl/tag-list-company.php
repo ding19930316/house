@@ -4,6 +4,7 @@
     switch ($t['modtype']) {
       case 'aijiacms_company':
         $url = $CFG['url']."index.php?homepage=".$t['company'];
+        $image_url = $t['thumb'];
         break;
       case 'aijiacms_rent_7':
         $url = $CFG['url']."/rent/show-".$t['id'].".html";
@@ -13,6 +14,7 @@
         break;
       case 'aijiacms_member':
           $url = $CFG['url']."index.php?homepage=".$t['company']."&member=".$t['id'];
+          $image_url = $CFG['url']."api/avatar/show.php?username=".$t['username']."&size=large";
           break;
       case 'aijiacms_sale_5':
         $url = $CFG['url']."/sale/show-".$t['id'].".html";
@@ -22,7 +24,7 @@
   ?>
        <li>
           <a href="<?php echo $url?>" target="_blank" class="hl_img broker_img" title="<?php echo $t['company'];?>">
-              <img src="<?php echo useravatar($t['username'], 'large');?>" alt="<?php echo $t['company'];?>">
+              <img src="<?php echo $image_url?>" alt="<?php echo $t['company'];?>">
           </a>
           <div>
               <!-- <h3><a href="<?php echo userurl($t['username'], '');?>" target="_blank"><?php echo userinfos($t['username']);?></a>&nbsp;<?php if($t['vcompany']) { ?>&nbsp;<img src="<?php echo $MODULE['2']['linkurl'];?>image/v_company.gif" width="16" height="16" align="absmiddle" title="通过工商认证"/><?php } ?>

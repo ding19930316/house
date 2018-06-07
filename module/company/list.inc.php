@@ -165,26 +165,26 @@ if($items) {
 		switch ($mod_item) {
 			case 'company':
 				// $sql[] = "select * from $table WHERE {$condition[$table]}";
-				$sql[] = "select userid as id,company as title,company,telephone,areaid,comaddress as address,'$table' as modtype from $table WHERE {$condition[$table]}";
+				$sql[] = "select userid as id,company as title,company,telephone,areaid,comaddress as address,'$table' as modtype ,level ,thumb,'1' as username from $table WHERE {$condition[$table]}";
 				break;
 			case 'member':
-				$sql[] = "select userid as id,truename as title,company,mobile as telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";
+				$sql[] = "select userid as id,truename as title,company,mobile as telephone,areaid,address,'$table' as modtype , '1000' as level ,'1' as thumb ,username from $table WHERE {$condition[$table]}";
 				break;
 			case 'newhouse_6':
-				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";
+				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype ,'1000' as level ,'1' as thumb ,'1' as username  from $table WHERE {$condition[$table]}";
 				break;
 			case 'rent_7':
-				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";
+				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype ,'1000' as level ,'1' as thumb ,'1' as username  from $table WHERE {$condition[$table]}";
 				break;
 			case 'sale_5':
-				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype  from $table WHERE {$condition[$table]}";
+				$sql[] = "select itemid as id,title,company,telephone,areaid,address,'$table' as modtype ,'1000' as level  ,'1' as thumb,'1' as username  from $table WHERE {$condition[$table]}";
 				break;
 			default:
 				// code...
 				break;
 		}
 	}
-	$sql = implode(" union all ",$sql)." LIMIT ".$offset.','.$pagesize;
+	$sql = implode(" union all ",$sql)." order by level asc "." LIMIT ".$offset.','.$pagesize;
 	// print_r($sql);exit;
 	$result = $db->query($sql);
 	while($r = $db->fetch_array($result)) {

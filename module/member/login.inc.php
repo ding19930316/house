@@ -1,4 +1,4 @@
-<?php 
+<?php
 defined('IN_AIJIACMS') or exit('Access Denied');
 if($_userid) dheader($MOD['linkurl']);
 require AJ_ROOT.'/module/'.$module.'/common.inc.php';
@@ -74,6 +74,7 @@ if($submit) {
 	}
 	set_cookie('forward_url', $forward);
 	$head_title = $register ? $L['login_title_reg'] : $L['login_title'];
+	// print_r($module);exit;
 	include template('login', $module);
 }
 

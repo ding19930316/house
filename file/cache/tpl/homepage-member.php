@@ -7,13 +7,9 @@
 <body>
     <div class="w_1200 mb20" style="overflow: hidden;margin-top:30px">
         <!--左侧信息-->
-            <input type="hidden" id="h_name" value="孟祥磊" />
-            <input type="hidden" id="h_num" value="152" />
-            <input type="hidden" id="h_qq" value="" />
-            <input type="hidden" id="h_remark" value="" />
 <div class="w_270 fl">
     <div class="jjrinfo mb20">
-        <img src="template/default/homepage/staticq/picture/no_j.gif" class="jjrpic">
+        <img src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $COM['username']?>&size=large" class="jjrpic">
         <div class="jjrname"><?php echo $COM['truename'];?></div>
         <div class="other_message"><span class="color999"><a href="<?php echo $MODULE[1][linkurl].'index.php?homepage='.$COM['company'] ?>">所属中介：</span><span class="red f16"><?php echo $COM['company'];?></span></a></div>
         <div class="other_message"><span class="color999">电子邮箱：</span><?php echo $COM['email'];?></div>

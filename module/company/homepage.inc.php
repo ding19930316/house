@@ -38,7 +38,7 @@ $HMAIN = $_HMAIN;
 if($EXT['wap_enable']) $head_mobile = $EXT['wap_url'].'index.php?moduleid=4&username='.$username;
 $seo_title = isset($HOME['seo_title']) && $HOME['seo_title'] ? $HOME['seo_title'] : '';
 $head_title = '';
-// print_r($COM);exit;
+// print_r($template);exit;
 include template('index', $template);
 if(isset($update) && $db->cache_ids && ($username == $_username || $_groupid == 1 || $domain)) {
 	foreach($db->cache_ids as $v) {

@@ -41,7 +41,7 @@
   <li class="pt"></li>
 
 			<span>验证码：</span>{template 'captchal', 'chip'}
-			
+
 			{/if}
 <li class="pt"></li>
                         <li class="h">
@@ -51,7 +51,7 @@
 </li>
 <li class="h">
 <input style="width:70px;" type="submit" name="submit" value="登 录" />
-&nbsp; <a href="{$AJ[file_register]}" title="免费注册">免费注册</a>|<a href="send.php" title="忘记密码">忘记密码</a>
+<!-- &nbsp; <a href="{$AJ[file_register]}" title="免费注册">免费注册</a>|<a href="send.php" title="忘记密码">忘记密码</a> -->
 </li>
 </ul>
 </form>
@@ -60,15 +60,13 @@
 使用以下帐号登录：<br>
 {loop $OAUTH $k $v}
 		{if $v[enable]}<a href="{AJ_PATH}api/oauth/{$k}/connect.php" title="{$v[name]}"><img src="{AJ_PATH}api/oauth/{$k}/ico.png" alt="{$v[name]}"/></a> &nbsp;{/if}
-		{/loop}</p> 
-                  
+		{/loop}</p>
+
 </div>
 {/if}
 </div>
 </div>
 </div>
-<div id="footer">
-技术支持：dede168.com</div>
 <script type="text/javascript">
 if(Dd('username').value == '') {
 	Dd('username').focus();

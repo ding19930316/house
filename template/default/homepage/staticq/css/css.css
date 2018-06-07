@@ -578,7 +578,7 @@ border-radius:3px;
 
 .jjrinfo{ float:left; width:268px; height:auto; padding-bottom:10px; border:1px solid  #ebebeb; overflow:hidden; text-align:center;  }
 .jjrinfo .zjpic{width:160px; height:120px;margin:30px auto 5px; padding:3px; border:1px solid #ebebeb;overflow:hidden}
-.jjrinfo .jjrpic{width:100px; height:134px;margin:30px auto 5px; padding:3px; border:1px solid #ebebeb;overflow:hidden}
+.jjrinfo .jjrpic{width:134px; height:134px;margin:30px auto 5px; padding:3px; border:1px solid #ebebeb;overflow:hidden}
 .jjrinfo .jjrname{ width:100%; height:25px; line-height:25px; font-size:16px; color:#065fb9 }
 .jjrinfo .qq_message{ width:163px; height:auto;margin:15px auto 0; padding-bottom:20px; overflow:hidden}
 .jjrinfo .line{ width:100%; height:1px; background:#ebebeb; margin-bottom:10px;}

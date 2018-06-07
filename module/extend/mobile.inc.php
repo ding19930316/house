@@ -19,5 +19,6 @@ if(get_cookie('mobile') != 'pc') {
 	if(preg_match("/(iPhone|iPod|Android)/i", $_SERVER['HTTP_USER_AGENT'])) dheader($url);
 	if(preg_match("/(Phone|Mobile)/i", $_SERVER['HTTP_USER_AGENT'])) dheader($url);
 }
+// print_r(111);exit;
 include template('mobile', $module);
 ?>

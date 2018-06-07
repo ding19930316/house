@@ -84,9 +84,10 @@ switch($action) {
 			// print_r("1111");exit;
 
 			if($do->pass($post)) {
-				print_r("1111");exit;
+				// print_r("1111");exit;
 				$CAT = get_cat($post['catid']);
-				if(!$CAT || !check_group($_groupid, $CAT['group_add'])) dalert(lang($L['group_add'], array($CAT['catname'])));
+				// print_r($CAT);exit;
+				// if(!$CAT || !check_group($_groupid, $CAT['group_add'])) dalert(lang($L['group_add'], array($CAT['catname'])));
 				if($MOD['upload_thumb'] && $MG['upload'] && strlen($post['thumb']) < 5) dalert($L['sell_upload_image']);
 				$post['addtime'] = $post['level'] = $post['fee'] = 0;
 				$post['style'] = $post['template'] = $post['note'] = $post['filepath'] = '';
@@ -175,7 +176,7 @@ switch($action) {
 		if($submit) {
 			if($do->pass($post)) {
 				$CAT = get_cat($post['catid']);
-				if(!$CAT || !check_group($_groupid, $CAT['group_add'])) dalert(lang($L['group_add'], array($CAT['catname'])));
+				// if(!$CAT || !check_group($_groupid, $CAT['group_add'])) dalert(lang($L['group_add'], array($CAT['catname'])));
 				$post['addtime'] = timetodate($item['addtime']);
 				$post['level'] = $item['level'];
 				$post['fee'] = $item['fee'];

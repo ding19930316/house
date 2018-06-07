@@ -41,7 +41,6 @@
 <?php if($MOD['captcha_login']) { ?>
   <li class="pt"></li>
 <span>验证码：</span><?php include template('captchal', 'chip');?>
-
 <?php } ?>
 <li class="pt"></li>
                         <li class="h">
@@ -52,7 +51,7 @@
 </li>
 <li class="h">
 <input style="width:70px;" type="submit" name="submit" value="登 录" />
-&nbsp; <a href="<?php echo $AJ['file_register'];?>" title="免费注册">免费注册</a>|<a href="send.php" title="忘记密码">忘记密码</a>
+<!-- &nbsp; <a href="<?php echo $AJ['file_register'];?>" title="免费注册">免费注册</a>|<a href="send.php" title="忘记密码">忘记密码</a> -->
 </li>
 </ul>
 </form>
@@ -61,15 +60,12 @@
 使用以下帐号登录：<br>
 <?php if(is_array($OAUTH)) { foreach($OAUTH as $k => $v) { ?>
 <?php if($v['enable']) { ?><a href="<?php echo AJ_PATH;?>api/oauth/<?php echo $k;?>/connect.php" title="<?php echo $v['name'];?>"><img src="<?php echo AJ_PATH;?>api/oauth/<?php echo $k;?>/ico.png" alt="<?php echo $v['name'];?>"/></a> &nbsp;<?php } ?>
-<?php } } ?></p> 
-                  
+<?php } } ?></p>
 </div>
 <?php } ?>
 </div>
 </div>
 </div>
-<div id="footer">
-技术支持：dede168.com</div>
 <script type="text/javascript">
 if(Dd('username').value == '') {
 Dd('username').focus();

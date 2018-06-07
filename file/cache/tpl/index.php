@@ -43,13 +43,19 @@ GoMobile('<?php echo $head_mobile;?>');
  var apptype = "<?php echo $MODULE[$searchid]['moduledir'];?>";
 </script>
 </head><body>
-<div class="top-fixed" id="top-fixed" mod-id="lj-home-fixtop"><div class="top-fixed-bg"></div><div class="top-fixew-width"><a href="<?php echo $MODULE['1']['linkurl'];?>" title="<?php echo $AJ['sitename'];?>"><div class="home-banner"></div></a>
-<div class="search" id="homeSearchEle">
-<form class="clear" action="<?php echo $MODULE['4']['linkurl'];?>search.php?kw="><input class="txt left" name="kw" placeholder="请输入城区、商圈或小区名开始找房..." autocomplete="off" id="keyword-box-01"><input class="btn home-ico ico-search left" type="submit" value="搜索"></form><div id="suggest-cont-01" class="suggest-wrap"></div></div><div class="fr typeUserInfo"><script type="text/template" class="template">
-                            <a href="<?php echo $MODULE['1']['linkurl'];?>member/register.php"><span class="log">注册</span></a>
-              <a href="<?php echo $MODULE['1']['linkurl'];?>member/login.php" class="btn-login bounceIn"><span class="reg">登录</span></a>
-                    </script><div class="typeShowUser"><a href="<?php echo $MODULE['1']['linkurl'];?>member/register.php"><span class="log">注册</span></a>
-              <a href="<?php echo $MODULE['1']['linkurl'];?>member/login.php" class="btn-login bounceIn"><span class="reg">登录</span></a></div></div></div></div>
+<div class="top-fixed" id="top-fixed" mod-id="lj-home-fixtop" style="display:block;">
+  <div class="top-fixed-bg" style="background-color:#40444a;height:76px;"></div>
+  <div class="top-fixew-width">
+    <a href="<?php echo $MODULE['1']['linkurl'];?>" title="<?php echo $AJ['sitename'];?>"><div class="home-banner" style="background:url(<?php echo $MODULE['1']['linkurl'];?>skin/default/images/logo.gif)"></div></a>
+    <div class="search" id="homeSearchEle" style="float:right;">
+      <span class="reg" style="color:#fff;font-size:18px"><?php if($_username){?>
+        <a href="<?php echo $MODULE['1']['linkurl'];?>member" class="btn-login bounceIn"><span class="reg" style="color:#e38415;font-size:18px"><?php echo $_truename;?></span></a>&nbsp;<a href="<?php echo $MODULE['1']['linkurl'];?>member/logout.php"><span style="font-size:10px;color:#e38415;">退出|</span></a><a href="<?php echo $MODULE['1']['linkurl'];?>member"><span style="font-size:10px;color:#e38415;">管理</span></a>
+      <?}else{?>
+        <a href="<?php echo $MODULE['1']['linkurl'];?>member/login.php" class="btn-login bounceIn"><span class="reg" style="color:#e38415;font-size:18px">登录</span></a>
+      <?}?>
+    </div>
+  </div>
+</div>
    <!-- <div class="lianjia-header" mod-id="lj-home-header">
   <div class="nav-wrap">
   <div class="hhd left">
@@ -218,7 +224,7 @@ a:hover{ color:#1974A1;  }
   height: 48px;
   padding-left: 1px;
   /* background: url(../image/menubg.gif); */
-  margin-bottom: 30px !important;
+  margin-bottom: 20px !important;
 }
 .hd li{
   float: left;
@@ -250,11 +256,12 @@ a:hover{ color:#1974A1;  }
 }
 .bd li{
   float: left;
-  width: 20%;
+  width: 220px;
   height: auto;
-  padding: 20px 14px 10px;
+  /* padding: 20px 14px 10px; */
+  padding-bottom: 10px;
   border: 1px solid #e2e2e2;
-  margin-right: 28px;
+  margin-right: 47px;
   position: relative;
 }
 .bd li:nth-child(4n){
@@ -264,12 +271,12 @@ a:hover{ color:#1974A1;  }
   margin-top: 30px;
 }
 .bd li div.imgbar{
-  width: 180px;
+  width: 200px;
   height: 30px;
   line-height: 40px;
   padding: 0 10px;
   position: absolute;
-  top: 212px;
+  top: 191px;
   z-index: 100;
   font-size: 16px;
   z-index: 100;
@@ -280,12 +287,12 @@ a:hover{ color:#1974A1;  }
   opacity: 0.5;
 }
 .bd li div.imgtxt{
-  width: 180px;
+  width: 200px;
   height: 40px;
   line-height: 40px;
   padding: 0 10px;
   position: absolute;
-  top: 208px;
+  top: 187px;
   z-index: 100;
   font-size: 16px;
   z-index: 100;
@@ -300,11 +307,12 @@ a:hover{ color:#1974A1;  }
 }
 .x2{
   float: left;
-  width: 20%;
+  width: 220px;
   height: 300px;
-  padding: 20px 14px 10px;
+  /* padding: 20px 14px 10px; */
+  background-color: #fff;
   border: 1px solid #e2e2e2;
-  margin-right: 28px;
+  margin-right: 47px;
   position: relative;
 }
 .x2:nth-child(n+5){
@@ -336,13 +344,13 @@ a:hover{ color:#1974A1;  }
           ?>
           <li>
             <a href="<?php echo $url;?>" title="<?php echo $t['truename']?>" target="_blank">
-              <img style="width:200px;height:222px" src="http://img2.efw.cn/news/201804/20180416113800153102.jpg" alt="<?php echo $t['truename']?>">
+              <img style="width:220px;height:220px" src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $t['username'];?>&size=large" alt="<?php echo $t['truename']?>">
             </a>
             <div class="imgbar"></div>
             <div class="imgtxt">
               <a href="<?php echo $url;?>" style="color:white;" title="" target="_blank"><?php echo $t['truename']?></a>
             </div>
-            <div class="text1"><span class="fl fb">电话:<?php echo $t['mobile']?></span></div>
+            <div class="text1" style="padding-top:10px;padding:0 10px;font-weight:600;color:grey"><span class="fb"style="display:inline-block;padding-top:10px">电话:<?php echo $t['mobile']?></span></div>
             <!-- <div class="imgyouhui"><a href="" title="品牌实木地板 保养极好" target="_blank">品牌实木地板 保养极好</a></div> -->
           </li>
         <?}?>
@@ -379,11 +387,11 @@ a:hover{ color:#1974A1;  }
     <?php if(is_array($members_r)) { foreach($members_r as $k => $t) { ?>
       <div class="x2">
         <a href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['company'];?>">
-          <img style="width:200px;height:222px" src="<?php echo $MODULE['1']['linkurl'];?>api/avatar/show.php?username=<?php echo $t['username'];?>&size=large" alt="" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
+          <img style="width:220px;height:220px" src="<?php echo $t['thumb'];?>" alt="" href="<?php echo $MODULE['1']['linkurl'];?>index.php?homepage=<?php echo $t['username'];?>">
         </a>
-        <div class="" style="text-align:left;white-space:nowrap;padding:5px;">
+        <div class="" style="text-align:left;white-space:nowrap;padding:10px;font-weight:600;color:grey">
           <p>电话：<?php echo $t['telephone'];?></p>
-          <p style="word-break: normal;white-space:normal">所属公司：<a href="<?php echo userurl(get_agent($t['companyid']), '');?>" target="_blank"><?php echo $t['company'];?></a></p>
+          <p style="word-break: normal;white-space:normal">所属公司：<a style = "font-weight:600;color:grey"href="<?php echo userurl(get_agent($t['companyid']), '');?>" target="_blank"><?php echo $t['company'];?></a></p>
         </div>
       </div>
     <?php } } ?>

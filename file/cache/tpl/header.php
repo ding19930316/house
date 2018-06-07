@@ -41,7 +41,7 @@ GoMobile('<?php echo $head_mobile;?>');
  var apptype = "<?php echo $MODULE[$searchid]['moduledir'];?>";
 </script>
 </head><body>
-<div id="top_bar">
+<!-- <div id="top_bar">
 <div class="cf wrap">
 <div class="fl" id="aijiacms_member"></div>
 <div class="fr">
@@ -54,7 +54,7 @@ GoMobile('<?php echo $head_mobile;?>');
 </ul>
 </div>
 </div>
-</div>
+</div> -->
 <?php if($head_mobile) { ?><div id="aijiacms_qrcode" style="display:none;"></div><?php } ?>
 <h1 class="hide_title"><?php echo $head_title;?></h1><div class="nav_box">
 <div id="nav">

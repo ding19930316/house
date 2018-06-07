@@ -43,7 +43,7 @@
 </div>
                               <?php if($tags) { ?><?php include template('list-'.$module, 'tag');?><?php } ?>
                 </div>
-<div class="hlist_fr i_x_mt20">
+<!-- <div class="hlist_fr i_x_mt20">
 <div class="lista">
 <h4><a href="<?php echo $MOD['linkurl'];?>list-u1.html" target="_blank" class="more">更多&gt;&gt;</a>经纪人排行</h4>
                         <ul class="jjrl"><?php $tags=tag("table=member&condition=groupid=6&areaid=$cityid&order=userid desc&pagesize=6&template=null");?>
@@ -59,7 +59,7 @@
                                            <?php } } ?>
                                                     </ul>
                     </div>
-</div>
+</div> -->
 </div>
 </div>
 <script>
